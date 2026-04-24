@@ -1,38 +1,4 @@
-# uMLIP model configurations
-# Each entry defines how to load and use a universal MLIP via ASE
-
-models:
-  MACE-MP-0:
-    package: mace
-    calculator: MACECalculator
-    kwargs:
-      model: "mace-mp-0"
-      dispersion: false
-      default_dtype: "float64"
-      device: "cpu"
-
-  CHGNet:
-    package: chgnet
-    calculator: CHGNetCalculator
-    kwargs:
-      use_device: "cpu"
-
-  M3GNet:
-    package: matgl
-    calculator: PESCalculator
-    kwargs:
-      potential: "M3GNet-MP-2021.2.8-PES"
-
-  SevenNet:
-    package: sevenn
-    calculator: SevenNetCalculator
-    kwargs:
-      model: "7net-0"
-      device: "cpu"
-
-  ORB:
-    package: orb_models
-    calculator: ORBCalculator
-    kwargs:
-      model: "orb-v2"
-      device: "cpu"
+# NOTE: Calculator definitions have moved to scripts/utils/models.py (CALCULATOR_BLOCKS dict).
+# This file is kept as a human-readable reference only and is no longer read by the pipeline.
+#
+# To add or modify a model, edit the CALCULATOR_BLOCKS dict in scripts/utils/models.py.

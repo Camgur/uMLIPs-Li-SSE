@@ -203,7 +203,7 @@ conda activate umlips-pipeline
 
 ```bash
 # 1a. Relax structures with all uMLIPs
-python scripts/relaxation/relax.py --config configs/models.yaml --material LLZO
+python scripts/relaxation/relax.py --material LLZO
 
 # 1b. Run DOS pre-screening
 python scripts/dos/run_dos.py --material LLZO

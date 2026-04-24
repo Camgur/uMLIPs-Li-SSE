@@ -2,8 +2,10 @@
 
 Usage
 -----
-    python scripts/neb/run_neb.py --material LLZO --model MACE-MP-0
-    python scripts/neb/run_neb.py --material LLZO --model CHGNet --config configs/neb_params.yaml
+    python scripts/neb/run_neb.py --material LLZO --model mace-0b3
+    python scripts/neb/run_neb.py --material LLZO --model chgnet-2024 --config configs/neb_params.yaml
+
+Available model names are defined in ``scripts/utils/models.py`` (``CALCULATOR_BLOCKS``).
 """
 
 from __future__ import annotations

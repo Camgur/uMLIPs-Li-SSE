@@ -3,10 +3,11 @@
 Usage
 -----
     python scripts/relaxation/relax.py --material LLZO
-    python scripts/relaxation/relax.py --material LLZO --model MACE-MP-0
+    python scripts/relaxation/relax.py --material LLZO --model mace-0b3
 
 The script reads input structures from ``structures/<material>/`` and writes
 relaxed structures to ``results/relaxed/<material>/<model>/POSCAR``.
+Available model names are defined in ``scripts/utils/models.py`` (``CALCULATOR_BLOCKS``).
 """
 
 from __future__ import annotations

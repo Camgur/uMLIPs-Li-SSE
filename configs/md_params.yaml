@@ -1,0 +1,33 @@
+# MD simulation parameters for lithium diffusion / Arrhenius analysis
+
+md:
+  ensemble: NVT             # Thermostat ensemble
+  thermostat: Langevin      # Thermostat type
+  timestep_fs: 2.0          # MD timestep [fs]
+  friction: 0.01            # Langevin friction coefficient [1/fs]
+
+  temperatures_K:           # Simulation temperatures for Arrhenius fitting
+    - 600
+    - 700
+    - 800
+    - 900
+    - 1000
+    - 1200
+
+  equilibration_steps: 5000   # Steps for thermalisation (not used for MSD)
+  production_steps: 500000    # Steps for production run (~1 ns at 2 fs timestep)
+  traj_interval: 100          # Trajectory write interval [steps]
+  log_interval:  100          # Log write interval [steps]
+
+supercell:
+  # Target supercell sizes (approximate number of atoms); actual size depends on unit cell
+  min_atoms: 200
+  max_atoms: 400
+
+msd:
+  min_dt_fraction: 0.1      # Minimum lag time as fraction of total trajectory
+  max_dt_fraction: 0.5      # Maximum lag time as fraction of total trajectory
+  li_only: true             # Compute MSD for Li ions only
+
+arrhenius:
+  min_temperatures: 4       # Minimum number of T points required for fitting

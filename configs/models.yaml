@@ -1,0 +1,4 @@
+# NOTE: Calculator definitions have moved to scripts/utils/models.py (CALCULATOR_BLOCKS dict).
+# This file is kept as a human-readable reference only and is no longer read by the pipeline.
+#
+# To add or modify a model, edit the CALCULATOR_BLOCKS dict in scripts/utils/models.py.

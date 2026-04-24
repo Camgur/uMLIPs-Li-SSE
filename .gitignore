@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VASP output (large binary files)
+WAVECAR
+CHGCAR
+OUTCAR
+vasprun.xml
+
+# ASE trajectory files produced during runs (keep example ones if added explicitly)
+# *.traj
+
+# NPZ result data files (added explicitly when ready to share)
+# *.npz

@@ -58,15 +58,12 @@ The following uMLIPs are evaluated in this study. All models are used in inferen
 
 ### 2.2 Solid-State Electrolyte Materials
 
-The benchmark focuses on lithium-based SSE materials spanning several structural and chemical families:
+The benchmark focuses on the following lithium-based SSE materials:
 
 | Material | Structure Type | Li Conductivity Regime |
 |----------|---------------|----------------------|
-| Li<sub>7</sub>La<sub>3</sub>Zr<sub>2</sub>O<sub>12</sub> (LLZO) | Garnet | High |
-| Li<sub>6</sub>PS<sub>5</sub>Cl (argyrodite) | Argyrodite | High |
-| Li<sub>3</sub>PS<sub>4</sub> (β-LPS) | Thio-LISICON | Moderate |
-| Li<sub>10</sub>GeP<sub>2</sub>S<sub>12</sub> (LGPS) | LGPS-type | Very high |
-| LiPON | Amorphous | Low–Moderate |
+| Li<sub>6</sub>PS<sub>5</sub>SnCl (LSnPS) | Argyrodite | High |
+| LiFeV<sub>2</sub>O<sub>7</sub> | Vanadate | Low–Moderate |
 
 > **Note:** Materials list subject to revision as the study progresses.
 
@@ -127,11 +124,8 @@ uMLIPs-pipeline/
 ├── README.md                    # This file
 │
 ├── structures/                  # Input crystal structures (CIF / POSCAR)
-│   ├── LLZO/
-│   ├── argyrodite/
-│   ├── beta-LPS/
-│   ├── LGPS/
-│   └── LiPON/
+│   ├── LSnPS/
+│   └── LiFeV2O7/
 │
 ├── scripts/
 │   ├── relaxation/              # Structure relaxation with each uMLIP
@@ -203,27 +197,25 @@ conda activate umlips-pipeline
 
 ```bash
 # 1a. Relax structures with all uMLIPs
-python scripts/relaxation/relax.py --material LLZO
+python scripts/relaxation/relax.py structures/LSnPS/LSnPS.cif mace-0b3
 
 # 1b. Run DOS pre-screening
-python scripts/dos/run_dos.py --material LLZO
-python scripts/dos/compare_dos.py --material LLZO
+python scripts/dos/run_dos.py --material LSnPS
+python scripts/dos/compare_dos.py --material LSnPS
 
 # 1c. Run NEB pre-screening
-python scripts/neb/build_neb_images.py --material LLZO
-python scripts/neb/run_neb.py --material LLZO --config configs/neb_params.yaml
-python scripts/neb/analyse_neb.py --material LLZO
+python scripts/neb/run_neb.py structures/LSnPS/LSnPS.cif idx1 idx2 mace-0b3
 ```
 
 ### Stage 2 — MD Simulations (top candidates only)
 
 ```bash
-# Run MD at multiple temperatures
-python scripts/md/run_md.py --material LLZO --model MACE-MP-0 --config configs/md_params.yaml
+# Run MD at a given temperature
+python scripts/md/run_md.py structures/LSnPS/LSnPS.cif 800 mace-0b3
 
 # Compute MSD and fit Arrhenius equation
-python scripts/md/compute_msd.py --material LLZO --model MACE-MP-0
-python scripts/md/arrhenius_fit.py --material LLZO --model MACE-MP-0
+python scripts/md/compute_msd.py --material LSnPS --model mace-0b3
+python scripts/md/arrhenius_fit.py --material LSnPS --model mace-0b3
 ```
 
 ### Analysis Notebooks
@@ -238,11 +230,8 @@ Open the notebooks in `notebooks/` for interactive analysis and figure generatio
 
 | Material | Best uMLIP | E<sub>a</sub> (uMLIP) [eV] | E<sub>a</sub> (ssNMR) [eV] | Δ [eV] |
 |----------|-----------|--------------------------|--------------------------|--------|
-| LLZO     | TBD       | TBD                      | ~0.30–0.40               | TBD    |
-| Argyrodite | TBD     | TBD                      | ~0.20–0.30               | TBD    |
-| β-LPS    | TBD       | TBD                      | ~0.35–0.45               | TBD    |
-| LGPS     | TBD       | TBD                      | ~0.20–0.25               | TBD    |
-| LiPON    | TBD       | TBD                      | ~0.50–0.60               | TBD    |
+| LSnPS    | TBD       | TBD                      | TBD                      | TBD    |
+| LiFeV<sub>2</sub>O<sub>7</sub> | TBD | TBD             | TBD                      | TBD    |
 
 ---
 

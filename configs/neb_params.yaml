@@ -19,8 +19,5 @@ reference:
   # Models deviating by more than `tolerance` are excluded from MD stage
   tolerance: 0.10
   barriers:
-    LLZO:        0.30       # Approximate DFT reference — update with in-house values
-    argyrodite:  0.20
-    beta-LPS:    0.38
-    LGPS:        0.22
-    LiPON:       0.55
+    LSnPS:      null        # DFT reference to be determined
+    LiFeV2O7:  null        # DFT reference to be determined

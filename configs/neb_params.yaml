@@ -1,0 +1,26 @@
+# NEB calculation parameters
+
+neb:
+  n_images: 5               # Number of intermediate images (excluding endpoints)
+  spring_constant: 0.5      # Spring constant [eV/Å]
+  climb: true               # Use climbing-image NEB (CI-NEB)
+  method: "aseneb"          # NEB method: "aseneb" | "improvedtangent" | "spline"
+
+optimiser:
+  type: BFGS
+  fmax: 0.05                # Force convergence criterion [eV/Å]
+  steps: 500                # Maximum optimisation steps
+
+interpolation:
+  method: linear            # Image interpolation: "linear" | "idpp"
+
+reference:
+  # DFT-NEB barrier thresholds for pre-screening (per material) [eV]
+  # Models deviating by more than `tolerance` are excluded from MD stage
+  tolerance: 0.10
+  barriers:
+    LLZO:        0.30       # Approximate DFT reference — update with in-house values
+    argyrodite:  0.20
+    beta-LPS:    0.38
+    LGPS:        0.22
+    LiPON:       0.55

@@ -1,96 +1,48 @@
-"""relaxation/relax.py — Relax crystal structures with each uMLIP.
+"""relaxation/relax.py — Relax crystal structures with a uMLIP.
 
 Usage
 -----
-    python scripts/relaxation/relax.py --material LLZO
-    python scripts/relaxation/relax.py --material LLZO --model mace-0b3
+    python scripts/relaxation/relax.py structure.cif model_name
 
-The script reads input structures from ``structures/<material>/`` and writes
-relaxed structures to ``results/relaxed/<material>/<model>/POSCAR``.
 Available model names are defined in ``scripts/utils/models.py`` (``CALCULATOR_BLOCKS``).
 """
 
-from __future__ import annotations
+import warnings
+warnings.simplefilter("ignore", category=FutureWarning)
 
-import argparse
-import logging
+import sys, os
 from pathlib import Path
 
+from ase.io import read
 from ase.optimize import BFGS
+from ase.filters import FrechetCellFilter
 
-# Project utilities (importable when running from repo root)
-import sys
 sys.path.insert(0, str(Path(__file__).parents[1]))
-from utils.io import load_structure, save_structure, ensure_dir
-from utils.models import get_calculator, list_models
+from utils.io import ensure_dir
+from utils.models import get_calculator
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(message)s")
+# ------------------------ Input handling ------------------------
+if len(sys.argv) != 3:
+    sys.exit("Usage: python relax.py structure.cif model_name")
 
+cif_path, model_name = sys.argv[1], sys.argv[2]
+filename = os.path.splitext(os.path.basename(cif_path))[0]
+
+# ------------------------ Load structure ------------------------
+atoms = read(cif_path)
+
+# ------------------------ Calculator ------------------------
+calculator = get_calculator(model_name)
+atoms.calc = calculator
+
+# ------------------------ Relaxation ------------------------
 REPO_ROOT = Path(__file__).parents[2]
-STRUCTURES_DIR = REPO_ROOT / "structures"
-RESULTS_DIR = REPO_ROOT / "results" / "relaxed"
+out_dir = ensure_dir(REPO_ROOT / "results" / "relaxed" / filename / model_name)
+traj_path = out_dir / "relax.traj"
+log_path = out_dir / "relax.log"
 
+opt = BFGS(FrechetCellFilter(atoms), trajectory=str(traj_path), logfile=str(log_path))
+opt.run(fmax=1e-3, steps=300)
 
-def relax(material: str, model_name: str, fmax: float = 0.01) -> None:
-    """Relax the input structure for *material* using *model_name*.
-
-    Parameters
-    ----------
-    material:
-        Sub-directory name inside ``structures/`` (e.g. ``"LLZO"``).
-    model_name:
-        uMLIP name as defined in ``configs/models.yaml``.
-    fmax:
-        Force convergence criterion [eV/Å].
-    """
-    struct_dir = STRUCTURES_DIR / material
-    candidates = list(struct_dir.glob("*.cif")) + list(struct_dir.glob("POSCAR"))
-    if not candidates:
-        raise FileNotFoundError(
-            f"No structure files found in {struct_dir}. "
-            "Place a CIF or POSCAR file there before relaxing."
-        )
-    struct_path = candidates[0]
-    logger.info("Loading structure: %s", struct_path)
-    atoms = load_structure(struct_path)
-
-    logger.info("Loading calculator: %s", model_name)
-    calc = get_calculator(model_name)
-    atoms.calc = calc
-
-    out_dir = ensure_dir(RESULTS_DIR / material / model_name)
-    traj_path = out_dir / "relax.traj"
-    log_path = out_dir / "relax.log"
-
-    logger.info("Starting relaxation — fmax=%.4f eV/Å", fmax)
-    opt = BFGS(atoms, trajectory=str(traj_path), logfile=str(log_path))
-    opt.run(fmax=fmax)
-
-    out_path = out_dir / "POSCAR_relaxed"
-    save_structure(atoms, out_path, fmt="vasp")
-    logger.info("Relaxed structure saved to %s", out_path)
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Relax structures with uMLIPs.")
-    parser.add_argument("--material", required=True, help="Material sub-directory name.")
-    parser.add_argument(
-        "--model",
-        default=None,
-        help="uMLIP model name. If omitted, all configured models are used.",
-    )
-    parser.add_argument("--fmax", type=float, default=0.01, help="Force threshold [eV/Å].")
-    args = parser.parse_args()
-
-    models = [args.model] if args.model else list_models()
-    for model in models:
-        logger.info("=== Relaxing %s with %s ===", args.material, model)
-        try:
-            relax(args.material, model, fmax=args.fmax)
-        except Exception as exc:
-            logger.error("Failed for %s / %s: %s", args.material, model, exc)
-
-
-if __name__ == "__main__":
-    main()
+out_path = out_dir / "POSCAR_relaxed"
+atoms.write(str(out_path))

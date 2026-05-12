@@ -28,14 +28,8 @@ env/
 .DS_Store
 Thumbs.db
 
-# VASP output (large binary files)
-WAVECAR
-CHGCAR
-OUTCAR
-vasprun.xml
+# ASE trajectory files produced during runs
+*.traj
 
-# ASE trajectory files produced during runs (keep example ones if added explicitly)
-# *.traj
-
-# NPZ result data files (added explicitly when ready to share)
-# *.npz
+# NPZ result data files
+*.npz

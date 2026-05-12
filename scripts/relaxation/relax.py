@@ -38,11 +38,11 @@ atoms.calc = calculator
 # ------------------------ Relaxation ------------------------
 REPO_ROOT = Path(__file__).parents[2]
 out_dir = ensure_dir(REPO_ROOT / "results" / "relaxed" / filename / model_name)
-traj_path = out_dir / "relax.traj"
-log_path = out_dir / "relax.log"
+traj_path = out_dir / f"relax_{filename}_{model_name}.traj"
+log_path = out_dir / f"relax_{filename}_{model_name}.log"
 
 opt = BFGS(FrechetCellFilter(atoms), trajectory=str(traj_path), logfile=str(log_path))
 opt.run(fmax=1e-3, steps=300)
 
-out_path = out_dir / "POSCAR_relaxed"
+out_path = out_dir / f"relaxed_{filename}_{model_name}.cif"
 atoms.write(str(out_path))

@@ -62,4 +62,4 @@ md = NoseHooverChainNVT(
     logfile=str(out_dir / f"production_{str(temp)}.log"),
     loginterval=50,
 )
-md.run(100_000_000)  # 100 ns
+md.run(100000000)  # 100 ns

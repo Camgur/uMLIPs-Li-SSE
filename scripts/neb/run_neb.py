@@ -79,7 +79,7 @@ for image in images:
     image.calc = calculator
 
 # ------------------------ NEB optimisation ------------------------
-traj_path = out_dir / "neb.traj"
+traj_path = out_dir / f"{idx1}to{idx2}_neb.traj"
 neb_opt = BFGS(
     neb,
     trajectory=str(traj_path),

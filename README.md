@@ -1,6 +1,9 @@
-# uMLIPs-pipeline
+# uMLIPs Pipeline
 
-A computational pipeline for benchmarking universal Machine Learning Interatomic Potentials (uMLIPs) for predicting activation energies of lithium-ion diffusion in solid-state electrolytes.
+A computational pipeline for benchmarking universal Machine Learning Interatomic Potentials (uMLIPs) for predicting activation energies of lithium-ion diffusion in solid-state electrolytes. Accompanies the following paper:
+
+Cameron A. Gurwell, Taiana L. E. Pereira, Mengyang Cui, et al. Experimental Validation of Universal Machine Learning Interatomic Potentials for Lithium-Ion Dynamics in Solid Electrolytes via 7Li NMR.  *ChemRxiv* . 28 April 2026.
+DOI: [https://doi.org/10.26434/chemrxiv.15002480/v1](https://doi.org/10.26434/chemrxiv.15002480/v1)
 
 ---
 
@@ -27,13 +30,15 @@ A computational pipeline for benchmarking universal Machine Learning Interatomic
 
 ## 1. Background
 
-Solid-state electrolytes (SSEs) are a key enabling technology for next-generation solid-state batteries, offering improved safety and energy density compared to conventional liquid electrolytes. A critical performance metric for SSEs is the activation energy (E<sub>a</sub>) for lithium-ion diffusion, which governs ionic conductivity and, ultimately, battery performance.
+Solid-state electrolytes (SSEs) are a key enabling technology for next-generation solid-state batteries, offering improved safety and energy density compared to conventional liquid electrolytes. A critical performance metric for SSEs is the activation energy (E<sub>a</sub>) for lithium-ion diffusion.
 
 Traditionally, E<sub>a</sub> is extracted by fitting the Arrhenius equation to lithium diffusivity data obtained from molecular dynamics (MD) simulations at multiple temperatures. When performed with *ab initio* MD (AIMD), this approach is computationally prohibitive: simulations long enough to achieve statistical convergence of diffusion coefficients demand significant high-performance computing resources.
 
-Universal Machine Learning Interatomic Potentials (uMLIPs) — pre-trained on large, chemically diverse datasets — offer orders-of-magnitude computational savings over DFT-based methods, making it feasible to run the long MD trajectories required for Arrhenius analysis. However, the accuracy of existing uMLIPs for lithium diffusion in SSEs is not yet well-characterised, and the cost of exhaustive MD benchmarking across many models and materials remains non-trivial.
+Despite decades of progress in pseudopotentials and density functional theory (DFT), atomistic simulations remain computationally demanding, with costs that scale poorly and limit their applicability to large systems. Universal machine-learning interatomic potentials (uMLIPs) offer a promising alternative, reducing these timescales to hours while retaining near–DFT accuracy.
 
-This work addresses that gap by introducing a two-stage pipeline:
+Although uMLIPs offer significant computational savings over DFT-based approaches, their application to lithium diffusion remains nontrivial in cost. As a computationally efficient pre-screening step, DOS and nudged elastic band (NEB) calculations are used to identify high-performing uMLIPs, thereby restricting expensive long lithium diffusion MD simulations required for Arrhenius fitting to only the most promising candidates.
+
+This work introduces a two-stage pipeline:
 
 1. **Pre-screening** (low-cost): Density of States (DOS) and Nudged Elastic Band (NEB) calculations quickly identify uMLIPs that accurately describe the electronic and energetic landscape of each material.
 2. **Full evaluation** (high-cost): Only the most promising uMLIPs, identified in Stage 1, are used for long lithium-diffusion MD simulations and subsequent Arrhenius fitting, with final validation against experimental solid-state NMR (ssNMR) diffusion data.
@@ -44,28 +49,37 @@ This work addresses that gap by introducing a two-stage pipeline:
 
 ### 2.1 Universal Machine Learning Interatomic Potentials
 
-The following uMLIPs are evaluated in this study. All models are used in inference mode (no additional fine-tuning) to assess their out-of-the-box transferability to lithium SSE chemistries.
+The following uMLIPs are evaluated in this study. All models are used without additional fine-tuning to assess their out-of-the-box transferability to lithium SSE chemistries.
 
-| Model | Architecture | Training Dataset | Reference |
-|-------|-------------|-----------------|-----------|
-| MACE-MP-0 | MACE (equivariant GNN) | MPtrj | [Batatia et al., 2023] |
-| CHGNet | Graph neural network | MPtrj | [Deng et al., 2023] |
-| M3GNet | Graph neural network | Materials Project | [Chen & Ong, 2022] |
-| SevenNet | Equivariant GNN | MPtrj | [Park et al., 2024] |
-| ORB | Transformer-based | MPtrj + others | [Neumann et al., 2024] |
+| Family                                                                  | Model                                   | Alias           | Training Dataset   |
+| ----------------------------------------------------------------------- | --------------------------------------- | --------------- | ------------------ |
+| [***CHGNet-Torch***](https://github.com/CederGroupHub/chgnet)           | 0.3.0                                   | CHGNet-torch    | MPTrj              |
+| [***CHGNet-MatGL***](https://github.com/materialsvirtuallab/matgl)      | CHGNet-MPtrj-2023.12.1-2.7M-PES         | CHGNet-2023     | MPTrj              |
+|                                                                         | CHGNet-MPtrj-2024.2.13-11M-PES          | CHGNet-2024     | MPTrj              |
+|                                                                         | CHGNet-MatPES-PBE-2025.2.10-2.7M-PES    | CHGNet-PBE-2025 | MatPES PBE         |
+|                                                                         | CHGNet-MatPES-r2SCAN-2025.2.10-2.7M-PES | CHGNet-r2-2025  | MatPES r2SCAN      |
+| [***M3GNet***](https://github.com/materialsvirtuallab/matgl)            | M3GNet-MP-2021.2.8-PES                  | M3GNet-2021     | MPF                |
+|                                                                         | M3GNet-MatPES-PBE-v2025.1-PES           | M3GNet-PBE-2025 | MatPES PBE         |
+|                                                                         | M3GNet-MatPES-r2SCAN-v2025.1-PES        | M3GNet-r2-2025  | MatPES r2SCAN      |
+| [***MACE***](https://github.com/ACEsuit/mace)                           | MACE-MP-0b3-medium                      | MACE-0b3        | MPTrj              |
+|                                                                         | 2024-01-07-mace-128-L2_epoch-199        | MACE-l2         | MPTrj              |
+|                                                                         | MACE-MPA-0                              | MACE-MPA        | MPTrj + sAlex      |
+|                                                                         | MACE-OMAT-0                             | MACE-OMAT       | OMAT24             |
+|                                                                         | MACE-MATPES-r2SCAN-0                    | MACE-r2         | MatPES r2SCAN      |
+| [***ORB***](https://github.com/orbital-materials/orb-models)            | orb-v2                                  | ORB-v2          | MPTrj + Alexandria |
+|                                                                         | orb_v3_conservative_20_mpa              | ORB-v3-cMPA     | MPTrj + sAlex      |
+|                                                                         | orb_v3_conservative_20_omat             | ORB-v3-cOMAT    | OMAT24             |
+|                                                                         | orb_v3_conservative_inf_mpa             | ORB-v3-iMPA     | MPTrj + sAlex      |
+|                                                                         | orb_v3_conservative_inf_omat            | ORB-v3-iOMAT    | OMAT24             |
 
-> **Note:** This table will be updated as additional models are incorporated into the benchmark.
+### 2.2 Example Materials
 
-### 2.2 Solid-State Electrolyte Materials
+This example benchmark focuses on the following lithium-based materials:
 
-The benchmark focuses on the following lithium-based SSE materials:
-
-| Material | Structure Type | Li Conductivity Regime |
-|----------|---------------|----------------------|
-| Li<sub>6</sub>PS<sub>5</sub>SnCl (LSnPS) | Argyrodite | High |
-| LiFeV<sub>2</sub>O<sub>7</sub> | Vanadate | Low–Moderate |
-
-> **Note:** Materials list subject to revision as the study progresses.
+| Material                                             | Structure Type   | Li Conductivity Regime |
+| ---------------------------------------------------- | ---------------- | ---------------------- |
+| Li<sub>10</sub>SnP<sub>2</sub>S<sub>12</sub> (LSnPS) | SSE (Argyrodite) | High                   |
+| LiFeV<sub>2</sub>O<sub>7</sub>                       | Cathode          | Low–Moderate           |
 
 ---
 
@@ -77,53 +91,57 @@ Pre-screening is performed at low computational cost to identify uMLIPs whose pr
 
 #### 3.1.1 Density of States (DOS)
 
-The electronic DOS provides a fingerprint of a material's electronic structure. Although uMLIPs do not directly produce electronic wavefunctions, the forces and energies they predict reflect the underlying potential energy surface. Here, DOS (computed via single-point DFT on uMLIP-relaxed structures) is used to assess whether structural relaxations by each uMLIP preserve key features of the DFT-reference geometry.
+The electronic DOS provides a fingerprint of a material's electronic structure. Although uMLIPs do not directly produce electronic wavefunctions, the forces and energies they predict reflect the underlying potential energy surface. Here, DOS (computed via single-point DFT on the respective uMLIP-relaxed structures) is used to assess whether structural relaxations by each uMLIP preserve key features of the DFT-reference geometry.
 
 - Structures are relaxed with each uMLIP using the ASE `BFGS` optimiser.
-- Single-point DFT (VASP/PBE) calculations are then performed on the relaxed geometries.
-- Resulting DOS curves are compared to fully DFT-relaxed reference structures using a cosine-similarity metric.
+- Single-point DFT (CASTEP/PBE) calculations are then performed on the relaxed geometries.
+- Resulting DOS curves are compared to fully DFT-relaxed reference structures
 
 #### 3.1.2 Nudged Elastic Band (NEB)
 
-NEB calculations provide direct estimates of migration barriers for Li<sup>+</sup> hopping between adjacent sites — the microscopic quantity most directly linked to E<sub>a</sub>. This makes NEB a powerful and cost-efficient pre-screening criterion.
+NEB calculations provide direct estimates of migration barriers for Li<sup>+</sup> hopping between adjacent sites. This makes NEB a powerful and cost-efficient pre-screening criterion.
 
-- Initial and final images are taken from DFT-relaxed structures.
+- Initial and final images are taken from uMLIP-relaxed structures.
 - Intermediate images are generated by linear interpolation.
-- Each uMLIP is used as the force engine within ASE's NEB implementation (`ase.neb.NEB`).
-- Barriers (E<sub>NEB</sub>) are compared against DFT-NEB reference barriers from the literature or computed in-house.
+- Each uMLIP is used as the force engine within ASE's NEB implementation.
+- Barriers (E<sub>a</sub>) are compared against NEB reference barriers from DFT (CASTEP/PBE).
 
-Models whose NEB barriers deviate by more than a defined threshold (e.g., ±0.1 eV) from DFT references are excluded from the full MD evaluation.
+The best-performing models were included in the lithium diffusion simulations.
 
-### 3.2 Lithium Diffusion MD Simulations
+### 3.2 Lithium Diffusion Simulations
 
-uMLIPs that pass the pre-screening stage proceed to long MD simulations designed to extract diffusion coefficients at multiple temperatures.
+The best uMLIPs that pass the pre-screening stage proceed to long MD simulations designed to extract diffusion coefficients at multiple temperatures.
 
 #### 3.2.1 Arrhenius Fitting
 
-The mean-square displacement (MSD) of Li<sup>+</sup> ions is computed from MD trajectories at several temperatures (typically 600–1200 K for accelerated sampling). The self-diffusion coefficient *D* is obtained from the Einstein relation:
+The mean-square displacement (MSD) of Li<sup>+</sup> is computed from MD trajectories at multiple temperatures (300-1200K for this work). The diffusion coefficient *D* is recovered from the Einstein relation:
 
-$$D = \lim_{t \to \infty} \frac{\langle |r(t) - r(0)|^2 \rangle}{6t}$$
+$$
+D = \lim_{t \to \infty} \frac{\langle |r(t) - r(0)|^2 \rangle}{6t}
+$$
 
 The temperature dependence of *D* is then fitted to the Arrhenius equation:
 
-$$D(T) = D_0 \exp\!\left(-\frac{E_a}{k_B T}\right)$$
+$$
+D(T) = D_0 \exp\!\left(-\frac{E_a}{k_B T}\right)
+$$
 
-to extract E<sub>a</sub> and the pre-exponential factor *D*<sub>0</sub>. Room-temperature ionic conductivity is subsequently estimated via the Nernst–Einstein equation.
+to extract E<sub>a</sub>. The Nernst-Einstein equation may be then used to obtain the room temperature conductivity, but comparison to ssNMR E<sub>a</sub> was the object of this study.
 
 #### 3.2.2 Comparison with Experimental ssNMR Data
 
-Solid-state NMR (ssNMR) provides experimental activation energies and diffusion coefficients that are independent of any simulation model. Calculated E<sub>a</sub> values from the best uMLIPs are compared against available ssNMR literature data for each material to provide a direct, quantitative validation.
+Solid-state NMR (ssNMR) provides experimental activation energies and diffusion coefficients that are independent of any simulation model. Calculated E<sub>a</sub> values from the best uMLIPs are compared against ssNMR data for each material to provide a direct, quantitative validation.
 
 ---
 
 ## 4. Repository Structure
 
 ```
-uMLIPs-pipeline/
+uMLIPs Pipeline/
 │
-├── README.md                    # This file
+├── README.md
 │
-├── structures/                  # Input crystal structures (CIF / POSCAR)
+├── structures/                  # Input crystal structures
 │   ├── LSnPS/
 │   └── LiFeV2O7/
 │
@@ -145,11 +163,6 @@ uMLIPs-pipeline/
 │       ├── io.py
 │       └── models.py            # uMLIP loader/wrapper
 │
-├── configs/                     # Calculation parameters (YAML)
-│   ├── models.yaml              # List of uMLIPs and loading instructions
-│   ├── neb_params.yaml
-│   └── md_params.yaml
-│
 ├── results/
 │   ├── dos/                     # DOS comparison metrics
 │   ├── neb/                     # NEB barrier results
@@ -162,7 +175,7 @@ uMLIPs-pipeline/
 │   ├── 03_arrhenius_analysis.ipynb
 │   └── 04_ssnmr_comparison.ipynb
 │
-└── environment.yml              # Conda environment specification
+└── environment.yml              # Environment specification
 ```
 
 ---
@@ -221,25 +234,3 @@ python scripts/md/arrhenius_fit.py --material LSnPS --model mace-0b3
 ### Analysis Notebooks
 
 Open the notebooks in `notebooks/` for interactive analysis and figure generation.
-
----
-
-## 7. Results Summary
-
-> Results will be populated as the benchmark progresses.
-
-| Material | Best uMLIP | E<sub>a</sub> (uMLIP) [eV] | E<sub>a</sub> (ssNMR) [eV] | Δ [eV] |
-|----------|-----------|--------------------------|--------------------------|--------|
-| LSnPS    | TBD       | TBD                      | TBD                      | TBD    |
-| LiFeV<sub>2</sub>O<sub>7</sub> | TBD | TBD             | TBD                      | TBD    |
-
----
-
-## 8. References
-
-- Batatia, I. et al. (2023). MACE: Higher order equivariant message passing neural networks for fast and accurate force fields. *NeurIPS*.
-- Chen, C. & Ong, S. P. (2022). A universal graph deep learning interatomic potential for the periodic table. *Nature Computational Science*, 2, 718–728.
-- Deng, B. et al. (2023). CHGNet as a pretrained universal neural network potential for charge-informed atomistic modelling. *Nature Machine Intelligence*, 5, 1031–1041.
-- Neumann, M. et al. (2024). Orb: A fast, scalable neural network potential. *arXiv:2410.22570*.
-- Park, Y.-J. et al. (2024). SevenNet: A interatomic potential benchmark and pretrained model for materials. *npj Computational Materials*.
-- Experimental ssNMR references to be added per material.

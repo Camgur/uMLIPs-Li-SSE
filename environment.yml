@@ -10,17 +10,15 @@ dependencies:
   - pyyaml>=6.0
   - pip
   - pip:
-      # ASE — Atomic Simulation Environment
+      # ASE
       - ase>=3.23
-      # PyMatGen — materials analysis
+      # PyMatGen
       - pymatgen>=2024.1
       # Jupyter for analysis notebooks
       - jupyter>=1.0
       - ipykernel
       # uMLIP packages (install whichever you need)
-      - mace-torch         # MACE-MP-0
-      - chgnet             # CHGNet
-      - matgl              # M3GNet
-      - sevenn             # SevenNet
-      # ORB — install from GitHub if not yet on PyPI:
-      # - orb-models @ git+https://github.com/orbital-materials/orb-models.git
+      - mace-torch         # MACE
+      - chgnet             # CHGNet-torch
+      - matgl              # CHGNet, M3GNet
+      - orb-models         # Orb

@@ -6,10 +6,9 @@ ready-to-use ASE Calculator.  Call ``get_calculator(model_name)`` to execute
 the relevant block and return that calculator.  The same dict is the single
 source of truth for ``list_models()``.
 
-.. note::
-   The MACE entries use absolute ``model_paths`` pointing to pre-downloaded
-   ``.model`` files on a specific HPC cluster.  Update these paths to match
-   your local environment before using those models.
+Note: The MACE models must be pointed to the correct .model files, which are 
+not included in this repo. Please download the relevant .model files from the 
+MACE repository and update the paths.
 """
 
 from __future__ import annotations
@@ -62,43 +61,38 @@ from matgl.ext.ase import PESCalculator
 mdl = load_model("M3GNet-MatPES-r2SCAN-v2025.1-PES")
 calculator = PESCalculator(potential=mdl)
 ''',
-    'm3gnet-tf': '''
-from m3gnet.models import M3GNet, M3GNetCalculator, Potential
-mdl = M3GNet.load()
-calculator = M3GNetCalculator(potential=Potential(mdl))
-''',
     'mace-0b3': '''
 from mace.calculators import MACECalculator
 calculator = MACECalculator(
-    model_paths='/home/cgurwell/projects/rrg-ravh011/cgurwell/opt/mace-mp-0b3-medium.model',
+    model_paths='mace-mp-0b3-medium.model',
     dispersion=False, device='cuda', default_dtype='float64'
 )
 ''',
     'mace-l2': '''
 from mace.calculators import MACECalculator
 calculator = MACECalculator(
-    model_paths='/home/cgurwell/projects/rrg-ravh011/cgurwell/opt/2024-01-07-mace-128-L2_epoch-199.model',
+    model_paths='2024-01-07-mace-128-L2_epoch-199.model',
     dispersion=False, device='cuda', default_dtype='float64'
 )
 ''',
     'mace-mpa': '''
 from mace.calculators import MACECalculator
 calculator = MACECalculator(
-    model_paths='/home/cgurwell/projects/rrg-ravh011/cgurwell/opt/mace-mpa-0-medium.model',
+    model_paths='mace-mpa-0-medium.model',
     dispersion=False, device='cuda', default_dtype='float64'
 )
 ''',
     'mace-omat': '''
 from mace.calculators import MACECalculator
 calculator = MACECalculator(
-    model_paths='/home/cgurwell/projects/rrg-ravh011/cgurwell/opt/mace-omat-0-medium.model',
+    model_paths='mace-omat-0-medium.model',
     dispersion=False, device='cuda', default_dtype='float64'
 )
 ''',
     'mace-r2': '''
 from mace.calculators import MACECalculator
 calculator = MACECalculator(
-    model_paths='/home/cgurwell/projects/rrg-ravh011/cgurwell/opt/mace-matpes-r2scan-omat-ft.model',
+    model_paths='mace-matpes-r2scan-omat-ft.model',
     dispersion=False, device='cuda', default_dtype='float64'
 )
 ''',

@@ -1,0 +1,562 @@
+ +-------------------------------------------------+
+ |                                                 |
+ |      CCC   AA    SSS  TTTTT  EEEEE  PPPP        |
+ |     C     A  A  S       T    E      P   P       |
+ |     C     AAAA   SS     T    EEE    PPPP        |
+ |     C     A  A     S    T    E      P           |
+ |      CCC  A  A  SSS     T    EEEEE  P           |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ | Welcome to Academic Release CASTEP version 25.12|
+ | Ab Initio Total Energy Program                  |
+ |                                                 |
+ | Authors:                                        |
+ | M. Segall, M. Probert, C. Pickard, P. Hasnip,   |
+ | S. Clark, K. Refson, J. R. Yates,               |
+ | A. Bartok-Partay, M. Payne                      |
+ |                                                 |
+ | Contributors:                                   |
+ | P. Lindan, P. Haynes, J. White, V. Milman,      |
+ | N. Govind, M. Gibson, P. Tulip, V. Cocula,      |
+ | B. Montanari, D. Quigley, M. Glover,            |
+ | L. Bernasconi, A. Perlov, M. Plummer,           |
+ | E. McNellis, J. Meyer, J. Gale, D. Jochym       |
+ | J. Aarons, B. Walker, R. Gillen, D. Jones       |
+ | T. Green, I. J. Bush, C. J. Armstrong,          |
+ | E. J. Higgins, E. L. Brown, M. S. McFly,        |
+ | J. Wilkins, B-C. Shih, P. J. P. Byrne,          |
+ | R. J. Maurer, J. C. Womack, J. Dziedzic,        |
+ | L. LeBlanc, T. K. Stenczel, J. Kermode,         |
+ | S. Sturniolo, B. Shi, B. Durham, M. Evans,      |
+ | M. J. Smith, A. Tamerus, Z. Hawkhead,           |
+ | V. Ravindran, T. Hollins, S. A. Joyce,          |
+ | R. T. Strong, A. M. Reilly, S. J. Donaldson,    |
+ | J. C. A. Prentice                               |
+ |                                                 |
+ | Copyright (c) 2000 - 2024                       |
+ |                                                 |
+ |     Distributed under license from Cambridge    |
+ |     Enterprise for academic use only.           |
+ |                                                 |
+ | Please cite                                     |
+ |                                                 |
+ |     "First principles methods using CASTEP"     |
+ |                                                 |
+ |         Zeitschrift fuer Kristallographie       |
+ |           220(5-6) pp. 567-570 (2005)           |
+ |                                                 |
+ | S. J. Clark, M. D. Segall, C. J. Pickard,       |
+ | P. J. Hasnip, M. J. Probert, K. Refson,         |
+ | M. C. Payne                                     |
+ |                                                 |
+ |       in all publications arising from          |
+ |              your use of CASTEP                 |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ |              http://www.castep.org              |
+ |                                                 |
+ +-------------------------------------------------+
+
+
+
+ Compiled for linux_x86_64_gfortran10 on Sun, 13 Jul 2025 14:49:40 -0400
+ from code version git version unavailable
+ Compiler: GNU Fortran 13.3.0; Optimisation: fast
+ Comms   : Open MPI v5.0.3
+ MATHLIBS: flexiblas (IMKL) (LAPACK version 3.12.0)
+ FFT Lib : fftw3 version fftw-3.3.10-sse2-avx-avx2-avx2_128
+ Fundamental constants values: CODATA 2018
+
+ Run started: Thu, 11 Dec 2025 00:33:49 -0500
+ Warning in parameters_read: presetting of magnetic moments on atoms cannot be guaranteed when metals_method /= density mixing
+
+ Atomic calculation performed for Li: 1s2 2s1
+
+ Converged in 47 iterations to an ae energy of -202.784 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 11-12-2025   |                
+   ------------------------------------------------------------                
+   | Element: Li Ionic charge:  3.00 Level of theory: PBE     |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            1s              2.000           -1.906        |                
+   |            2s              1.000           -0.106        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -1.906   1.001     qc      0         |                
+   |          2      0   -0.106   1.001     qc      0         |                
+   |          3      0    0.250   1.001     qc      0         |                
+   |         loc     1    0.000   1.001     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 0.699                       |                
+   | No partial core correction                               |                
+   ------------------------------------------------------------                
+   | "1|1.0|14|16|18|10U:20(qc=7)"                            |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for O: 1s2 2s2 2p4
+
+ Converged in 61 iterations to an ae energy of -2040.902 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 11-12-2025   |                
+   ------------------------------------------------------------                
+   | Element: O Ionic charge:  6.00 Level of theory: PBE      |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            2s              2.000           -0.881        |                
+   |            2p              4.000           -0.332        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.881   1.100     qc      0         |                
+   |          2      0    0.250   1.100     qc      0         |                
+   |          3      1   -0.332   1.100     qc      0         |                
+   |          4      1    0.250   1.100     qc      0         |                
+   |         loc     2    0.000   1.100     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 0.769                       |                
+   | Partial core correction Rc = 0.769                       |                
+   ------------------------------------------------------------                
+   | "2|1.1|17|20|23|20:21(qc=8)"                             |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for P: 1s2 2s2 2p6 3s2 3p3
+
+ Converged in 56 iterations to an ae energy of -9303.626 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 11-12-2025   |                
+   ------------------------------------------------------------                
+   | Element: P Ionic charge:  5.00 Level of theory: PBE      |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            3s              2.000           -0.513        |                
+   |            3p              3.000           -0.202        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.513   1.807     qc      0         |                
+   |          2      0    0.250   1.807     qc      0         |                
+   |          3      1   -0.202   1.807     qc      0         |                
+   |          4      1    0.250   1.807     qc      0         |                
+   |          5      2    0.000   1.807     qc      0         |                
+   |          6      2    0.250   1.807     qc      0         |                
+   |         loc     3    0.000   1.807     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 1.263                       |                
+   | Partial core correction Rc = 1.263                       |                
+   ------------------------------------------------------------                
+   | "3|1.8|4|4|5|30:31:32"                                   |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for Fe: 1s2 2s2 2p6 3s2 3p6 3d6 4s2
+
+ Converged in 96 iterations to an ae energy of -34625.102 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 11-12-2025   |                
+   ------------------------------------------------------------                
+   | Element: Fe Ionic charge:  8.00 Level of theory: PBE     |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            3d              6.000           -0.276        |                
+   |            4s              2.000           -0.194        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.194   2.399     qc      0         |                
+   |          2      0    0.250   2.399     qc      0         |                
+   |          3      1    0.000   2.399     qc      0         |                
+   |          4      1    0.250   2.399     qc      0         |                
+   |          5      2   -0.276   1.997     qc      0         |                
+   |          6      2    0.250   1.997     qc      0         |                
+   |         loc     3    0.000   2.399     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 1.000                       |                
+   | Partial core correction Rc = 1.000                       |                
+   ------------------------------------------------------------                
+   | "3|2.4|2.4|1.0|8|9|10|40:41:32U2U2(qc=5.5)"              |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+ Calculation parallelised over 20 processes.
+ Data is distributed by k-point(20-way)
+
+ ************************************ Title ************************************
+ 
+
+ ***************************** General Parameters ******************************
+  
+ output verbosity                               : normal  (1)
+ write checkpoint data to                       : ml_dos.check
+ type of calculation                            : Electronic Spectroscopy
+ stress calculation                             : off
+ density difference calculation                 : off
+ electron localisation func (ELF) calculation   : off
+ Hirshfeld analysis                             : off
+ polarisation (Berry phase) analysis            : off
+ molecular orbital projected DOS                : off
+ deltaSCF calculation                           : off
+ unlimited duration calculation
+ timing information                             : on
+ memory usage estimate                          : on
+ write extra output files                       : on
+ write final potential to formatted file        : off
+ write final density to formatted file          : off
+ write BibTeX reference list                    : on
+ write OTFG pseudopotential files               : on
+ write electrostatic potential file             : on
+ write bands file                               : on
+ checkpoint writing                             : both castep_bin and check files
+  
+ output         length unit                     : A
+ output           mass unit                     : amu
+ output           time unit                     : ps
+ output         charge unit                     : e
+ output           spin unit                     : hbar/2
+ output         energy unit                     : eV
+ output          force unit                     : eV/A
+ output       velocity unit                     : A/ps
+ output       pressure unit                     : GPa
+ output     inv_length unit                     : 1/A
+ output      frequency unit                     : cm-1
+ output force constant unit                     : eV/A**2
+ output         volume unit                     : A**3
+ output   IR intensity unit                     : (D/A)**2/amu
+ output         dipole unit                     : D
+ output         efield unit                     : eV/A/e
+ output        entropy unit                     : J/mol/K
+ output    efield chi2 unit                     : pm/V
+  
+ wavefunctions paging                           : none
+ random number generator seed                   :    3349039
+ data distribution                              : optimal for this architecture
+ optimization strategy                          : balance speed and memory
+
+ *********************** Exchange-Correlation Parameters ***********************
+  
+ using functional                               : Perdew Burke Ernzerhof
+ relativistic treatment                         : Koelling-Harmon
+ DFT+D: Semi-empirical dispersion correction    : off
+
+ ************************* Pseudopotential Parameters **************************
+  
+ pseudopotential representation                 : reciprocal space
+ <beta|phi> representation                      : reciprocal space
+ spin-orbit coupling                            : off
+
+ **************************** Basis Set Parameters *****************************
+  
+ plane wave basis set cut-off                   :   900.0000   eV
+ size of standard grid                          :     2.0000
+ size of   fine   gmax                          :    30.7390   1/A
+ finite basis set correction                    : none
+
+ **************************** Electronic Parameters ****************************
+  
+ number of  electrons                           :  160.0    
+ net charge of system                           :  0.000    
+ net spin   of system                           :  0.000    
+ number of  up  spins                           :  80.00    
+ number of down spins                           :  80.00    
+ treating system as spin-polarized
+ number of bands                                :         96
+ electron temperature                           :     0.0000   K
+
+ ********************* Electronic Minimization Parameters **********************
+  
+ Method: Treating system as metallic with ensemble DFT treatment of electrons,
+         and number of  SD  steps               :          1
+         and number of  CG  steps               :          4
+  
+ total energy / atom convergence tol.           : 0.1000E-05   eV
+ max force / atom convergence tol.              : ignored
+ convergence tolerance window                   :          3   cycles
+ max. number of SCF cycles                      :        100
+ number of fixed-spin iterations                :         10
+ smearing scheme                                : Gaussian
+ smearing width                                 : 0.2000       eV
+ Fermi energy convergence tolerance             : 0.2721E-13   eV
+ number of occupancy cycles                     :          6
+ periodic dipole correction                     : NONE
+
+ *********************** Population Analysis Parameters ************************
+  
+ Population analysis with cutoff                :  3.000       A
+ Population analysis output                     : summary and pdos components
+ Partial DOS weights calculated
+
+ ********************* Electronic Spectroscopy Parameters **********************
+  
+ electronic spectroscopy with theory level      : DFT       
+ spectroscopy calculation                       : density of states
+ max. number of iterations                      :         60
+ max. steps per iteration                       :          5
+ number of bands / k-point                      :        145
+ band convergence tolerance                     : 0.1000E-05   eV
+ write orbitals file                            : off
+
+ *******************************************************************************
+  
+
+                           -------------------------------
+                                      Unit Cell
+                           -------------------------------
+        Real Lattice(A)                      Reciprocal Lattice(1/A)
+    10.4552530     0.0000000     0.0000000        0.600959662  -0.000000198  -0.000000126
+     0.0000020     6.0743100     0.0000000        0.000000000   1.034386672   0.000000433
+     0.0000010    -0.0000020     4.7732860        0.000000000   0.000000000   1.316322824
+
+                       Lattice parameters(A)       Cell Angles
+                    a =     10.455253          alpha =   90.000024
+                    b =      6.074310          beta  =   89.999988
+                    c =      4.773286          gamma =   89.999981
+
+                       Current cell volume =           303.143985       A**3
+                                   density =             2.081616   AMU/A**3
+                                           =             3.456605     g/cm^3
+
+                           -------------------------------
+                                     Cell Contents
+                           -------------------------------
+                         Total number of ions in cell =   28
+                      Total number of species in cell =    4
+                        Max number of any one species =   16
+
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            x  Element    Atom        Fractional coordinates of atoms  x
+            x            Number           u          v          w      x
+            x----------------------------------------------------------x
+            x  Li           1         0.500001   0.000003   0.500002   x 
+            x  Li           2         0.999999   0.500002   0.000003   x 
+            x  Li           3         0.500002   0.500000   0.500001   x 
+            x  Li           4         0.999999   0.000001   0.999999   x 
+            x  O            1         0.598471   0.249998   0.767409   x 
+            x  O            2         0.098466   0.250000   0.732604   x 
+            x  O            3         0.401527   0.749999   0.232602   x 
+            x  O            4         0.901532   0.749999   0.267394   x 
+            x  O            5         0.954820   0.250002   0.291992   x 
+            x  O            6         0.454814   0.249999   0.207999   x 
+            x  O            7         0.045180   0.750000   0.708010   x 
+            x  O            8         0.545185   0.750000   0.791992   x 
+            x  O            9         0.662904   0.045938   0.222599   x 
+            x  O           10         0.162901   0.454064   0.277389   x 
+            x  O           11         0.337097   0.545944   0.777395   x 
+            x  O           12         0.837098   0.954062   0.722613   x 
+            x  O           13         0.337095   0.954057   0.777393   x 
+            x  O           14         0.837099   0.545937   0.722612   x 
+            x  O           15         0.662905   0.454063   0.222602   x 
+            x  O           16         0.162903   0.045934   0.277387   x 
+            x  P            1         0.593254   0.250001   0.088681   x 
+            x  P            2         0.093257   0.249998   0.411327   x 
+            x  P            3         0.406747   0.750001   0.911327   x 
+            x  P            4         0.906745   0.749999   0.588669   x 
+            x  Fe           1         0.782262   0.250000   0.529487   x 
+            x  Fe           2         0.282274   0.249999   0.970512   x 
+            x  Fe           3         0.217736   0.750002   0.470510   x 
+            x  Fe           4         0.717726   0.749999   0.029491   x 
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+                         No user defined ionic velocities
+
+                           -------------------------------
+                                   Details of Species
+                           -------------------------------
+
+                               Mass of species in AMU
+                                    Li    6.9410000
+                                    O   15.9994000
+                                    P   30.9737600
+                                    Fe   55.8450000
+
+                          Electric Quadrupole Moment (Barn)
+                                    Li   -0.0401000 Isotope   7
+                                    O   -0.0255800 Isotope  17
+                                    P    1.0000000 No Isotope Defined
+                                    Fe    0.1600000 Isotope  57
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+         |  Element    Atom         Initial            Initial magnetic       |
+         |            Number    spin polarization        moment (uB)     Fix? |
+         |--------------------------------------------------------------------|
+         | Li             1         0.000000              0.000       F       |
+         | Li             2         0.000000              0.000       F       |
+         | Li             3         0.000000              0.000       F       |
+         | Li             4         0.000000              0.000       F       |
+         | O              1         0.000000              0.000       F       |
+         | O              2         0.000000              0.000       F       |
+         | O              3         0.000000              0.000       F       |
+         | O              4         0.000000              0.000       F       |
+         | O              5         0.000000              0.000       F       |
+         | O              6         0.000000              0.000       F       |
+         | O              7         0.000000              0.000       F       |
+         | O              8         0.000000              0.000       F       |
+         | O              9         0.000000              0.000       F       |
+         | O             10         0.000000              0.000       F       |
+         | O             11         0.000000              0.000       F       |
+         | O             12         0.000000              0.000       F       |
+         | O             13         0.000000              0.000       F       |
+         | O             14         0.000000              0.000       F       |
+         | O             15         0.000000              0.000       F       |
+         | O             16         0.000000              0.000       F       |
+         | P              1         0.000000              0.000       F       |
+         | P              2         0.000000              0.000       F       |
+         | P              3         0.000000              0.000       F       |
+         | P              4         0.000000              0.000       F       |
+         | Fe             1         0.562500              4.500       F       |
+         | Fe             2        -0.562500             -4.500       F       |
+         | Fe             3         0.562500              4.500       F       |
+         | Fe             4        -0.562500             -4.500       F       |
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+         Quantisation axis:    0.00000   0.00000   1.00000
+
+         Units for Hubbard U values are eV
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+         |  Element     Atom     Hubbard U   values by orbital type         |
+         |             Number      s          p          d          f       |
+         |------------------------------------------------------------------|
+         |Li            1         0.00000    0.00000    0.00000    0.00000  |
+         |Li            2         0.00000    0.00000    0.00000    0.00000  |
+         |Li            3         0.00000    0.00000    0.00000    0.00000  |
+         |Li            4         0.00000    0.00000    0.00000    0.00000  |
+         |O             1         0.00000    0.00000    0.00000    0.00000  |
+         |O             2         0.00000    0.00000    0.00000    0.00000  |
+         |O             3         0.00000    0.00000    0.00000    0.00000  |
+         |O             4         0.00000    0.00000    0.00000    0.00000  |
+         |O             5         0.00000    0.00000    0.00000    0.00000  |
+         |O             6         0.00000    0.00000    0.00000    0.00000  |
+         |O             7         0.00000    0.00000    0.00000    0.00000  |
+         |O             8         0.00000    0.00000    0.00000    0.00000  |
+         |O             9         0.00000    0.00000    0.00000    0.00000  |
+         |O            10         0.00000    0.00000    0.00000    0.00000  |
+         |O            11         0.00000    0.00000    0.00000    0.00000  |
+         |O            12         0.00000    0.00000    0.00000    0.00000  |
+         |O            13         0.00000    0.00000    0.00000    0.00000  |
+         |O            14         0.00000    0.00000    0.00000    0.00000  |
+         |O            15         0.00000    0.00000    0.00000    0.00000  |
+         |O            16         0.00000    0.00000    0.00000    0.00000  |
+         |P             1         0.00000    0.00000    0.00000    0.00000  |
+         |P             2         0.00000    0.00000    0.00000    0.00000  |
+         |P             3         0.00000    0.00000    0.00000    0.00000  |
+         |P             4         0.00000    0.00000    0.00000    0.00000  |
+         |Fe            1         0.00000    0.00000    4.40000    0.00000  |
+         |Fe            2         0.00000    0.00000    4.40000    0.00000  |
+         |Fe            3         0.00000    0.00000    4.40000    0.00000  |
+         |Fe            4         0.00000    0.00000    4.40000    0.00000  |
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+                          Files used for pseudopotentials:
+                                    Li 1|1.0|14|16|18|10U:20(qc=7)
+                                    O 2|1.1|17|20|23|20:21(qc=8)
+                                    P 3|1.8|4|4|5|30:31:32
+                                    Fe 3|2.4|2.4|1.0|8|9|10|40:41:32U2U2(qc=5.5)
+
+                           -------------------------------
+                              k-Points For BZ Sampling
+                           -------------------------------
+                       MP grid size for SCF calculation is  2  4  5
+                            with an offset of   0.000  0.000  0.000
+                       Number of kpoints used =            20
+
+                           -------------------------------
+                               Symmetry and Constraints
+                           -------------------------------
+
+                      Maximum deviation from symmetry =  0.00000         ANG
+
+                      Number of symmetry operations   =           1
+                      Number of ionic constraints     =           3
+                      Point group of crystal =     1: C1, 1, 1
+                      Space group of crystal =    62: Pnma, -P 2ac 2n
+
+             Set iprint > 1 for details on symmetry rotations/translations
+
+                         Centre of mass is constrained
+             Set iprint > 2 for details of linear ionic constraints
+
+                         Number of cell constraints= 0
+                         Cell constraints are:  1 2 3 4 5 6
+
+                         External pressure/stress (GPa)
+                          0.00000   0.00000   0.00000
+                                    0.00000   0.00000
+                                              0.00000
+ 
++---------------- MEMORY AND SCRATCH DISK ESTIMATES PER PROCESS --------------+
+|                                                     Memory          Disk    |
+| Baseline code, static data and system overhead      804.0 MB         0.0 MB |
+| BLAS internal memory storage                          0.0 MB         0.0 MB |
+| Model and support data                             1443.6 MB         0.0 MB |
+| Electronic energy minimisation requirements         337.2 MB         0.0 MB |
+| Force calculation requirements                       68.8 MB         0.0 MB |
+|                                               ----------------------------- |
+| Approx. total storage required per process         2584.7 MB         0.0 MB |
+|                                                                             |
+| Requirements will fluctuate during execution and may exceed these estimates |
++-----------------------------------------------------------------------------+
+Calculating approximate eigenstates for fixed initial Hamiltonian
+Cut-off for approx. calculation is   89.988 eV
+Improving approx. states at cut-off of  450.000 eV
+Resetting cut-off to  900.000 eV
+Improving states further at cut-off of  900.000 eV
+Calculating total energy with cut-off of  900.000 eV.
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+------------------------------------------------------------------------ <-- SCF
+SCF loop      Energy           Fermi           Energy gain       Timer   <-- SCF
+                               energy          per atom          (sec)   <-- SCF
+------------------------------------------------------------------------ <-- SCF
+Initial  -1.20304702E+004  5.39465549E+000                        55.79  <-- SCF

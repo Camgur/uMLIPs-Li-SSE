@@ -1,0 +1,433 @@
+malloc(): unsorted double linked list corrupted
+corrupted double-linked list
+
+Program received signal SIGABRT: Process abort signal.
+
+Backtrace for this error:
+
+Program received signal SIGABRT: Process abort signal.
+
+Backtrace for this error:
+corrupted double-linked list
+malloc(): unsorted double linked list corrupted
+
+Program received signal SIGABRT: Process abort signal.
+
+Backtrace for this error:
+
+Program received signal SIGABRT: Process abort signal.
+
+Backtrace for this error:
+malloc(): unsorted double linked list corrupted
+malloc(): unsorted double linked list corrupted
+
+Program received signal SIGABRT: Process abort signal.
+
+Program received signal SIGABRT: Process abort signal.
+
+Backtrace for this error:
+
+Backtrace for this error:
+#0  0x1e9aad6 in ???
+#1  0x1e9a1a1 in ???
+#2  0x1471d606378f in ???
+#0  0x1e9aad6 in ???
+#0  0x1e9aad6 in ???
+#1  0x1e9a1a1 in ???
+#2  0x14c9cb86378f in ???
+#3  0x14c9cb8b17ac in ???
+#4  0x14c9cb8636f1 in ???
+#5  0x14c9cb84d4b1 in ???
+#6  0x14c9cb84e400 in ???
+#7  0x14c9cb8bb154 in ???
+#8  0x14c9cb8bba63 in ???
+#9  0x14c9cb8bbbbc in ???
+#10  0x14c9cb8bd23f in ???
+#11  0x14c9cb8bf8be in ???
+#3  0x1471d60b17ac in ???
+#4  0x1471d60636f1 in ???
+#5  0x1471d604d4b1 in ???
+#6  0x1471d604e400 in ???
+#7  0x1471d60bb154 in ???
+#8  0x1471d60be47b in ???
+#9  0x1471d60bf358 in ???
+#0  0x1e9aad6 in ???
+#1  0x1e9a1a1 in ???
+#2  0x14588476b78f in ???
+#3  0x1458847b97ac in ???
+#4  0x14588476b6f1 in ???
+#5  0x1458847554b1 in ???
+#6  0x145884756400 in ???
+#7  0x1458847c3154 in ???
+#8  0x1458847c647b in ???
+#9  0x1458847c7358 in ???
+#12  0x14c9cba5e578 in ???
+#13  0x14c9cb73cc19 in ???
+#14  0x14c9cb7328ae in ???
+#15  0x14c9cba8af38 in ???
+#16  0x14c9cba91ac3 in ???
+#17  0x14c9cba9300c in ???
+#18  0x14c9cba874c2 in ???
+#19  0x14c9cc7656f8 in ???
+#20  0x14c9cc7ad791 in ???
+#1  0x1e9a1a1 in ???
+#2  0x14922e16b78f in ???
+#3  0x14922e1b97ac in ???
+#4  0x14922e16b6f1 in ???
+#5  0x14922e1554b1 in ???
+#6  0x14922e156400 in ???
+#7  0x14922e1c3154 in ???
+#8  0x14922e1c647b in ???
+#10  0x1471d511222e in ucs_malloc
+	at debug/memtrack.c:320
+#9  0x14922e1c7358 in ???
+#10  0x1458837e422e in ucs_malloc
+#11  0x1471d5106aec in ucs_mpool_chunk_malloc
+	at datastruct/mpool.c:328
+#12  0x1471d5106843 in ucs_mpool_grow
+	at datastruct/mpool.c:266
+#13  0x1471d5106a44 in ucs_mpool_get_grow
+	at datastruct/mpool.c:312
+	at debug/memtrack.c:320
+#10  0x14922d1aa22e in ucs_malloc
+	at debug/memtrack.c:320
+#11  0x1458837d8aec in ucs_mpool_chunk_malloc
+#11  0x14922d19eaec in ucs_mpool_chunk_malloc
+	at datastruct/mpool.c:328
+#12  0x14922d19e843 in ucs_mpool_grow
+	at datastruct/mpool.c:266
+#13  0x14922d19ea44 in ucs_mpool_get_grow
+	at datastruct/mpool.c:312
+	at datastruct/mpool.c:328
+#12  0x1458837d8843 in ucs_mpool_grow
+	at datastruct/mpool.c:266
+#13  0x1458837d8a44 in ucs_mpool_get_grow
+	at datastruct/mpool.c:312
+#21  0x1cbec09 in __comms_MOD_comms_finalise
+#14  0x1471d256e2c5 in uct_rc_txqp_add_flush_comp
+	at /tmp/ebuser/avx2/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/ib/rc/base/rc_ep.h:418
+#15  0x1471d256e2c5 in uct_rc_mlx5_ep_flush
+	at rc/accel/rc_mlx5_ep.c:638
+	at ../../../Source/Utility/comms.mpi.F90:765
+#14  0x14922a5b02c5 in uct_rc_txqp_add_flush_comp
+	at /tmp/ebuser/avx2/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/ib/rc/base/rc_ep.h:418
+#15  0x14922a5b02c5 in uct_rc_mlx5_ep_flush
+	at rc/accel/rc_mlx5_ep.c:638
+#14  0x1458836e52c5 in uct_rc_txqp_add_flush_comp
+	at /tmp/ebuser/avx2/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/ib/rc/base/rc_ep.h:418
+#15  0x1458836e52c5 in uct_rc_mlx5_ep_flush
+	at rc/accel/rc_mlx5_ep.c:638
+#16  0x1471d51a3a6d in uct_ep_flush
+#16  0x14922d6dfa6d in uct_ep_flush
+	at /tmp/ebuser/avx2/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/api/uct.h:3244
+#17  0x14922d6dfa6d in ucp_ep_flush_progress
+	at rma/flush.c:121
+	at /tmp/ebuser/avx2/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/api/uct.h:3244
+#17  0x1471d51a3a6d in ucp_ep_flush_progress
+#18  0x14922d6e0284 in ucp_ep_flush_internal
+	at rma/flush.c:413
+	at rma/flush.c:121
+#18  0x1471d51a4284 in ucp_ep_flush_internal
+	at rma/flush.c:413
+#16  0x145883d05a6d in uct_ep_flush
+	at /tmp/ebuser/avx2/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/api/uct.h:3244
+#17  0x145883d05a6d in ucp_ep_flush_progress
+	at rma/flush.c:121
+#18  0x145883d06284 in ucp_ep_flush_internal
+	at rma/flush.c:413
+#19  0x14922d6b632c in ucp_ep_close_nbx
+	at core/ucp_ep.c:1726
+#19  0x1471d517a32c in ucp_ep_close_nbx
+	at core/ucp_ep.c:1726
+#20  0x1471d517a519 in ucp_ep_close_nb
+	at core/ucp_ep.c:1695
+#21  0x1471d5700314 in ???
+#22  0x1471d5700468 in ???
+#23  0x1471d56587a8 in ???
+#24  0x1471d629093c in ???
+#25  0x1471d5f3cc19 in ???
+#26  0x1471d5f328ae in ???
+#27  0x1471d628af38 in ???
+#28  0x1471d6291ac3 in ???
+#29  0x1471d629300c in ???
+#30  0x1471d62874c2 in ???
+#31  0x1471d70296f8 in ???
+#32  0x1471d7071791 in ???
+#20  0x14922d6b6519 in ucp_ep_close_nb
+	at core/ucp_ep.c:1695
+#21  0x14922d66a314 in ???
+#22  0x14922d66a468 in ???
+#23  0x14922d6757a8 in ???
+#22  0x42d5f7 in __castep_MOD_castep_finalise
+	at ../../../Source/Functional/castep.f90:7042
+#24  0x14922e49093c in ???
+#25  0x14922dd11c19 in ???
+#26  0x14922dd078ae in ???
+#23  0x40dec3 in MAIN__
+	at ../../../Source/main.f90:101
+#24  0x40a668 in main
+	at ../../../Source/main.f90:32
+#27  0x14922e48af38 in ???
+#28  0x14922e491ac3 in ???
+#29  0x14922e49300c in ???
+#30  0x14922e4874c2 in ???
+#19  0x145883cdc32c in ucp_ep_close_nbx
+	at core/ucp_ep.c:1726
+#20  0x145883cdc519 in ucp_ep_close_nb
+	at core/ucp_ep.c:1695
+#21  0x145883c64314 in ???
+#22  0x145883c64468 in ???
+#23  0x145883dd27a8 in ???
+#24  0x145884a9093c in ???
+#25  0x145884311c19 in ???
+#26  0x1458843078ae in ???
+#27  0x145884a8af38 in ???
+#28  0x145884a91ac3 in ???
+#29  0x145884a9300c in ???
+#30  0x145884a874c2 in ???
+#31  0x1458857056f8 in ???
+#32  0x14588574d791 in ???
+#31  0x14922ede46f8 in ???
+#32  0x14922f128791 in ???
+#33  0x1cbec09 in __comms_MOD_comms_finalise
+	at ../../../Source/Utility/comms.mpi.F90:765
+#33  0x1cbec09 in __comms_MOD_comms_finalise
+#33  0x1cbec09 in __comms_MOD_comms_finalise
+	at ../../../Source/Utility/comms.mpi.F90:765
+	at ../../../Source/Utility/comms.mpi.F90:765
+#34  0x42d5f7 in __castep_MOD_castep_finalise
+	at ../../../Source/Functional/castep.f90:7042
+#0  0x1e9aad6 in ???
+#0  0x1e9aad6 in ???
+#1  0x1e9a1a1 in ???
+#2  0x152be7d6b78f in ???
+#3  0x152be7db97ac in ???
+#4  0x152be7d6b6f1 in ???
+#5  0x152be7d554b1 in ???
+#6  0x152be7d56400 in ???
+#35  0x40dec3 in MAIN__
+	at ../../../Source/main.f90:101
+#36  0x40a668 in main
+	at ../../../Source/main.f90:32
+#7  0x152be7dc3154 in ???
+#8  0x152be7dc3a63 in ???
+#9  0x152be7dc3bff in ???
+#10  0x152be7dc523f in ???
+#11  0x152be7dc78be in ???
+#1  0x1e9a1a1 in ???
+#12  0x152be805e578 in ???
+#13  0x152be7911c19 in ???
+#14  0x152be79078ae in ???
+#15  0x152be808af38 in ???
+#16  0x152be8091ac3 in ???
+#17  0x152be809300c in ???
+#18  0x152be80874c2 in ???
+#19  0x152be89e46f8 in ???
+#20  0x152be8cc8791 in ???
+#2  0x14717ca6378f in ???
+#3  0x14717cab17ac in ???
+#4  0x14717ca636f1 in ???
+#5  0x14717ca4d4b1 in ???
+#6  0x14717ca4e400 in ???
+#7  0x14717cabb154 in ???
+#8  0x14717cabe47b in ???
+#9  0x14717cabf358 in ???
+#34  0x42d5f7 in __castep_MOD_castep_finalise
+	at ../../../Source/Functional/castep.f90:7042
+#10  0x14717bec322e in ucs_malloc
+	at debug/memtrack.c:320
+#34  0x42d5f7 in __castep_MOD_castep_finalise
+#35  0x40dec3 in MAIN__
+	at ../../../Source/main.f90:101
+#36  0x40a668 in main
+	at ../../../Source/main.f90:32
+	at ../../../Source/Functional/castep.f90:7042
+#11  0x14717beb7aec in ucs_mpool_chunk_malloc
+	at datastruct/mpool.c:328
+#12  0x14717beb7843 in ucs_mpool_grow
+#35  0x40dec3 in MAIN__
+	at datastruct/mpool.c:266
+	at ../../../Source/main.f90:101
+#13  0x14717beb7a44 in ucs_mpool_get_grow
+	at datastruct/mpool.c:312
+#36  0x40a668 in main
+	at ../../../Source/main.f90:32
+#21  0x1cbec09 in __comms_MOD_comms_finalise
+	at ../../../Source/Utility/comms.mpi.F90:765
+#14  0x14717996e2c5 in uct_rc_txqp_add_flush_comp
+	at /tmp/ebuser/avx2/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/ib/rc/base/rc_ep.h:418
+#15  0x14717996e2c5 in uct_rc_mlx5_ep_flush
+	at rc/accel/rc_mlx5_ep.c:638
+#16  0x14717bf8ea6d in uct_ep_flush
+	at /tmp/ebuser/avx2/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/api/uct.h:3244
+#17  0x14717bf8ea6d in ucp_ep_flush_progress
+	at rma/flush.c:121
+#18  0x14717bf8f284 in ucp_ep_flush_internal
+	at rma/flush.c:413
+#22  0x42d5f7 in __castep_MOD_castep_finalise
+	at ../../../Source/Functional/castep.f90:7042
+#23  0x40dec3 in MAIN__
+	at ../../../Source/main.f90:101
+#24  0x40a668 in main
+	at ../../../Source/main.f90:32
+#19  0x14717bf6532c in ucp_ep_close_nbx
+	at core/ucp_ep.c:1726
+#20  0x14717bf65519 in ucp_ep_close_nb
+	at core/ucp_ep.c:1695
+#21  0x14717c236314 in ???
+#22  0x14717c236468 in ???
+#23  0x14717c2947a8 in ???
+#24  0x14717cc9093c in ???
+#25  0x14717c93cc19 in ???
+#26  0x14717c9328ae in ???
+#27  0x14717cc8af38 in ???
+#28  0x14717cc91ac3 in ???
+#29  0x14717cc9300c in ???
+#30  0x14717cc874c2 in ???
+#31  0x14717d98c6f8 in ???
+#32  0x14717d9d4791 in ???
+#33  0x1cbec09 in __comms_MOD_comms_finalise
+	at ../../../Source/Utility/comms.mpi.F90:765
+#34  0x42d5f7 in __castep_MOD_castep_finalise
+	at ../../../Source/Functional/castep.f90:7042
+#35  0x40dec3 in MAIN__
+	at ../../../Source/main.f90:101
+#36  0x40a668 in main
+	at ../../../Source/main.f90:32
+malloc(): unsorted double linked list corrupted
+
+Program received signal SIGABRT: Process abort signal.
+
+Backtrace for this error:
+malloc(): unsorted double linked list corrupted
+
+Program received signal SIGABRT: Process abort signal.
+
+Backtrace for this error:
+malloc(): unsorted double linked list corrupted
+
+Program received signal SIGABRT: Process abort signal.
+
+Backtrace for this error:
+#0  0x1e9aad6 in ???
+#1  0x1e9a1a1 in ???
+#2  0x152be496b78f in ???
+#3  0x152be49b97ac in ???
+#4  0x152be496b6f1 in ???
+#5  0x152be49554b1 in ???
+#6  0x152be4956400 in ???
+#7  0x152be49c3154 in ???
+#8  0x152be49c647b in ???
+#9  0x152be49c7358 in ???
+#10  0x152be391222e in ucs_malloc
+	at debug/memtrack.c:320
+#11  0x152be0daa3c0 in uct_rc_mlx5_ep_t_cleanup
+	at rc/accel/rc_mlx5_ep.c:1110
+#12  0x152be3920a8d in ucs_class_call_cleanup_chain
+	at type/class.c:56
+#13  0x152be0db2747 in uct_rc_mlx5_ep_t_delete
+	at rc/accel/rc_mlx5_ep.c:1139
+#14  0x152be397534a in ucp_ep_cleanup_lanes
+	at core/ucp_ep.c:1579
+#15  0x152be3975418 in ucp_ep_destroy_internal
+	at core/ucp_ep.c:1282
+#16  0x152be3985aa1 in ucp_worker_destroy_eps
+	at core/ucp_worker.c:2841
+#17  0x152be398a933 in ucp_worker_destroy
+	at core/ucp_worker.c:2852
+#18  0x152be3e68a2a in ???
+#19  0x152be4511c19 in ???
+#20  0x152be45078ae in ???
+#21  0x152be4c8af38 in ???
+#22  0x152be4c91ac3 in ???
+#23  0x152be4c9300c in ???
+#24  0x152be4c874c2 in ???
+#25  0x152be559e6f8 in ???
+#26  0x152be55e4791 in ???
+#27  0x1cbec09 in __comms_MOD_comms_finalise
+	at ../../../Source/Utility/comms.mpi.F90:765
+#28  0x42d5f7 in __castep_MOD_castep_finalise
+	at ../../../Source/Functional/castep.f90:7042
+#29  0x40dec3 in MAIN__
+	at ../../../Source/main.f90:101
+#30  0x40a668 in main
+	at ../../../Source/main.f90:32
+srun: error: fc30649: tasks 4,9: Aborted
+#0  0x1e9aad6 in ???
+#1  0x1e9a1a1 in ???
+#2  0x154b34a6378f in ???
+#3  0x154b34ab17ac in ???
+srun: Terminating StepId=10244544.0
+#4  0x154b34a636f1 in ???
+#5  0x154b34a4d4b1 in ???
+#6  0x154b34a4e400 in ???
+#7  0x154b34abb154 in ???
+#8  0x154b34abe47b in ???
+#9  0x154b34abf358 in ???
+#10  0x154b33ec322e in ucs_malloc
+	at debug/memtrack.c:320
+#11  0x154b3199f3c0 in uct_rc_mlx5_ep_t_cleanup
+	at rc/accel/rc_mlx5_ep.c:1110
+#12  0x154b33ed1a8d in ucs_class_call_cleanup_chain
+	at type/class.c:56
+#13  0x154b319a7747 in uct_rc_mlx5_ep_t_delete
+	at rc/accel/rc_mlx5_ep.c:1139
+#0  0x1e9aad6 in ???
+#1  0x1e9a1a1 in ???
+#2  0x14815976b78f in ???
+#3  0x1481597b97ac in ???
+#4  0x14815976b6f1 in ???
+#5  0x1481597554b1 in ???
+#6  0x148159756400 in ???
+#7  0x1481597c3154 in ???
+#8  0x1481597c647b in ???
+#9  0x1481597c7358 in ???
+#10  0x1481587aa22e in ucs_malloc
+	at debug/memtrack.c:320
+#14  0x154b33f6034a in ucp_ep_cleanup_lanes
+	at core/ucp_ep.c:1579
+#15  0x154b33f60418 in ucp_ep_destroy_internal
+	at core/ucp_ep.c:1282
+#16  0x154b33f70aa1 in ucp_worker_destroy_eps
+	at core/ucp_worker.c:2841
+#17  0x154b33f75933 in ucp_worker_destroy
+	at core/ucp_worker.c:2852
+#18  0x154b338a0a2a in ???
+#19  0x154b3493cc19 in ???
+#20  0x154b349328ae in ???
+#21  0x154b34c8af38 in ???
+#22  0x154b34c91ac3 in ???
+#23  0x154b34c9300c in ???
+#24  0x154b34c874c2 in ???
+#25  0x154b359926f8 in ???
+#26  0x154b359da791 in ???
+#11  0x148155baa3c0 in uct_rc_mlx5_ep_t_cleanup
+	at rc/accel/rc_mlx5_ep.c:1110
+#12  0x1481587b8a8d in ucs_class_call_cleanup_chain
+	at type/class.c:56
+#13  0x148155bb2747 in uct_rc_mlx5_ep_t_delete
+	at rc/accel/rc_mlx5_ep.c:1139
+srun: error: fc30652: tasks 11,14,18-19: Aborted
+#14  0x148158ca134a in ucp_ep_cleanup_lanes
+	at core/ucp_ep.c:1579
+#15  0x148158ca1418 in ucp_ep_destroy_internal
+	at core/ucp_ep.c:1282
+#16  0x148158cb1aa1 in ucp_worker_destroy_eps
+	at core/ucp_worker.c:2841
+#17  0x148158cb6933 in ucp_worker_destroy
+	at core/ucp_worker.c:2852
+#18  0x148158d9ba2a in ???
+#19  0x148159311c19 in ???
+#20  0x1481593078ae in ???
+#21  0x148159a8af38 in ???
+#22  0x148159a91ac3 in ???
+#23  0x148159a9300c in ???
+#24  0x148159a874c2 in ???
+#25  0x14815a3e46f8 in ???
+#26  0x14815a711791 in ???
+slurmstepd: error: *** STEP 10244544.0 ON fc30648 CANCELLED AT 2025-11-03T10:09:43 ***
+srun: error: fc30649: tasks 2,5-8: Terminated
+srun: error: fc30649: task 3: Aborted
+srun: error: fc30652: tasks 12-13,16-17: Terminated
+srun: error: fc30652: tasks 10,15: Terminated
+srun: Force Terminated StepId=10244544.0

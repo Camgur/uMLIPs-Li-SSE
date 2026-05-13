@@ -1,0 +1,1143 @@
+ +-------------------------------------------------+
+ |                                                 |
+ |      CCC   AA    SSS  TTTTT  EEEEE  PPPP        |
+ |     C     A  A  S       T    E      P   P       |
+ |     C     AAAA   SS     T    EEE    PPPP        |
+ |     C     A  A     S    T    E      P           |
+ |      CCC  A  A  SSS     T    EEEEE  P           |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ | Welcome to Academic Release CASTEP version 25.12|
+ | Ab Initio Total Energy Program                  |
+ |                                                 |
+ | Authors:                                        |
+ | M. Segall, M. Probert, C. Pickard, P. Hasnip,   |
+ | S. Clark, K. Refson, J. R. Yates,               |
+ | A. Bartok-Partay, M. Payne                      |
+ |                                                 |
+ | Contributors:                                   |
+ | P. Lindan, P. Haynes, J. White, V. Milman,      |
+ | N. Govind, M. Gibson, P. Tulip, V. Cocula,      |
+ | B. Montanari, D. Quigley, M. Glover,            |
+ | L. Bernasconi, A. Perlov, M. Plummer,           |
+ | E. McNellis, J. Meyer, J. Gale, D. Jochym       |
+ | J. Aarons, B. Walker, R. Gillen, D. Jones       |
+ | T. Green, I. J. Bush, C. J. Armstrong,          |
+ | E. J. Higgins, E. L. Brown, M. S. McFly,        |
+ | J. Wilkins, B-C. Shih, P. J. P. Byrne,          |
+ | R. J. Maurer, J. C. Womack, J. Dziedzic,        |
+ | L. LeBlanc, T. K. Stenczel, J. Kermode,         |
+ | S. Sturniolo, B. Shi, B. Durham, M. Evans,      |
+ | M. J. Smith, A. Tamerus, Z. Hawkhead,           |
+ | V. Ravindran, T. Hollins, S. A. Joyce,          |
+ | R. T. Strong, A. M. Reilly, S. J. Donaldson,    |
+ | J. C. A. Prentice                               |
+ |                                                 |
+ | Copyright (c) 2000 - 2024                       |
+ |                                                 |
+ |     Distributed under license from Cambridge    |
+ |     Enterprise for academic use only.           |
+ |                                                 |
+ | Please cite                                     |
+ |                                                 |
+ |     "First principles methods using CASTEP"     |
+ |                                                 |
+ |         Zeitschrift fuer Kristallographie       |
+ |           220(5-6) pp. 567-570 (2005)           |
+ |                                                 |
+ | S. J. Clark, M. D. Segall, C. J. Pickard,       |
+ | P. J. Hasnip, M. J. Probert, K. Refson,         |
+ | M. C. Payne                                     |
+ |                                                 |
+ |       in all publications arising from          |
+ |              your use of CASTEP                 |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ |              http://www.castep.org              |
+ |                                                 |
+ +-------------------------------------------------+
+
+
+
+ Compiled for linux_x86_64_gfortran10 on Sun, 13 Jul 2025 14:49:40 -0400
+ from code version git version unavailable
+ Compiler: GNU Fortran 13.3.0; Optimisation: fast
+ Comms   : Open MPI v5.0.3
+ MATHLIBS: flexiblas (IMKL) (LAPACK version 3.12.0)
+ FFT Lib : fftw3 version fftw-3.3.10-sse2-avx-avx2-avx2_128
+ Fundamental constants values: CODATA 2018
+
+ Run started: Thu, 11 Dec 2025 00:37:44 -0500
+
+ Atomic calculation performed for Li: 1s2 2s1
+
+ Converged in 47 iterations to an ae energy of -202.784 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 11-12-2025   |                
+   ------------------------------------------------------------                
+   | Element: Li Ionic charge:  3.00 Level of theory: PBE     |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            1s              2.000           -1.906        |                
+   |            2s              1.000           -0.106        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -1.906   1.001     qc      0         |                
+   |          2      0   -0.106   1.001     qc      0         |                
+   |          3      0    0.250   1.001     qc      0         |                
+   |         loc     1    0.000   1.001     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 0.699                       |                
+   | No partial core correction                               |                
+   ------------------------------------------------------------                
+   | "1|1.0|14|16|18|10U:20(qc=7)"                            |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for O: 1s2 2s2 2p4
+
+ Converged in 61 iterations to an ae energy of -2040.902 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 11-12-2025   |                
+   ------------------------------------------------------------                
+   | Element: O Ionic charge:  6.00 Level of theory: PBE      |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            2s              2.000           -0.881        |                
+   |            2p              4.000           -0.332        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.881   1.100     qc      0         |                
+   |          2      0    0.250   1.100     qc      0         |                
+   |          3      1   -0.332   1.100     qc      0         |                
+   |          4      1    0.250   1.100     qc      0         |                
+   |         loc     2    0.000   1.100     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 0.769                       |                
+   | Partial core correction Rc = 0.769                       |                
+   ------------------------------------------------------------                
+   | "2|1.1|17|20|23|20:21(qc=8)"                             |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for P: 1s2 2s2 2p6 3s2 3p3
+
+ Converged in 56 iterations to an ae energy of -9303.626 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 11-12-2025   |                
+   ------------------------------------------------------------                
+   | Element: P Ionic charge:  5.00 Level of theory: PBE      |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            3s              2.000           -0.513        |                
+   |            3p              3.000           -0.202        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.513   1.807     qc      0         |                
+   |          2      0    0.250   1.807     qc      0         |                
+   |          3      1   -0.202   1.807     qc      0         |                
+   |          4      1    0.250   1.807     qc      0         |                
+   |          5      2    0.000   1.807     qc      0         |                
+   |          6      2    0.250   1.807     qc      0         |                
+   |         loc     3    0.000   1.807     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 1.263                       |                
+   | Partial core correction Rc = 1.263                       |                
+   ------------------------------------------------------------                
+   | "3|1.8|4|4|5|30:31:32"                                   |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for Ge: 1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p2
+
+ Converged in 85 iterations to an ae energy of -57112.123 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 11-12-2025   |                
+   ------------------------------------------------------------                
+   | Element: Ge Ionic charge: 14.00 Level of theory: PBE     |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            3d             10.000           -1.077        |                
+   |            4s              2.000           -0.431        |                
+   |            4p              2.000           -0.143        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.431   1.999     qc      0         |                
+   |          2      0    0.250   1.999     qc      0         |                
+   |          3      1   -0.143   1.999     qc      0         |                
+   |          4      1    0.250   1.999     qc      0         |                
+   |          5      2   -1.077   1.999     qc      0         |                
+   |          6      2    0.250   1.999     qc      0         |                
+   |         loc     3    0.000   1.999     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 1.397                       |                
+   | Partial core correction Rc = 1.397                       |                
+   ------------------------------------------------------------                
+   | "3|2.0|10|12|13|40:41:32(qc=6)"                          |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+ Calculation parallelised over 12 processes.
+ Data is distributed by G-vector(3-way) and k-point(4-way)
+
+ ************************************ Title ************************************
+ 
+
+ ***************************** General Parameters ******************************
+  
+ output verbosity                               : normal  (1)
+ write checkpoint data to                       : ml_dos.check
+ type of calculation                            : Electronic Spectroscopy
+ stress calculation                             : off
+ density difference calculation                 : off
+ electron localisation func (ELF) calculation   : off
+ Hirshfeld analysis                             : off
+ polarisation (Berry phase) analysis            : off
+ molecular orbital projected DOS                : off
+ deltaSCF calculation                           : off
+ unlimited duration calculation
+ timing information                             : on
+ memory usage estimate                          : on
+ write extra output files                       : on
+ write final potential to formatted file        : off
+ write final density to formatted file          : off
+ write BibTeX reference list                    : on
+ write OTFG pseudopotential files               : on
+ write electrostatic potential file             : on
+ write bands file                               : on
+ checkpoint writing                             : both castep_bin and check files
+  
+ output         length unit                     : A
+ output           mass unit                     : amu
+ output           time unit                     : ps
+ output         charge unit                     : e
+ output           spin unit                     : hbar/2
+ output         energy unit                     : eV
+ output          force unit                     : eV/A
+ output       velocity unit                     : A/ps
+ output       pressure unit                     : GPa
+ output     inv_length unit                     : 1/A
+ output      frequency unit                     : cm-1
+ output force constant unit                     : eV/A**2
+ output         volume unit                     : A**3
+ output   IR intensity unit                     : (D/A)**2/amu
+ output         dipole unit                     : D
+ output         efield unit                     : eV/A/e
+ output        entropy unit                     : J/mol/K
+ output    efield chi2 unit                     : pm/V
+  
+ wavefunctions paging                           : none
+ random number generator seed                   :    3744266
+ data distribution                              : optimal for this architecture
+ optimization strategy                          : balance speed and memory
+
+ *********************** Exchange-Correlation Parameters ***********************
+  
+ using functional                               : Perdew Burke Ernzerhof
+ relativistic treatment                         : Koelling-Harmon
+ DFT+D: Semi-empirical dispersion correction    : off
+
+ ************************* Pseudopotential Parameters **************************
+  
+ pseudopotential representation                 : reciprocal space
+ <beta|phi> representation                      : reciprocal space
+ spin-orbit coupling                            : off
+
+ **************************** Basis Set Parameters *****************************
+  
+ plane wave basis set cut-off                   :   900.0000   eV
+ size of standard grid                          :     2.0000
+ size of   fine   gmax                          :    30.7390   1/A
+ finite basis set correction                    : none
+
+ **************************** Electronic Parameters ****************************
+  
+ number of  electrons                           :  236.0    
+ net charge of system                           :  0.000    
+ treating system as non-spin-polarized
+ number of bands                                :        142
+
+ ********************* Electronic Minimization Parameters **********************
+  
+ Method: Treating system as metallic with density mixing treatment of electrons,
+         and number of  SD  steps               :          1
+         and number of  CG  steps               :          4
+  
+ total energy / atom convergence tol.           : 0.1000E-05   eV
+ eigen-energy convergence tolerance             : 0.3051E-06   eV
+ max force / atom convergence tol.              : ignored
+ convergence tolerance window                   :          3   cycles
+ max. number of SCF cycles                      :        100
+ number of fixed-spin iterations                :         10
+ smearing scheme                                : Gaussian
+ smearing width                                 : 0.2000       eV
+ Fermi energy convergence tolerance             : 0.2721E-13   eV
+ periodic dipole correction                     : NONE
+
+ ************************** Density Mixing Parameters **************************
+  
+ density-mixing scheme                          : Pulay
+ max. length of mixing history                  :         20
+ charge density mixing amplitude                : 0.2000    
+ cut-off energy for mixing                      :  900.0       eV
+
+ *********************** Population Analysis Parameters ************************
+  
+ Population analysis with cutoff                :  3.000       A
+ Population analysis output                     : summary and pdos components
+ Partial DOS weights calculated
+
+ ********************* Electronic Spectroscopy Parameters **********************
+  
+ electronic spectroscopy with theory level      : DFT       
+ spectroscopy calculation                       : density of states
+ max. number of iterations                      :         60
+ max. steps per iteration                       :          5
+ number of bands / k-point                      :        202
+ band convergence tolerance                     : 0.1000E-05   eV
+ write orbitals file                            : off
+
+ *******************************************************************************
+  
+
+                           -------------------------------
+                                      Unit Cell
+                           -------------------------------
+        Real Lattice(A)                      Reciprocal Lattice(1/A)
+     8.3422470     0.0000000     0.0000000        0.753176609  -0.437681556  -0.309110922
+     4.1914680     7.2128140     0.0000000        0.000000000   0.871114285  -0.309110831
+     4.1914680     2.4120760     6.7975420        0.000000000   0.000000000   0.924331958
+
+                       Lattice parameters(A)       Cell Angles
+                    a =      8.342247          alpha =   59.838528
+                    b =      8.342247          beta  =   59.838525
+                    c =      8.342247          gamma =   59.838524
+
+                       Current cell volume =           409.015416       A**3
+                                   density =             2.137206   AMU/A**3
+                                           =             3.548914     g/cm^3
+
+                           -------------------------------
+                                     Cell Contents
+                           -------------------------------
+                         Total number of ions in cell =   36
+                      Total number of species in cell =    4
+                        Max number of any one species =   24
+
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            x  Element    Atom        Fractional coordinates of atoms  x
+            x            Number           u          v          w      x
+            x----------------------------------------------------------x
+            x  Li           1         0.500001   0.499999   0.500000   x 
+            x  Li           2         0.999999   0.000000   1.000000   x 
+            x  O            1         0.505830   0.129914   0.299513   x 
+            x  O            2         0.129914   0.299513   0.505830   x 
+            x  O            3         0.299514   0.505830   0.129914   x 
+            x  O            4         0.005830   0.799513   0.629915   x 
+            x  O            5         0.799513   0.629915   0.005830   x 
+            x  O            6         0.629914   0.005831   0.799513   x 
+            x  O            7         0.494170   0.870086   0.700487   x 
+            x  O            8         0.870086   0.700487   0.494170   x 
+            x  O            9         0.700486   0.494170   0.870086   x 
+            x  O           10         0.994170   0.200487   0.370086   x 
+            x  O           11         0.200487   0.370086   0.994170   x 
+            x  O           12         0.370087   0.994170   0.200486   x 
+            x  O           13         0.442586   0.233865   0.578687   x 
+            x  O           14         0.233865   0.578687   0.442586   x 
+            x  O           15         0.578687   0.442586   0.233864   x 
+            x  O           16         0.942586   0.078687   0.733865   x 
+            x  O           17         0.078687   0.733865   0.942586   x 
+            x  O           18         0.733865   0.942586   0.078687   x 
+            x  O           19         0.557414   0.766136   0.421313   x 
+            x  O           20         0.766135   0.421312   0.557414   x 
+            x  O           21         0.421313   0.557414   0.766136   x 
+            x  O           22         0.057414   0.921313   0.266136   x 
+            x  O           23         0.921313   0.266135   0.057414   x 
+            x  O           24         0.266136   0.057414   0.921313   x 
+            x  P            1         0.538466   0.961534   0.250000   x 
+            x  P            2         0.961534   0.250000   0.538466   x 
+            x  P            3         0.250000   0.538466   0.961534   x 
+            x  P            4         0.038466   0.750000   0.461534   x 
+            x  P            5         0.750000   0.461534   0.038466   x 
+            x  P            6         0.461534   0.038466   0.750000   x 
+            x  Ge           1         0.359418   0.359418   0.359417   x 
+            x  Ge           2         0.859417   0.859418   0.859417   x 
+            x  Ge           3         0.640582   0.640582   0.640582   x 
+            x  Ge           4         0.140583   0.140582   0.140582   x 
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+                         No user defined ionic velocities
+
+                           -------------------------------
+                                   Details of Species
+                           -------------------------------
+
+                               Mass of species in AMU
+                                    Li    6.9410000
+                                    O   15.9994000
+                                    P   30.9737600
+                                    Ge   72.6100000
+
+                          Electric Quadrupole Moment (Barn)
+                                    Li   -0.0401000 Isotope   7
+                                    O   -0.0255800 Isotope  17
+                                    P    1.0000000 No Isotope Defined
+                                    Ge   -0.1730000 Isotope  73
+
+                          Files used for pseudopotentials:
+                                    Li 1|1.0|14|16|18|10U:20(qc=7)
+                                    O 2|1.1|17|20|23|20:21(qc=8)
+                                    P 3|1.8|4|4|5|30:31:32
+                                    Ge 3|2.0|10|12|13|40:41:32(qc=6)
+
+                           -------------------------------
+                              k-Points For BZ Sampling
+                           -------------------------------
+                       MP grid size for SCF calculation is  4  4  4
+                            with an offset of   0.000  0.000  0.000
+                       Number of kpoints used =            32
+
+                           -------------------------------
+                               Symmetry and Constraints
+                           -------------------------------
+
+                      Maximum deviation from symmetry =  0.00000         ANG
+
+                      Number of symmetry operations   =           1
+                      Number of ionic constraints     =           3
+                      Point group of crystal =     1: C1, 1, 1
+                      Space group of crystal =   167: R-3c, -R 3 2"c
+
+             Set iprint > 1 for details on symmetry rotations/translations
+
+                         Centre of mass is constrained
+             Set iprint > 2 for details of linear ionic constraints
+
+                         Number of cell constraints= 0
+                         Cell constraints are:  1 2 3 4 5 6
+
+                         External pressure/stress (GPa)
+                          0.00000   0.00000   0.00000
+                                    0.00000   0.00000
+                                              0.00000
+ 
++---------------- MEMORY AND SCRATCH DISK ESTIMATES PER PROCESS --------------+
+|                                                     Memory          Disk    |
+| Baseline code, static data and system overhead      800.0 MB         0.0 MB |
+| BLAS internal memory storage                          0.0 MB         0.0 MB |
+| Model and support data                             1294.0 MB         0.0 MB |
+| Electronic energy minimisation requirements         391.9 MB         0.0 MB |
+| Force calculation requirements                       35.2 MB         0.0 MB |
+|                                               ----------------------------- |
+| Approx. total storage required per process         2485.9 MB         0.0 MB |
+|                                                                             |
+| Requirements will fluctuate during execution and may exceed these estimates |
++-----------------------------------------------------------------------------+
+Calculating approximate eigenstates for fixed initial Hamiltonian
+Cut-off for approx. calculation is  108.886 eV
+Improving approx. states at cut-off of  450.000 eV
+Resetting cut-off to  900.000 eV
+Calculating total energy with cut-off of  900.000 eV.
+------------------------------------------------------------------------ <-- SCF
+SCF loop      Energy           Fermi           Energy gain       Timer   <-- SCF
+                               energy          per atom          (sec)   <-- SCF
+------------------------------------------------------------------------ <-- SCF
+Initial  -2.19330367E+004  0.00000000E+000                        52.44  <-- SCF
+      1  -2.24628999E+004  4.66613954E+000   1.47184212E+001     118.52  <-- SCF
+      2  -2.24641577E+004  4.66471096E+000   3.49409158E-002     177.05  <-- SCF
+      3  -2.24509426E+004  4.87243896E+000  -3.67086942E-001     225.00  <-- SCF
+      4  -2.24444332E+004  5.16098427E+000  -1.80817775E-001     292.72  <-- SCF
+      5  -2.24445328E+004  5.13886878E+000   2.76652764E-003     360.64  <-- SCF
+      6  -2.24445225E+004  5.17001686E+000  -2.85102596E-004     404.88  <-- SCF
+      7  -2.24445407E+004  5.22352796E+000   5.04622559E-004     452.26  <-- SCF
+      8  -2.24445410E+004  5.22663496E+000   8.59772842E-006     497.21  <-- SCF
+      9  -2.24445419E+004  5.23143683E+000   2.67336074E-005     541.25  <-- SCF
+     10  -2.24445418E+004  5.23173142E+000  -3.60205842E-006     574.55  <-- SCF
+     11  -2.24445418E+004  5.23274645E+000  -7.43422083E-007     612.42  <-- SCF
+     12  -2.24445418E+004  5.23214731E+000  -4.22516117E-007     641.72  <-- SCF
+     13  -2.24445418E+004  5.23199356E+000   2.81425485E-007     670.91  <-- SCF
+------------------------------------------------------------------------ <-- SCF
+ 
+Final energy, E             =  -22444.54176505     eV
+Final free energy (E-TS)    =  -22444.54176505     eV
+(energies not corrected for finite basis set)
+ 
+NB est. 0K energy (E-0.5TS)      =  -22444.54176505     eV
+ 
+
+Writing analysis data to ml_dos.castep_bin
+
+Writing model to ml_dos.check
+ 
++---------------- MEMORY AND SCRATCH DISK ESTIMATES PER PROCESS --------------+
+|                                                     Memory          Disk    |
+|                                               ----------------------------- |
+| Approx. total storage required per process         1279.5 MB         0.0 MB |
+|                                                                             |
+| Requirements will fluctuate during execution and may exceed these estimates |
++-----------------------------------------------------------------------------+
+ 
+  =====================================================================
+  +                                                                   +
+  +                 Calculation of Spectral Properties                +
+  +                                                                   +
+  + Calculation re-parallelised over 12 processes.                    +
+  + There are 32 k-points distributed across 4 k-point groups.        +
+  + Data distributed by G-vector(3-way), k-point(4-way), band(1-way)  +
+  + Data distributed by G-vector(3-way), k-point(4-way)               +
+  +                                                                   +
+  =====================================================================
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+  Starting k-point:        1 of        8 Time:      0.00 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+  Starting k-point:        2 of        8 Time:     69.12 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+  Starting k-point:        3 of        8 Time:    138.72 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+  Starting k-point:        4 of        8 Time:    208.60 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+  Starting k-point:        5 of        8 Time:    277.74 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+  Starting k-point:        6 of        8 Time:    347.66 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+  Starting k-point:        7 of        8 Time:    416.85 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+  Starting k-point:        8 of        8 Time:    486.18 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+  Check-pointing spectral run                                 |<-- SPEC
+  Total time to compute matrix elements            555.26 sec |<-- SPEC
+  
+  + Calculation re-parallelised over 12 processes.                    +
+  + Data distributed by G-vector(3-way), k-point(4-way)               +
+
+ ************************** Forces **************************
+ *                                                          *
+ *               Cartesian components (eV/A)                *
+ * -------------------------------------------------------- *
+ *                         x            y            z      *
+ *                                                          *
+ * Li              1     -0.00002     -0.00002      0.00001 *
+ * Li              2     -0.00001     -0.00001     -0.00000 *
+ * O               1      0.40396      0.29727      0.06957 *
+ * O               2      0.46000      0.13238      0.16515 *
+ * O               3      0.34541      0.26639      0.25674 *
+ * O               4      0.40375      0.16466      0.25644 *
+ * O               5      0.34532      0.33091      0.16521 *
+ * O               6      0.45978      0.19998      0.06947 *
+ * O               7     -0.40391     -0.29741     -0.06956 *
+ * O               8     -0.45991     -0.13238     -0.16511 *
+ * O               9     -0.34546     -0.26639     -0.25677 *
+ * O              10     -0.40396     -0.16502     -0.25688 *
+ * O              11     -0.34560     -0.33130     -0.16510 *
+ * O              12     -0.46014     -0.19990     -0.06954 *
+ * O              13      0.22338      0.50495     -0.38921 *
+ * O              14      0.54875     -0.38694      0.07309 *
+ * O              15     -0.05894      0.29265      0.60619 *
+ * O              16      0.22342     -0.19786      0.60597 *
+ * O              17     -0.05888      0.66891      0.07310 *
+ * O              18      0.54882     -0.06049     -0.38912 *
+ * O              19     -0.22347     -0.50509      0.38931 *
+ * O              20     -0.54881      0.38723     -0.07295 *
+ * O              21      0.05893     -0.29266     -0.60629 *
+ * O              22     -0.22342      0.19796     -0.60612 *
+ * O              23      0.05893     -0.66897     -0.07306 *
+ * O              24     -0.54897      0.06060      0.38927 *
+ * P               1     -0.08146      0.14219     -0.00024 *
+ * P               2      0.08187     -0.04781     -0.13399 *
+ * P               3      0.00011     -0.09441      0.13413 *
+ * P               4     -0.08175      0.04764      0.13432 *
+ * P               5      0.00002      0.09484     -0.13431 *
+ * P               6      0.08209     -0.14199     -0.00016 *
+ * Ge              1     -0.12287     -0.07077     -0.04978 *
+ * Ge              2     -0.12268     -0.07057     -0.04978 *
+ * Ge              3      0.12293      0.07069      0.04998 *
+ * Ge              4      0.12284      0.07074      0.05003 *
+ *                                                          *
+ ************************************************************
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.5098 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Ge 3d10 4s2 4p2
+
+ Converged in 28 iterations to a total energy of -2533.5726 eV
+Charge spilling parameter for spin component 1 = 1.00%
+
+            Orbital Populations       
+     Ion    Atom   Orbital             Charge
+  -------------------------------------------
+     Li     1      S                    2.000
+     Li     1      S                    0.098
+     Li     1      Px                   0.028
+     Li     1      Py                   0.049
+     Li     1      Pz                   0.054
+     Li     2      S                    2.000
+     Li     2      S                    0.098
+     Li     2      Px                   0.028
+     Li     2      Py                   0.049
+     Li     2      Pz                   0.054
+      O     1      S                    1.807
+      O     1      Px                   1.818
+      O     1      Py                   1.548
+      O     1      Pz                   1.850
+      O     2      S                    1.807
+      O     2      Px                   1.554
+      O     2      Py                   1.856
+      O     2      Pz                   1.806
+      O     3      S                    1.807
+      O     3      Px                   1.746
+      O     3      Py                   1.844
+      O     3      Pz                   1.626
+      O     4      S                    1.807
+      O     4      Px                   1.818
+      O     4      Py                   1.772
+      O     4      Pz                   1.626
+      O     5      S                    1.807
+      O     5      Px                   1.746
+      O     5      Py                   1.665
+      O     5      Pz                   1.806
+      O     6      S                    1.807
+      O     6      Px                   1.554
+      O     6      Py                   1.813
+      O     6      Pz                   1.850
+      O     7      S                    1.807
+      O     7      Px                   1.818
+      O     7      Py                   1.548
+      O     7      Pz                   1.850
+      O     8      S                    1.807
+      O     8      Px                   1.554
+      O     8      Py                   1.856
+      O     8      Pz                   1.806
+      O     9      S                    1.807
+      O     9      Px                   1.746
+      O     9      Py                   1.845
+      O     9      Pz                   1.626
+      O    10      S                    1.807
+      O    10      Px                   1.818
+      O    10      Py                   1.772
+      O    10      Pz                   1.626
+      O    11      S                    1.807
+      O    11      Px                   1.746
+      O    11      Py                   1.665
+      O    11      Pz                   1.806
+      O    12      S                    1.807
+      O    12      Px                   1.554
+      O    12      Py                   1.813
+      O    12      Pz                   1.850
+      O    13      S                    1.829
+      O    13      Px                   1.791
+      O    13      Py                   1.749
+      O    13      Pz                   1.638
+      O    14      S                    1.829
+      O    14      Px                   1.761
+      O    14      Py                   1.562
+      O    14      Pz                   1.855
+      O    15      S                    1.829
+      O    15      Px                   1.681
+      O    15      Py                   1.849
+      O    15      Pz                   1.648
+      O    16      S                    1.829
+      O    16      Px                   1.791
+      O    16      Py                   1.739
+      O    16      Pz                   1.648
+      O    17      S                    1.829
+      O    17      Px                   1.681
+      O    17      Py                   1.642
+      O    17      Pz                   1.855
+      O    18      S                    1.829
+      O    18      Px                   1.761
+      O    18      Py                   1.779
+      O    18      Pz                   1.638
+      O    19      S                    1.829
+      O    19      Px                   1.791
+      O    19      Py                   1.749
+      O    19      Pz                   1.638
+      O    20      S                    1.829
+      O    20      Px                   1.761
+      O    20      Py                   1.562
+      O    20      Pz                   1.855
+      O    21      S                    1.829
+      O    21      Px                   1.681
+      O    21      Py                   1.849
+      O    21      Pz                   1.648
+      O    22      S                    1.829
+      O    22      Px                   1.791
+      O    22      Py                   1.739
+      O    22      Pz                   1.648
+      O    23      S                    1.829
+      O    23      Px                   1.681
+      O    23      Py                   1.642
+      O    23      Pz                   1.855
+      O    24      S                    1.829
+      O    24      Px                   1.761
+      O    24      Py                   1.779
+      O    24      Pz                   1.638
+      P     1      S                    0.866
+      P     1      Px                   0.575
+      P     1      Py                   0.600
+      P     1      Pz                   0.612
+      P     2      S                    0.866
+      P     2      Px                   0.575
+      P     2      Py                   0.609
+      P     2      Pz                   0.603
+      P     3      S                    0.866
+      P     3      Px                   0.590
+      P     3      Py                   0.594
+      P     3      Pz                   0.603
+      P     4      S                    0.866
+      P     4      Px                   0.575
+      P     4      Py                   0.609
+      P     4      Pz                   0.603
+      P     5      S                    0.866
+      P     5      Px                   0.590
+      P     5      Py                   0.594
+      P     5      Pz                   0.603
+      P     6      S                    0.866
+      P     6      Px                   0.575
+      P     6      Py                   0.600
+      P     6      Pz                   0.612
+     Ge     1      Dzz                  2.000
+     Ge     1      Dzy                  2.000
+     Ge     1      Dzx                  2.000
+     Ge     1      Dxx-yy               2.000
+     Ge     1      Dxy                  2.000
+     Ge     1      S                    0.807
+     Ge     1      Px                   0.439
+     Ge     1      Py                   0.426
+     Ge     1      Pz                   0.422
+     Ge     1      S                   -0.279
+     Ge     2      Dzz                  2.000
+     Ge     2      Dzy                  2.000
+     Ge     2      Dzx                  2.000
+     Ge     2      Dxx-yy               2.000
+     Ge     2      Dxy                  2.000
+     Ge     2      S                    0.807
+     Ge     2      Px                   0.439
+     Ge     2      Py                   0.426
+     Ge     2      Pz                   0.422
+     Ge     2      S                   -0.279
+     Ge     3      Dzz                  2.000
+     Ge     3      Dzy                  2.000
+     Ge     3      Dzx                  2.000
+     Ge     3      Dxx-yy               2.000
+     Ge     3      Dxy                  2.000
+     Ge     3      S                    0.807
+     Ge     3      Px                   0.439
+     Ge     3      Py                   0.426
+     Ge     3      Pz                   0.422
+     Ge     3      S                   -0.279
+     Ge     4      Dzz                  2.000
+     Ge     4      Dzy                  2.000
+     Ge     4      Dzx                  2.000
+     Ge     4      Dxx-yy               2.000
+     Ge     4      Dxy                  2.000
+     Ge     4      S                    0.807
+     Ge     4      Px                   0.439
+     Ge     4      Py                   0.426
+     Ge     4      Pz                   0.422
+     Ge     4      S                   -0.279
+  -------------------------------------------
+                           Total:     235.994
+  -------------------------------------------
+
+     Atomic Populations (Mulliken)
+     -----------------------------
+Species          Ion     s       p       d       f      Total   Charge (e)
+==========================================================================
+  Li              1     2.098   0.130   0.000   0.000   2.228     0.772
+  Li              2     2.098   0.130   0.000   0.000   2.228     0.772
+  O               1     1.807   5.216   0.000   0.000   7.023    -1.023
+  O               2     1.807   5.217   0.000   0.000   7.024    -1.024
+  O               3     1.807   5.216   0.000   0.000   7.023    -1.023
+  O               4     1.807   5.216   0.000   0.000   7.023    -1.023
+  O               5     1.807   5.216   0.000   0.000   7.023    -1.023
+  O               6     1.807   5.216   0.000   0.000   7.023    -1.023
+  O               7     1.807   5.216   0.000   0.000   7.023    -1.023
+  O               8     1.807   5.216   0.000   0.000   7.023    -1.023
+  O               9     1.807   5.216   0.000   0.000   7.023    -1.023
+  O              10     1.807   5.216   0.000   0.000   7.023    -1.023
+  O              11     1.807   5.217   0.000   0.000   7.024    -1.024
+  O              12     1.807   5.216   0.000   0.000   7.023    -1.023
+  O              13     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              14     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              15     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              16     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              17     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              18     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              19     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              20     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              21     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              22     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              23     1.829   5.178   0.000   0.000   7.007    -1.007
+  O              24     1.829   5.178   0.000   0.000   7.007    -1.007
+  P               1     0.866   1.787   0.000   0.000   2.653     2.347
+  P               2     0.866   1.787   0.000   0.000   2.653     2.347
+  P               3     0.866   1.787   0.000   0.000   2.653     2.347
+  P               4     0.866   1.787   0.000   0.000   2.653     2.347
+  P               5     0.866   1.787   0.000   0.000   2.653     2.347
+  P               6     0.866   1.787   0.000   0.000   2.653     2.347
+  Ge              1     0.527   1.287  10.000   0.000  11.814     2.186
+  Ge              2     0.527   1.287  10.000   0.000  11.814     2.186
+  Ge              3     0.528   1.287  10.000   0.000  11.814     2.186
+  Ge              4     0.528   1.287  10.000   0.000  11.814     2.186
+==========================================================================
+
+                 Bond                   Population      Length (A)
+======================================================================
+              O 12 -- P 1                    0.67        1.51774
+              O 2  -- P 2                    0.67        1.51775
+              O 8  -- P 4                    0.67        1.51775
+              O 7  -- P 6                    0.67        1.51775
+              O 1  -- P 1                    0.67        1.51775
+              O 11 -- P 3                    0.67        1.51775
+              O 10 -- P 2                    0.67        1.51775
+              O 6  -- P 6                    0.67        1.51775
+              O 9  -- P 5                    0.67        1.51775
+              O 3  -- P 3                    0.67        1.51775
+              O 5  -- P 5                    0.67        1.51775
+              O 4  -- P 4                    0.67        1.51775
+              O 24 -- P 6                    0.63        1.53351
+              O 21 -- P 3                    0.63        1.53351
+              O 15 -- P 5                    0.63        1.53351
+              O 19 -- P 1                    0.63        1.53351
+              O 22 -- P 4                    0.63        1.53351
+              O 20 -- P 2                    0.63        1.53351
+              O 14 -- P 4                    0.63        1.53351
+              O 18 -- P 1                    0.63        1.53351
+              O 17 -- P 3                    0.63        1.53351
+              O 23 -- P 5                    0.63        1.53351
+              O 13 -- P 6                    0.63        1.53351
+              O 16 -- P 2                    0.63        1.53351
+              O 4  -- Ge 2                   0.38        1.84536
+              O 6  -- Ge 2                   0.38        1.84536
+              O 3  -- Ge 1                   0.38        1.84536
+              O 5  -- Ge 2                   0.38        1.84536
+              O 12 -- Ge 4                   0.38        1.84537
+              O 1  -- Ge 1                   0.38        1.84537
+              O 11 -- Ge 4                   0.38        1.84537
+              O 9  -- Ge 3                   0.38        1.84537
+              O 8  -- Ge 3                   0.38        1.84537
+              O 7  -- Ge 3                   0.38        1.84537
+              O 2  -- Ge 1                   0.38        1.84537
+              O 10 -- Ge 4                   0.38        1.84537
+              O 21 -- Ge 3                   0.32        1.88260
+              O 19 -- Ge 3                   0.32        1.88260
+              O 15 -- Ge 1                   0.32        1.88260
+              O 24 -- Ge 4                   0.32        1.88260
+              O 22 -- Ge 4                   0.32        1.88261
+              O 14 -- Ge 1                   0.32        1.88261
+              O 16 -- Ge 2                   0.32        1.88261
+              O 23 -- Ge 4                   0.32        1.88261
+              O 20 -- Ge 3                   0.32        1.88261
+              O 13 -- Ge 1                   0.32        1.88261
+              O 18 -- Ge 2                   0.32        1.88261
+              O 17 -- Ge 2                   0.32        1.88262
+              Li 1 -- O 20                   0.09        2.20851
+              Li 2 -- O 18                   0.09        2.20851
+              Li 2 -- O 16                   0.09        2.20852
+              Li 1 -- O 13                   0.09        2.20852
+              Li 2 -- O 17                   0.09        2.20852
+              Li 2 -- O 23                   0.09        2.20852
+              Li 1 -- O 14                   0.09        2.20853
+              Li 1 -- O 15                   0.09        2.20853
+              Li 1 -- O 21                   0.09        2.20853
+              Li 1 -- O 19                   0.09        2.20853
+              Li 2 -- O 22                   0.09        2.20853
+              Li 2 -- O 24                   0.09        2.20854
+              O 10 -- O 20                  -0.15        2.41633
+              O 7  -- O 24                  -0.15        2.41633
+              O 11 -- O 21                  -0.15        2.41633
+              O 6  -- O 13                  -0.15        2.41633
+              O 8  -- O 22                  -0.15        2.41633
+              O 12 -- O 19                  -0.15        2.41633
+              O 1  -- O 18                  -0.15        2.41633
+              O 2  -- O 16                  -0.15        2.41633
+              O 5  -- O 15                  -0.15        2.41634
+              O 4  -- O 14                  -0.15        2.41634
+              O 9  -- O 23                  -0.15        2.41634
+              O 3  -- O 17                  -0.15        2.41634
+              O 16 -- O 20                  -0.14        2.49496
+              O 17 -- O 21                  -0.14        2.49496
+              O 15 -- O 23                  -0.14        2.49496
+              O 14 -- O 22                  -0.14        2.49496
+              O 18 -- O 19                  -0.14        2.49496
+              O 13 -- O 24                  -0.14        2.49496
+              O 17 -- O 18                  -0.09        2.50342
+              O 13 -- O 14                  -0.09        2.50342
+              O 16 -- O 18                  -0.09        2.50342
+              O 16 -- O 17                  -0.09        2.50342
+              O 14 -- O 15                  -0.09        2.50342
+              O 22 -- O 23                  -0.09        2.50342
+              O 23 -- O 24                  -0.09        2.50343
+              O 20 -- O 21                  -0.09        2.50343
+              O 13 -- O 15                  -0.09        2.50343
+              O 22 -- O 24                  -0.09        2.50343
+              O 19 -- O 21                  -0.09        2.50343
+              O 19 -- O 20                  -0.09        2.50343
+              O 1  -- O 12                  -0.12        2.53295
+              O 2  -- O 10                  -0.12        2.53295
+              O 3  -- O 11                  -0.12        2.53296
+              O 6  -- O 7                   -0.12        2.53296
+              O 4  -- O 8                   -0.12        2.53296
+              O 5  -- O 9                   -0.12        2.53297
+              O 1  -- O 19                  -0.12        2.54080
+              O 12 -- O 18                  -0.12        2.54080
+              O 9  -- O 15                  -0.12        2.54080
+              O 3  -- O 21                  -0.12        2.54080
+              O 6  -- O 24                  -0.12        2.54080
+              O 8  -- O 14                  -0.12        2.54081
+              O 11 -- O 17                  -0.12        2.54081
+              O 7  -- O 13                  -0.12        2.54081
+              O 10 -- O 16                  -0.12        2.54081
+              O 4  -- O 22                  -0.12        2.54081
+              O 2  -- O 20                  -0.12        2.54081
+              O 5  -- O 23                  -0.12        2.54082
+              O 3  -- O 15                  -0.08        2.60562
+              O 9  -- O 21                  -0.08        2.60562
+              O 12 -- O 24                  -0.08        2.60562
+              O 5  -- O 17                  -0.07        2.60562
+              O 10 -- O 22                  -0.08        2.60562
+              O 4  -- O 16                  -0.08        2.60562
+              O 7  -- O 19                  -0.08        2.60562
+              O 6  -- O 18                  -0.08        2.60563
+              O 11 -- O 23                  -0.08        2.60563
+              O 2  -- O 14                  -0.08        2.60563
+              O 1  -- O 13                  -0.08        2.60563
+              O 8  -- O 20                  -0.08        2.60564
+              O 5  -- O 18                  -0.06        2.70113
+              O 4  -- O 17                  -0.06        2.70113
+              O 6  -- O 16                  -0.06        2.70114
+              O 8  -- O 19                  -0.06        2.70114
+              O 11 -- O 24                  -0.06        2.70114
+              O 1  -- O 15                  -0.06        2.70114
+              O 7  -- O 21                  -0.06        2.70114
+              O 3  -- O 14                  -0.06        2.70114
+              O 2  -- O 13                  -0.06        2.70114
+              O 10 -- O 23                  -0.06        2.70114
+              O 12 -- O 22                  -0.06        2.70114
+              O 9  -- O 20                  -0.06        2.70114
+              O 4  -- O 5                   -0.07        2.71351
+              O 7  -- O 9                   -0.07        2.71351
+              O 1  -- O 3                   -0.07        2.71351
+              O 11 -- O 12                  -0.07        2.71351
+              O 7  -- O 8                   -0.07        2.71352
+              O 1  -- O 2                   -0.07        2.71352
+              O 5  -- O 6                   -0.07        2.71352
+              O 10 -- O 11                  -0.07        2.71352
+              O 4  -- O 6                   -0.07        2.71352
+              O 8  -- O 9                   -0.07        2.71352
+              O 2  -- O 3                   -0.07        2.71352
+              O 10 -- O 12                  -0.07        2.71352
+              Li 1 -- Ge 3                  -0.72        2.87619
+              Li 2 -- Ge 2                  -0.72        2.87620
+              Li 1 -- Ge 1                  -0.72        2.87620
+              Li 2 -- Ge 4                  -0.72        2.87620
+              O 3  -- O 9                   -0.01        2.91477
+              O 6  -- O 12                  -0.01        2.91477
+              O 2  -- O 8                   -0.01        2.91478
+              O 1  -- O 7                   -0.01        2.91478
+              O 5  -- O 11                  -0.01        2.91478
+              O 4  -- O 10                  -0.01        2.91478
+======================================================================
+
+
+Writing analysis data to ml_dos.castep_bin
+
+Writing model to ml_dos.check
+ 
+ A BibTeX formatted list of references used in this run has been written to 
+ ml_dos.bib
+ 
+Initialisation time =     11.45 s
+Calculation time    =   1302.30 s
+Finalisation time   =      3.29 s
+Total time          =   1317.05 s
+Peak Memory Use     = 2891700 kB
+ 
+Overall parallel efficiency rating: Satisfactory (64%)
+ 
+Data was distributed by:-
+G-vector (3-way); efficiency rating: Good (71%)
+k-point (4-way); efficiency rating: Very good (86%)

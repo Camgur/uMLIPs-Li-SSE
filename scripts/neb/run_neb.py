@@ -1,12 +1,3 @@
-"""neb/run_neb.py — Run NEB calculations with a uMLIP force engine.
-
-Usage
------
-    python scripts/neb/run_neb.py structure.cif idx1 idx2 model_name
-
-Available model names are defined in ``scripts/utils/models.py`` (``CALCULATOR_BLOCKS``).
-"""
-
 import warnings
 warnings.simplefilter("ignore", category=FutureWarning)
 
@@ -22,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).parents[1]))
 from utils.io import ensure_dir
 from utils.models import get_calculator
 
-# ------------------------ Input handling ------------------------
+# Input
 if len(sys.argv) != 5:
     sys.exit("Usage: python run_neb.py structure.cif idx1 idx2 model_name")
 
@@ -37,7 +28,7 @@ if idx1 >= len(atoms) or idx2 >= len(atoms):
     sys.exit("Indices out of range.")
 print(f"Total atoms: {len(atoms)}, removing Li at indices {idx1}, {idx2}")
 
-# ------------------------ Initial/final setup ------------------------
+# System setup
 initial = atoms.copy()
 final = atoms.copy()
 
@@ -52,13 +43,12 @@ from ase.build import sort
 initial = sort(initial)
 final = sort(final)
 
-# ------------------------ Calculator ------------------------
 calculator = get_calculator(model_name)
 
 REPO_ROOT = Path(__file__).parents[2]
 out_dir = ensure_dir(REPO_ROOT / "results" / "neb" / filename / model_name)
 
-# ------------------------ Optimise endpoints ------------------------
+# Opt endpoints
 for state, label in zip([initial, final], ["init", "fin"]):
     state.calc = calculator
     opt = BFGS(
@@ -69,8 +59,8 @@ for state, label in zip([initial, final], ["init", "fin"]):
     opt.run(fmax=1e-3, steps=100)
     write(str(out_dir / f"{label}_{idx1}to{idx2}_opt.cif"), state)
 
-# ------------------------ NEB setup ------------------------
-# Create three interpolated images between initial/final
+# NEB setup
+# Create 3 interpolated images
 images = [initial, initial.copy(), initial.copy(), initial.copy(), final]
 neb = NEB(images, climb=True, allow_shared_calculator=True)
 neb.interpolate(method='idpp', mic=True)
@@ -78,7 +68,7 @@ neb.interpolate(method='idpp', mic=True)
 for image in images:
     image.calc = calculator
 
-# ------------------------ NEB optimisation ------------------------
+# NEB opt
 traj_path = out_dir / f"{idx1}to{idx2}_neb.traj"
 neb_opt = BFGS(
     neb,
@@ -89,7 +79,7 @@ neb_opt.run(fmax=0.05, steps=300)
 
 print("NEB optimisation finished.")
 
-# ------------------------ NEB analysis ------------------------
+# NEB analysis
 neb_traj = read(str(traj_path) + "@-5:")
 for image in neb_traj:
     image.calc = calculator

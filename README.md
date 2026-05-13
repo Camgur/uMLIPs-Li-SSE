@@ -114,16 +114,16 @@ The best uMLIPs that pass the pre-screening stage proceed to long MD simulations
 The mean-square displacement (MSD) of Li<sup>+</sup> is computed from MD trajectories at multiple temperatures (300-1200K for this work). The diffusion coefficient *D* is recovered from the Einstein relation:
 
 $$
-D = \lim_{t \to \infty} \frac{\langle |r(t) - r(0)|^2 \rangle}{6t}
+D = \frac{1}{6 N_{Li} \Delta t} \sum_{i=1}^{n} \langle |r_i(t + \Delta t) - r_i(t)|^2 \rangle
 $$
 
 The temperature dependence of *D* is then fitted to the Arrhenius equation:
 
 $$
-D(T) = D_0 \exp\!\left(-\frac{E_a}{k_B T}\right)
+D = D_0 \exp \left(-\frac{E_a}{k_B T}\right)
 $$
 
-to extract E<sub>a</sub>. The Nernst-Einstein equation may be then used to obtain the room temperature conductivity, but comparison to ssNMR E<sub>a</sub> was the object of this study.
+to extract E<sub>a</sub>. The Nernst-Einstein equation may be then used to obtain the room temperature conductivity, but comparison to ssNMR E<sub>a</sub> was the object of this study, so this equation was unused.
 
 #### 3.2.2 Comparison with Experimental ssNMR Data
 

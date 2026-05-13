@@ -12,19 +12,16 @@ DOI: [https://doi.org/10.26434/chemrxiv.15002480/v1](https://doi.org/10.26434/ch
 1. [Background](#1-background)
 2. [Selected uMLIPs and Materials](#2-selected-umlips-and-materials)
    - 2.1 [Universal Machine Learning Interatomic Potentials](#21-universal-machine-learning-interatomic-potentials)
-   - 2.2 [Solid-State Electrolyte Materials](#22-solid-state-electrolyte-materials)
+   - 2.2 [Example Materials](#22-example-materials)
 3. [Methodology and Pipeline](#3-methodology-and-pipeline)
    - 3.1 [Pre-Screening: DOS and NEB Calculations](#31-pre-screening-dos-and-neb-calculations)
      - 3.1.1 [Density of States (DOS)](#311-density-of-states-dos)
      - 3.1.2 [Nudged Elastic Band (NEB)](#312-nudged-elastic-band-neb)
-   - 3.2 [Lithium Diffusion MD Simulations](#32-lithium-diffusion-md-simulations)
+   - 3.2 [Lithium Diffusion Simulations](#32-lithium-diffusion-simulations)
      - 3.2.1 [Arrhenius Fitting](#321-arrhenius-fitting)
      - 3.2.2 [Comparison with Experimental ssNMR Data](#322-comparison-with-experimental-ssnmr-data)
 4. [Repository Structure](#4-repository-structure)
 5. [Installation and Dependencies](#5-installation-and-dependencies)
-6. [Usage](#6-usage)
-7. [Results Summary](#7-results-summary)
-8. [References](#8-references)
 
 ---
 
@@ -40,8 +37,8 @@ Although uMLIPs offer significant computational savings over DFT-based approache
 
 This work introduces a two-stage pipeline:
 
-1. **Pre-screening** (low-cost): Density of States (DOS) and Nudged Elastic Band (NEB) calculations quickly identify uMLIPs that accurately describe the electronic and energetic landscape of each material.
-2. **Full evaluation** (high-cost): Only the most promising uMLIPs, identified in Stage 1, are used for long lithium-diffusion MD simulations and subsequent Arrhenius fitting, with final validation against experimental solid-state NMR (ssNMR) diffusion data.
+1. **Pre-screening** (low-cost): Density of States (DOS) and Nudged Elastic Band (NEB) calculations identify uMLIPs that accurately describe the electronic and energetic landscape of each material.
+2. **Full evaluation** (high-cost): Only the most promising uMLIPs identified in 1 are used for long lithium-diffusion MD simulations and subsequent Arrhenius fitting, with final validation against experimental solid-state NMR (ssNMR) diffusion data.
 
 ---
 
@@ -79,7 +76,7 @@ This example benchmark focuses on the following lithium-based materials:
 | Material                                             | Structure Type   | Li Conductivity Regime |
 | ---------------------------------------------------- | ---------------- | ---------------------- |
 | Li<sub>10</sub>SnP<sub>2</sub>S<sub>12</sub> (LSnPS) | SSE (Argyrodite) | High                   |
-| LiFeV<sub>2</sub>O<sub>7</sub>                       | Cathode          | Low–Moderate           |
+| LiFeV<sub>2</sub>O<sub>7</sub> (LFVO)                | Cathode          | Low–Moderate           |
 
 ---
 
@@ -190,16 +187,16 @@ uMLIPs Pipeline/
 - [NumPy](https://numpy.org/), [SciPy](https://scipy.org/), [Matplotlib](https://matplotlib.org/)
 - Individual uMLIP packages (see `environment.yml`)
 
-### Environment Setup
+### Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/Camgur/uMLIPs-pipeline.git
-cd uMLIPs-pipeline
+git clone https://github.com/Camgur/uMLIPs-Li-SSE.git
+cd uMLIPs-Li-SSE
 
 # Create and activate the conda environment
 conda env create -f environment.yml
-conda activate umlips-pipeline
+conda activate uMLIPs-Li-SSE
 ```
 
 ---
@@ -213,7 +210,6 @@ conda activate umlips-pipeline
 python scripts/relaxation/relax.py structures/LSnPS/LSnPS.cif mace-0b3
 
 # 1b. Run DOS pre-screening
-python scripts/dos/run_dos.py --material LSnPS
 python scripts/dos/compare_dos.py --material LSnPS
 
 # 1c. Run NEB pre-screening

@@ -1,0 +1,1002 @@
+ +-------------------------------------------------+
+ |                                                 |
+ |      CCC   AA    SSS  TTTTT  EEEEE  PPPP        |
+ |     C     A  A  S       T    E      P   P       |
+ |     C     AAAA   SS     T    EEE    PPPP        |
+ |     C     A  A     S    T    E      P           |
+ |      CCC  A  A  SSS     T    EEEEE  P           |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ | Welcome to Academic Release CASTEP version 25.12|
+ | Ab Initio Total Energy Program                  |
+ |                                                 |
+ | Authors:                                        |
+ | M. Segall, M. Probert, C. Pickard, P. Hasnip,   |
+ | S. Clark, K. Refson, J. R. Yates,               |
+ | A. Bartok-Partay, M. Payne                      |
+ |                                                 |
+ | Contributors:                                   |
+ | P. Lindan, P. Haynes, J. White, V. Milman,      |
+ | N. Govind, M. Gibson, P. Tulip, V. Cocula,      |
+ | B. Montanari, D. Quigley, M. Glover,            |
+ | L. Bernasconi, A. Perlov, M. Plummer,           |
+ | E. McNellis, J. Meyer, J. Gale, D. Jochym       |
+ | J. Aarons, B. Walker, R. Gillen, D. Jones       |
+ | T. Green, I. J. Bush, C. J. Armstrong,          |
+ | E. J. Higgins, E. L. Brown, M. S. McFly,        |
+ | J. Wilkins, B-C. Shih, P. J. P. Byrne,          |
+ | R. J. Maurer, J. C. Womack, J. Dziedzic,        |
+ | L. LeBlanc, T. K. Stenczel, J. Kermode,         |
+ | S. Sturniolo, B. Shi, B. Durham, M. Evans,      |
+ | M. J. Smith, A. Tamerus, Z. Hawkhead,           |
+ | V. Ravindran, T. Hollins, S. A. Joyce,          |
+ | R. T. Strong, A. M. Reilly, S. J. Donaldson,    |
+ | J. C. A. Prentice                               |
+ |                                                 |
+ | Copyright (c) 2000 - 2024                       |
+ |                                                 |
+ |     Distributed under license from Cambridge    |
+ |     Enterprise for academic use only.           |
+ |                                                 |
+ | Please cite                                     |
+ |                                                 |
+ |     "First principles methods using CASTEP"     |
+ |                                                 |
+ |         Zeitschrift fuer Kristallographie       |
+ |           220(5-6) pp. 567-570 (2005)           |
+ |                                                 |
+ | S. J. Clark, M. D. Segall, C. J. Pickard,       |
+ | P. J. Hasnip, M. J. Probert, K. Refson,         |
+ | M. C. Payne                                     |
+ |                                                 |
+ |       in all publications arising from          |
+ |              your use of CASTEP                 |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ |              http://www.castep.org              |
+ |                                                 |
+ +-------------------------------------------------+
+
+
+
+ Compiled for linux_x86_64_gfortran10 on Sun, 13 Jul 2025 14:49:40 -0400
+ from code version git version unavailable
+ Compiler: GNU Fortran 13.3.0; Optimisation: fast
+ Comms   : Open MPI v5.0.3
+ MATHLIBS: flexiblas (IMKL) (LAPACK version 3.12.0)
+ FFT Lib : fftw3 version fftw-3.3.10-sse2-avx-avx2-avx2_128
+ Fundamental constants values: CODATA 2018
+
+ Run started: Fri, 20 Feb 2026 12:06:40 -0500
+ Warning in parameters_read: presetting of magnetic moments on atoms cannot be guaranteed when metals_method /= density mixing
+
+ Atomic calculation performed for O: 1s2 2s2 2p4
+
+ Converged in 61 iterations to an ae energy of -2040.902 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 20-02-2026   |                
+   ------------------------------------------------------------                
+   | Element: O Ionic charge:  6.00 Level of theory: PBE      |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            2s              2.000           -0.881        |                
+   |            2p              4.000           -0.332        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.881   1.100     qc      0         |                
+   |          2      0    0.250   1.100     qc      0         |                
+   |          3      1   -0.332   1.100     qc      0         |                
+   |          4      1    0.250   1.100     qc      0         |                
+   |         loc     2    0.000   1.100     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 0.769                       |                
+   | Partial core correction Rc = 0.769                       |                
+   ------------------------------------------------------------                
+   | "2|1.1|17|20|23|20:21(qc=8)"                             |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for P: 1s2 2s2 2p6 3s2 3p3
+
+ Converged in 56 iterations to an ae energy of -9303.626 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 20-02-2026   |                
+   ------------------------------------------------------------                
+   | Element: P Ionic charge:  5.00 Level of theory: PBE      |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            3s              2.000           -0.513        |                
+   |            3p              3.000           -0.202        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.513   1.807     qc      0         |                
+   |          2      0    0.250   1.807     qc      0         |                
+   |          3      1   -0.202   1.807     qc      0         |                
+   |          4      1    0.250   1.807     qc      0         |                
+   |          5      2    0.000   1.807     qc      0         |                
+   |          6      2    0.250   1.807     qc      0         |                
+   |         loc     3    0.000   1.807     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 1.263                       |                
+   | Partial core correction Rc = 1.263                       |                
+   ------------------------------------------------------------                
+   | "3|1.8|4|4|5|30:31:32"                                   |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for Fe: 1s2 2s2 2p6 3s2 3p6 3d6 4s2
+
+ Converged in 96 iterations to an ae energy of -34625.102 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation 20-02-2026   |                
+   ------------------------------------------------------------                
+   | Element: Fe Ionic charge:  8.00 Level of theory: PBE     |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            3d              6.000           -0.276        |                
+   |            4s              2.000           -0.194        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.194   2.399     qc      0         |                
+   |          2      0    0.250   2.399     qc      0         |                
+   |          3      1    0.000   2.399     qc      0         |                
+   |          4      1    0.250   2.399     qc      0         |                
+   |          5      2   -0.276   1.997     qc      0         |                
+   |          6      2    0.250   1.997     qc      0         |                
+   |         loc     3    0.000   2.399     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 1.000                       |                
+   | Partial core correction Rc = 1.000                       |                
+   ------------------------------------------------------------                
+   | "3|2.4|2.4|1.0|8|9|10|40:41:32U2U2(qc=5.5)"              |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+ Calculation parallelised over 15 processes.
+ Data is distributed by k-point(15-way)
+
+ ************************************ Title ************************************
+ 
+
+ ***************************** General Parameters ******************************
+  
+ output verbosity                               : normal  (1)
+ write checkpoint data to                       : ml_dos.check
+ type of calculation                            : Electronic Spectroscopy
+ stress calculation                             : off
+ density difference calculation                 : off
+ electron localisation func (ELF) calculation   : off
+ Hirshfeld analysis                             : off
+ polarisation (Berry phase) analysis            : off
+ molecular orbital projected DOS                : off
+ deltaSCF calculation                           : off
+ unlimited duration calculation
+ timing information                             : on
+ memory usage estimate                          : on
+ write extra output files                       : on
+ write final potential to formatted file        : off
+ write final density to formatted file          : off
+ write BibTeX reference list                    : on
+ write OTFG pseudopotential files               : on
+ write electrostatic potential file             : on
+ write bands file                               : on
+ checkpoint writing                             : both castep_bin and check files
+  
+ output         length unit                     : A
+ output           mass unit                     : amu
+ output           time unit                     : ps
+ output         charge unit                     : e
+ output           spin unit                     : hbar/2
+ output         energy unit                     : eV
+ output          force unit                     : eV/A
+ output       velocity unit                     : A/ps
+ output       pressure unit                     : GPa
+ output     inv_length unit                     : 1/A
+ output      frequency unit                     : cm-1
+ output force constant unit                     : eV/A**2
+ output         volume unit                     : A**3
+ output   IR intensity unit                     : (D/A)**2/amu
+ output         dipole unit                     : D
+ output         efield unit                     : eV/A/e
+ output        entropy unit                     : J/mol/K
+ output    efield chi2 unit                     : pm/V
+  
+ wavefunctions paging                           : none
+ random number generator seed                   :  120640501
+ data distribution                              : optimal for this architecture
+ optimization strategy                          : balance speed and memory
+
+ *********************** Exchange-Correlation Parameters ***********************
+  
+ using functional                               : Perdew Burke Ernzerhof
+ relativistic treatment                         : Koelling-Harmon
+ DFT+D: Semi-empirical dispersion correction    : off
+
+ ************************* Pseudopotential Parameters **************************
+  
+ pseudopotential representation                 : reciprocal space
+ <beta|phi> representation                      : reciprocal space
+ spin-orbit coupling                            : off
+
+ **************************** Basis Set Parameters *****************************
+  
+ plane wave basis set cut-off                   :   900.0000   eV
+ size of standard grid                          :     2.0000
+ size of   fine   gmax                          :    30.7390   1/A
+ finite basis set correction                    : none
+
+ **************************** Electronic Parameters ****************************
+  
+ number of  electrons                           :  148.0    
+ net charge of system                           :  0.000    
+ net spin   of system                           :  0.000    
+ number of  up  spins                           :  74.00    
+ number of down spins                           :  74.00    
+ treating system as spin-polarized
+ number of bands                                :         89
+ electron temperature                           :     0.0000   K
+
+ ********************* Electronic Minimization Parameters **********************
+  
+ Method: Treating system as metallic with ensemble DFT treatment of electrons,
+         and number of  SD  steps               :          1
+         and number of  CG  steps               :          4
+  
+ total energy / atom convergence tol.           : 0.1000E-05   eV
+ max force / atom convergence tol.              : ignored
+ convergence tolerance window                   :          3   cycles
+ max. number of SCF cycles                      :        100
+ number of fixed-spin iterations                :         10
+ smearing scheme                                : Gaussian
+ smearing width                                 : 0.2000       eV
+ Fermi energy convergence tolerance             : 0.2721E-13   eV
+ number of occupancy cycles                     :          6
+ periodic dipole correction                     : NONE
+
+ *********************** Population Analysis Parameters ************************
+  
+ Population analysis with cutoff                :  3.000       A
+ Population analysis output                     : summary and pdos components
+ Partial DOS weights calculated
+
+ ********************* Electronic Spectroscopy Parameters **********************
+  
+ electronic spectroscopy with theory level      : DFT       
+ spectroscopy calculation                       : density of states
+ max. number of iterations                      :         60
+ max. steps per iteration                       :          5
+ number of bands / k-point                      :        137
+ band convergence tolerance                     : 0.1000E-05   eV
+ write orbitals file                            : off
+
+ *******************************************************************************
+  
+
+                           -------------------------------
+                                      Unit Cell
+                           -------------------------------
+        Real Lattice(A)                      Reciprocal Lattice(1/A)
+     9.9675270     0.0000000     0.0000000        0.630365517   0.000000000   0.000000000
+     0.0000000     5.9227210     0.0000000        0.000000000   1.060861268   0.000000000
+     0.0000000     0.0000000     4.8951310        0.000000000   0.000000000   1.283558153
+
+                       Lattice parameters(A)       Cell Angles
+                    a =      9.967527          alpha =   90.000000
+                    b =      5.922721          beta  =   90.000000
+                    c =      4.895131          gamma =   90.000000
+
+                       Current cell volume =           288.983478       A**3
+                                   density =             2.087543   AMU/A**3
+                                           =             3.466447     g/cm^3
+
+                           -------------------------------
+                                     Cell Contents
+                           -------------------------------
+                         Total number of ions in cell =   24
+                      Total number of species in cell =    3
+                        Max number of any one species =   16
+
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            x  Element    Atom        Fractional coordinates of atoms  x
+            x            Number           u          v          w      x
+            x----------------------------------------------------------x
+            x  O            1         0.622211   0.250000   0.781194   x 
+            x  O            2         0.122211   0.250000   0.718806   x 
+            x  O            3         0.377789   0.750000   0.218806   x 
+            x  O            4         0.877789   0.750000   0.281194   x 
+            x  O            5         0.947035   0.250000   0.350478   x 
+            x  O            6         0.447035   0.250000   0.149522   x 
+            x  O            7         0.052965   0.750000   0.649522   x 
+            x  O            8         0.552965   0.750000   0.850478   x 
+            x  O            9         0.671146   0.047571   0.235779   x 
+            x  O           10         0.171146   0.452429   0.264221   x 
+            x  O           11         0.328854   0.547571   0.764221   x 
+            x  O           12         0.828854   0.952429   0.735779   x 
+            x  O           13         0.328854   0.952429   0.764221   x 
+            x  O           14         0.828854   0.547571   0.735779   x 
+            x  O           15         0.671146   0.452429   0.235779   x 
+            x  O           16         0.171146   0.047571   0.264221   x 
+            x  P            1         0.597348   0.250000   0.088803   x 
+            x  P            2         0.097348   0.250000   0.411197   x 
+            x  P            3         0.402652   0.750000   0.911197   x 
+            x  P            4         0.902652   0.750000   0.588803   x 
+            x  Fe           1         0.774942   0.250000   0.537684   x 
+            x  Fe           2         0.274942   0.250000   0.962316   x 
+            x  Fe           3         0.225058   0.750000   0.462316   x 
+            x  Fe           4         0.725058   0.750000   0.037684   x 
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+                         No user defined ionic velocities
+
+                           -------------------------------
+                                   Details of Species
+                           -------------------------------
+
+                               Mass of species in AMU
+                                    O   15.9994000
+                                    P   30.9737600
+                                    Fe   55.8450000
+
+                          Electric Quadrupole Moment (Barn)
+                                    O   -0.0255800 Isotope  17
+                                    P    1.0000000 No Isotope Defined
+                                    Fe    0.1600000 Isotope  57
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+         |  Element    Atom         Initial            Initial magnetic       |
+         |            Number    spin polarization        moment (uB)     Fix? |
+         |--------------------------------------------------------------------|
+         | O              1         0.000000              0.000       F       |
+         | O              2         0.000000              0.000       F       |
+         | O              3         0.000000              0.000       F       |
+         | O              4         0.000000              0.000       F       |
+         | O              5         0.000000              0.000       F       |
+         | O              6         0.000000              0.000       F       |
+         | O              7         0.000000              0.000       F       |
+         | O              8         0.000000              0.000       F       |
+         | O              9         0.000000              0.000       F       |
+         | O             10         0.000000              0.000       F       |
+         | O             11         0.000000              0.000       F       |
+         | O             12         0.000000              0.000       F       |
+         | O             13         0.000000              0.000       F       |
+         | O             14         0.000000              0.000       F       |
+         | O             15         0.000000              0.000       F       |
+         | O             16         0.000000              0.000       F       |
+         | P              1         0.000000              0.000       F       |
+         | P              2         0.000000              0.000       F       |
+         | P              3         0.000000              0.000       F       |
+         | P              4         0.000000              0.000       F       |
+         | Fe             1         0.562500              4.500       F       |
+         | Fe             2        -0.562500             -4.500       F       |
+         | Fe             3         0.562500              4.500       F       |
+         | Fe             4        -0.562500             -4.500       F       |
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+         Quantisation axis:    0.00000   0.00000   1.00000
+
+         Units for Hubbard U values are eV
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+         |  Element     Atom     Hubbard U   values by orbital type         |
+         |             Number      s          p          d          f       |
+         |------------------------------------------------------------------|
+         |O             1         0.00000    0.00000    0.00000    0.00000  |
+         |O             2         0.00000    0.00000    0.00000    0.00000  |
+         |O             3         0.00000    0.00000    0.00000    0.00000  |
+         |O             4         0.00000    0.00000    0.00000    0.00000  |
+         |O             5         0.00000    0.00000    0.00000    0.00000  |
+         |O             6         0.00000    0.00000    0.00000    0.00000  |
+         |O             7         0.00000    0.00000    0.00000    0.00000  |
+         |O             8         0.00000    0.00000    0.00000    0.00000  |
+         |O             9         0.00000    0.00000    0.00000    0.00000  |
+         |O            10         0.00000    0.00000    0.00000    0.00000  |
+         |O            11         0.00000    0.00000    0.00000    0.00000  |
+         |O            12         0.00000    0.00000    0.00000    0.00000  |
+         |O            13         0.00000    0.00000    0.00000    0.00000  |
+         |O            14         0.00000    0.00000    0.00000    0.00000  |
+         |O            15         0.00000    0.00000    0.00000    0.00000  |
+         |O            16         0.00000    0.00000    0.00000    0.00000  |
+         |P             1         0.00000    0.00000    0.00000    0.00000  |
+         |P             2         0.00000    0.00000    0.00000    0.00000  |
+         |P             3         0.00000    0.00000    0.00000    0.00000  |
+         |P             4         0.00000    0.00000    0.00000    0.00000  |
+         |Fe            1         0.00000    0.00000    4.40000    0.00000  |
+         |Fe            2         0.00000    0.00000    4.40000    0.00000  |
+         |Fe            3         0.00000    0.00000    4.40000    0.00000  |
+         |Fe            4         0.00000    0.00000    4.40000    0.00000  |
+         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+                          Files used for pseudopotentials:
+                                    O 2|1.1|17|20|23|20:21(qc=8)
+                                    P 3|1.8|4|4|5|30:31:32
+                                    Fe 3|2.4|2.4|1.0|8|9|10|40:41:32U2U2(qc=5.5)
+
+                           -------------------------------
+                              k-Points For BZ Sampling
+                           -------------------------------
+                       MP grid size for SCF calculation is  3  4  5
+                            with an offset of   0.000  0.000  0.000
+                       Number of kpoints used =            30
+
+                           -------------------------------
+                               Symmetry and Constraints
+                           -------------------------------
+
+                      Maximum deviation from symmetry =  0.00000         ANG
+
+                      Number of symmetry operations   =           1
+                      Number of ionic constraints     =           3
+                      Point group of crystal =     1: C1, 1, 1
+                      Space group of crystal =    62: Pnma, -P 2ac 2n
+
+             Set iprint > 1 for details on symmetry rotations/translations
+
+                         Centre of mass is constrained
+             Set iprint > 2 for details of linear ionic constraints
+
+                         Number of cell constraints= 0
+                         Cell constraints are:  1 2 3 4 5 6
+
+                         External pressure/stress (GPa)
+                          0.00000   0.00000   0.00000
+                                    0.00000   0.00000
+                                              0.00000
+ 
++---------------- MEMORY AND SCRATCH DISK ESTIMATES PER PROCESS --------------+
+|                                                     Memory          Disk    |
+| Baseline code, static data and system overhead      806.0 MB         0.0 MB |
+| BLAS internal memory storage                          0.0 MB         0.0 MB |
+| Model and support data                             1320.4 MB         0.0 MB |
+| Electronic energy minimisation requirements         545.7 MB         0.0 MB |
+| Force calculation requirements                       63.7 MB         0.0 MB |
+|                                               ----------------------------- |
+| Approx. total storage required per process         2672.1 MB         0.0 MB |
+|                                                                             |
+| Requirements will fluctuate during execution and may exceed these estimates |
++-----------------------------------------------------------------------------+
+Calculating approximate eigenstates for fixed initial Hamiltonian
+Cut-off for approx. calculation is   89.988 eV
+Improving approx. states at cut-off of  450.000 eV
+Resetting cut-off to  900.000 eV
+Improving states further at cut-off of  900.000 eV
+Calculating total energy with cut-off of  900.000 eV.
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+------------------------------------------------------------------------ <-- SCF
+SCF loop      Energy           Fermi           Energy gain       Timer   <-- SCF
+                               energy          per atom          (sec)   <-- SCF
+------------------------------------------------------------------------ <-- SCF
+Initial  -1.08038661E+004  4.10891519E+000                        70.56  <-- SCF
+      1  -1.13658830E+004  2.96499542E+000   2.34173670E+001     224.25  <-- SCF
+      2  -1.13669021E+004  2.96499542E+000   4.24641225E-002     380.52  <-- SCF
+      3  -1.13669127E+004  2.96499542E+000   4.41667258E-004     529.28  <-- SCF
+      4  -1.13669142E+004  2.96499542E+000   6.32639148E-005     680.89  <-- SCF
+      5  -1.13669143E+004  2.96499542E+000   2.07338815E-006     832.51  <-- SCF
+      6  -1.13669145E+004  2.96499542E+000   1.07734555E-005     995.00  <-- SCF
+      7  -1.13669150E+004  2.96499542E+000   1.91306422E-005    1164.12  <-- SCF
+      8  -1.13669150E+004  2.96499542E+000   2.28461175E-006    1335.83  <-- SCF
+      9  -1.13669151E+004  2.96499542E+000   1.43382589E-006    1515.05  <-- SCF
+     10  -1.13630324E+004  2.46542774E+000  -1.61775785E-001    1724.38  <-- SCF
+     11  -1.13630908E+004  2.46838647E+000   2.43211964E-003    1901.97  <-- SCF
+     12  -1.13631237E+004  2.47289107E+000   1.36816005E-003    2031.53  <-- SCF
+     13  -1.13631239E+004  2.47167019E+000   9.41944209E-006    2152.69  <-- SCF
+     14  -1.13631239E+004  2.47162668E+000   6.48578614E-008    2258.40  <-- SCF
+     15  -1.13631239E+004  2.47161406E+000   1.50721623E-009    2458.36  <-- SCF
+------------------------------------------------------------------------ <-- SCF
+ 
+Integrated Spin Density     =    0.150878E-12 hbar/2
+Integrated |Spin Density|   =     18.5957     hbar/2
+ 
+
+     Hubbard U occupation numbers
+     ----------------------------
+Species   Ion   l  spin               occupancies
+==================================================================
+  Fe       1    2   up:   0.99  1.00  1.00  1.00  1.00
+                    dn:   0.12  0.14  0.15  0.33  0.37
+  Fe       2    2   up:   0.12  0.14  0.15  0.33  0.37
+                    dn:   0.99  1.00  1.00  1.00  1.00
+  Fe       3    2   up:   0.99  1.00  1.00  1.00  1.00
+                    dn:   0.12  0.14  0.15  0.33  0.37
+  Fe       4    2   up:   0.12  0.14  0.15  0.33  0.37
+                    dn:   0.99  1.00  1.00  1.00  1.00
+==================================================================
+
+Final energy, E             =  -11363.12388175     eV
+Final free energy (E-TS)    =  -11363.12388175     eV
+(energies not corrected for finite basis set)
+ 
+NB est. 0K energy (E-0.5TS)      =  -11363.12388175     eV
+ 
+
+Writing analysis data to ml_dos.castep_bin
+
+Writing model to ml_dos.check
+ 
++---------------- MEMORY AND SCRATCH DISK ESTIMATES PER PROCESS --------------+
+|                                                     Memory          Disk    |
+|                                               ----------------------------- |
+| Approx. total storage required per process         1439.0 MB         0.0 MB |
+|                                                                             |
+| Requirements will fluctuate during execution and may exceed these estimates |
++-----------------------------------------------------------------------------+
+ 
+  =====================================================================
+  +                                                                   +
+  +                 Calculation of Spectral Properties                +
+  +                                                                   +
+  + Calculation re-parallelised over 15 processes.                    +
+  + There are 30 k-points distributed across 15 k-point groups.       +
+  + Data distributed by G-vector(1-way), k-point(15-way), band(1-way) +
+  + Data distributed by k-point(15-way)                               +
+  +                                                                   +
+  =====================================================================
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+  Starting k-point:        1 of        2 Time:      0.00 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+  Starting k-point:        2 of        2 Time:     46.49 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+  Starting k-point:        1 of        2 Time:     91.78 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+  Starting k-point:        2 of        2 Time:    137.34 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+  Check-pointing spectral run                                 |<-- SPEC
+  Total time to compute matrix elements            182.50 sec |<-- SPEC
+  
+  + Calculation re-parallelised over 15 processes.                    +
+  + Data distributed by k-point(15-way)                               +
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+
+ ************************** Forces **************************
+ *                                                          *
+ *               Cartesian components (eV/A)                *
+ * -------------------------------------------------------- *
+ *                         x            y            z      *
+ *                                                          *
+ * O               1     -0.16924      0.00000     -0.03731 *
+ * O               2     -0.16925      0.00000      0.03731 *
+ * O               3      0.16925     -0.00000      0.03731 *
+ * O               4      0.16923     -0.00000     -0.03731 *
+ * O               5      0.01908     -0.00000     -0.10668 *
+ * O               6      0.01909      0.00000      0.10668 *
+ * O               7     -0.01909     -0.00000      0.10668 *
+ * O               8     -0.01907     -0.00000     -0.10668 *
+ * O               9      0.00681     -0.00878      0.11862 *
+ * O              10      0.00680      0.00877     -0.11862 *
+ * O              11     -0.00680     -0.00877     -0.11863 *
+ * O              12     -0.00681      0.00876      0.11863 *
+ * O              13     -0.00680      0.00877     -0.11863 *
+ * O              14     -0.00681     -0.00876      0.11863 *
+ * O              15      0.00681      0.00878      0.11862 *
+ * O              16      0.00680     -0.00877     -0.11862 *
+ * P               1      0.01651      0.00000     -0.09616 *
+ * P               2      0.01651      0.00000      0.09616 *
+ * P               3     -0.01651     -0.00000      0.09616 *
+ * P               4     -0.01651      0.00000     -0.09616 *
+ * Fe              1     -0.00252      0.00000     -0.03991 *
+ * Fe              2     -0.00252     -0.00000      0.03991 *
+ * Fe              3      0.00252      0.00000      0.03991 *
+ * Fe              4      0.00252      0.00000     -0.03991 *
+ *                                                          *
+ ************************************************************
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 24 iterations to a total energy of -432.3399 eV
+
+ Pseudo atomic calculation performed for P 3s2 3p3
+
+ Converged in 18 iterations to a total energy of -214.2237 eV
+
+ Pseudo atomic calculation performed for Fe 3d6 4s2
+
+ Converged in 34 iterations to a total energy of -853.8318 eV
+Charge spilling parameter for spin component 1 = 1.03%
+Charge spilling parameter for spin component 2 = 1.03%
+
+                   Orbital Populations                  
+  ---------------------------------------------------------------
+     Ion    Atom   Orbital              Up        Down      Spin
+  ---------------------------------------------------------------
+      O     1      S                    0.931     0.918     0.013
+      O     1      Px                   0.908     0.831     0.077
+      O     1      Py                   0.923     0.884     0.039
+      O     1      Pz                   0.791     0.772     0.018
+      O     2      S                    0.918     0.931    -0.013
+      O     2      Px                   0.830     0.908    -0.077
+      O     2      Py                   0.884     0.923    -0.039
+      O     2      Pz                   0.773     0.790    -0.018
+      O     3      S                    0.931     0.918     0.013
+      O     3      Px                   0.908     0.831     0.077
+      O     3      Py                   0.923     0.884     0.039
+      O     3      Pz                   0.791     0.772     0.018
+      O     4      S                    0.918     0.931    -0.013
+      O     4      Px                   0.831     0.908    -0.077
+      O     4      Py                   0.884     0.923    -0.039
+      O     4      Pz                   0.773     0.790    -0.018
+      O     5      S                    0.930     0.918     0.012
+      O     5      Px                   0.777     0.749     0.028
+      O     5      Py                   0.914     0.887     0.027
+      O     5      Pz                   0.911     0.870     0.041
+      O     6      S                    0.918     0.931    -0.013
+      O     6      Px                   0.749     0.776    -0.027
+      O     6      Py                   0.887     0.914    -0.027
+      O     6      Pz                   0.870     0.911    -0.041
+      O     7      S                    0.931     0.918     0.012
+      O     7      Px                   0.777     0.749     0.027
+      O     7      Py                   0.914     0.887     0.027
+      O     7      Pz                   0.911     0.870     0.041
+      O     8      S                    0.918     0.930    -0.012
+      O     8      Px                   0.749     0.776    -0.027
+      O     8      Py                   0.887     0.914    -0.027
+      O     8      Pz                   0.870     0.911    -0.041
+      O     9      S                    0.932     0.936    -0.004
+      O     9      Px                   0.875     0.867     0.008
+      O     9      Py                   0.797     0.823    -0.027
+      O     9      Pz                   0.858     0.843     0.015
+      O    10      S                    0.936     0.932     0.004
+      O    10      Px                   0.867     0.875    -0.008
+      O    10      Py                   0.823     0.796     0.027
+      O    10      Pz                   0.844     0.858    -0.014
+      O    11      S                    0.932     0.936    -0.004
+      O    11      Px                   0.875     0.867     0.008
+      O    11      Py                   0.797     0.823    -0.027
+      O    11      Pz                   0.858     0.843     0.015
+      O    12      S                    0.936     0.932     0.004
+      O    12      Px                   0.867     0.875    -0.008
+      O    12      Py                   0.823     0.796     0.027
+      O    12      Pz                   0.843     0.858    -0.015
+      O    13      S                    0.932     0.936    -0.004
+      O    13      Px                   0.875     0.867     0.008
+      O    13      Py                   0.797     0.823    -0.027
+      O    13      Pz                   0.858     0.843     0.015
+      O    14      S                    0.936     0.932     0.004
+      O    14      Px                   0.867     0.875    -0.007
+      O    14      Py                   0.823     0.796     0.027
+      O    14      Pz                   0.843     0.858    -0.015
+      O    15      S                    0.932     0.936    -0.004
+      O    15      Px                   0.875     0.867     0.008
+      O    15      Py                   0.797     0.823    -0.027
+      O    15      Pz                   0.858     0.843     0.015
+      O    16      S                    0.936     0.932     0.004
+      O    16      Px                   0.867     0.875    -0.008
+      O    16      Py                   0.823     0.796     0.027
+      O    16      Pz                   0.843     0.858    -0.015
+      P     1      S                    0.458     0.460    -0.002
+      P     1      Px                   0.308     0.307     0.000
+      P     1      Py                   0.327     0.324     0.003
+      P     1      Pz                   0.292     0.301    -0.009
+      P     2      S                    0.460     0.458     0.002
+      P     2      Px                   0.307     0.308    -0.001
+      P     2      Py                   0.324     0.327    -0.003
+      P     2      Pz                   0.301     0.292     0.009
+      P     3      S                    0.458     0.460    -0.002
+      P     3      Px                   0.308     0.307     0.000
+      P     3      Py                   0.327     0.324     0.003
+      P     3      Pz                   0.292     0.301    -0.009
+      P     4      S                    0.460     0.458     0.002
+      P     4      Px                   0.307     0.308    -0.001
+      P     4      Py                   0.324     0.327    -0.003
+      P     4      Pz                   0.301     0.292     0.009
+     Fe     1      Dzz                  1.000     0.100     0.900
+     Fe     1      Dzy                  0.999     0.203     0.796
+     Fe     1      Dzx                  0.997     0.197     0.800
+     Fe     1      Dxx-yy               0.998     0.177     0.822
+     Fe     1      Dxy                  0.999     0.157     0.842
+     Fe     1      S                    0.181     0.143     0.038
+     Fe     1      Px                   0.043     0.037     0.007
+     Fe     1      Py                   0.067     0.056     0.011
+     Fe     1      Pz                   0.053     0.042     0.011
+     Fe     2      Dzz                  0.100     1.000    -0.900
+     Fe     2      Dzy                  0.203     0.999    -0.796
+     Fe     2      Dzx                  0.197     0.997    -0.800
+     Fe     2      Dxx-yy               0.177     0.999    -0.822
+     Fe     2      Dxy                  0.157     0.999    -0.842
+     Fe     2      S                    0.143     0.180    -0.038
+     Fe     2      Px                   0.037     0.043    -0.007
+     Fe     2      Py                   0.056     0.067    -0.011
+     Fe     2      Pz                   0.042     0.053    -0.011
+     Fe     3      Dzz                  1.000     0.100     0.900
+     Fe     3      Dzy                  0.999     0.203     0.796
+     Fe     3      Dzx                  0.997     0.197     0.800
+     Fe     3      Dxx-yy               0.998     0.177     0.822
+     Fe     3      Dxy                  0.999     0.157     0.842
+     Fe     3      S                    0.181     0.143     0.038
+     Fe     3      Px                   0.043     0.037     0.007
+     Fe     3      Py                   0.067     0.056     0.011
+     Fe     3      Pz                   0.053     0.042     0.011
+     Fe     4      Dzz                  0.100     1.000    -0.900
+     Fe     4      Dzy                  0.203     0.999    -0.796
+     Fe     4      Dzx                  0.197     0.997    -0.800
+     Fe     4      Dxx-yy               0.177     0.999    -0.822
+     Fe     4      Dxy                  0.157     0.999    -0.842
+     Fe     4      S                    0.143     0.180    -0.038
+     Fe     4      Px                   0.037     0.043    -0.007
+     Fe     4      Py                   0.056     0.067    -0.011
+     Fe     4      Pz                   0.042     0.053    -0.011
+  ---------------------------------------------------------------
+                           Total:      73.999    73.998     0.000
+  ---------------------------------------------------------------
+
+     Atomic Populations (Mulliken)
+     -----------------------------
+Species          Ion Spin      s       p       d       f      Total   Charge(e)   Spin(hbar/2)
+==============================================================================================
+  O               1   up:     0.931   2.622   0.000   0.000   3.553    -0.958        0.148
+                  1   dn:     0.918   2.487   0.000   0.000   3.405
+  O               2   up:     0.918   2.487   0.000   0.000   3.405    -0.958       -0.147
+                  2   dn:     0.931   2.622   0.000   0.000   3.553
+  O               3   up:     0.931   2.622   0.000   0.000   3.553    -0.958        0.148
+                  3   dn:     0.918   2.487   0.000   0.000   3.405
+  O               4   up:     0.918   2.487   0.000   0.000   3.405    -0.958       -0.147
+                  4   dn:     0.931   2.621   0.000   0.000   3.552
+  O               5   up:     0.930   2.602   0.000   0.000   3.532    -0.956        0.108
+                  5   dn:     0.918   2.506   0.000   0.000   3.424
+  O               6   up:     0.918   2.506   0.000   0.000   3.424    -0.956       -0.108
+                  6   dn:     0.931   2.601   0.000   0.000   3.532
+  O               7   up:     0.931   2.602   0.000   0.000   3.532    -0.956        0.108
+                  7   dn:     0.918   2.506   0.000   0.000   3.424
+  O               8   up:     0.918   2.506   0.000   0.000   3.424    -0.956       -0.108
+                  8   dn:     0.930   2.601   0.000   0.000   3.532
+  O               9   up:     0.932   2.529   0.000   0.000   3.462    -0.931       -0.008
+                  9   dn:     0.936   2.534   0.000   0.000   3.470
+  O              10   up:     0.936   2.534   0.000   0.000   3.470    -0.931        0.008
+                 10   dn:     0.932   2.529   0.000   0.000   3.462
+  O              11   up:     0.932   2.529   0.000   0.000   3.462    -0.931       -0.008
+                 11   dn:     0.936   2.533   0.000   0.000   3.469
+  O              12   up:     0.936   2.534   0.000   0.000   3.470    -0.931        0.008
+                 12   dn:     0.932   2.529   0.000   0.000   3.461
+  O              13   up:     0.932   2.530   0.000   0.000   3.462    -0.931       -0.008
+                 13   dn:     0.936   2.534   0.000   0.000   3.470
+  O              14   up:     0.936   2.534   0.000   0.000   3.470    -0.931        0.008
+                 14   dn:     0.932   2.529   0.000   0.000   3.461
+  O              15   up:     0.932   2.529   0.000   0.000   3.462    -0.931       -0.008
+                 15   dn:     0.936   2.534   0.000   0.000   3.470
+  O              16   up:     0.936   2.534   0.000   0.000   3.470    -0.931        0.008
+                 16   dn:     0.932   2.529   0.000   0.000   3.462
+  P               1   up:     0.458   0.926   0.000   0.000   1.384     2.224       -0.008
+                  1   dn:     0.460   0.932   0.000   0.000   1.392
+  P               2   up:     0.460   0.932   0.000   0.000   1.392     2.224        0.008
+                  2   dn:     0.458   0.926   0.000   0.000   1.384
+  P               3   up:     0.458   0.926   0.000   0.000   1.384     2.224       -0.008
+                  3   dn:     0.460   0.932   0.000   0.000   1.392
+  P               4   up:     0.460   0.932   0.000   0.000   1.392     2.224        0.008
+                  4   dn:     0.458   0.926   0.000   0.000   1.384
+  Fe              1   up:     0.181   0.163   4.993   0.000   5.337     1.554        4.227
+                  1   dn:     0.143   0.134   0.833   0.000   1.110
+  Fe              2   up:     0.143   0.134   0.833   0.000   1.110     1.552       -4.228
+                  2   dn:     0.180   0.163   4.994   0.000   5.338
+  Fe              3   up:     0.181   0.163   4.993   0.000   5.336     1.554        4.226
+                  3   dn:     0.143   0.134   0.833   0.000   1.110
+  Fe              4   up:     0.143   0.134   0.833   0.000   1.110     1.552       -4.228
+                  4   dn:     0.180   0.163   4.994   0.000   5.338
+==============================================================================================
+
+                 Bond                   Population        Spin       Length (A)
+================================================================================
+              O 1  -- P 1                    0.67         0.01          1.52604
+              O 4  -- P 4                    0.67        -0.01          1.52604
+              O 2  -- P 2                    0.67        -0.01          1.52604
+              O 3  -- P 3                    0.67         0.01          1.52604
+              O 6  -- P 1                    0.67        -0.01          1.52745
+              O 5  -- P 2                    0.67         0.01          1.52745
+              O 8  -- P 3                    0.67        -0.01          1.52745
+              O 7  -- P 4                    0.67         0.01          1.52745
+              O 16 -- P 2                    0.57        -0.00          1.57992
+              O 14 -- P 4                    0.57        -0.00          1.57992
+              O 13 -- P 3                    0.57         0.00          1.57992
+              O 12 -- P 4                    0.57        -0.00          1.57992
+              O 11 -- P 3                    0.57         0.00          1.57992
+              O 10 -- P 2                    0.57        -0.00          1.57992
+              O 9  -- P 1                    0.57         0.00          1.57992
+              O 15 -- P 1                    0.57         0.00          1.57992
+              O 3  -- Fe 3                   0.34        -0.05          1.93351
+              O 2  -- Fe 2                   0.34         0.05          1.93351
+              O 4  -- Fe 4                   0.34         0.05          1.93351
+              O 1  -- Fe 1                   0.34        -0.05          1.93351
+              O 8  -- Fe 4                   0.32         0.05          1.94478
+              O 5  -- Fe 1                   0.32        -0.05          1.94478
+              O 7  -- Fe 3                   0.32        -0.05          1.94478
+              O 6  -- Fe 2                   0.32         0.05          1.94478
+              O 15 -- Fe 4                   0.24         0.05          2.08213
+              O 14 -- Fe 1                   0.24        -0.05          2.08213
+              O 13 -- Fe 2                   0.24         0.05          2.08213
+              O 12 -- Fe 1                   0.24        -0.05          2.08213
+              O 11 -- Fe 2                   0.24         0.05          2.08213
+              O 10 -- Fe 3                   0.24        -0.05          2.08213
+              O 9  -- Fe 4                   0.24         0.05          2.08213
+              O 16 -- Fe 3                   0.24        -0.05          2.08213
+              O 14 -- Fe 4                   0.14         0.04          2.16608
+              O 13 -- Fe 3                   0.14        -0.04          2.16608
+              O 12 -- Fe 4                   0.14         0.04          2.16608
+              O 11 -- Fe 3                   0.14        -0.04          2.16608
+              O 9  -- Fe 1                   0.14        -0.04          2.16608
+              O 16 -- Fe 2                   0.14         0.04          2.16608
+              O 15 -- Fe 1                   0.14        -0.04          2.16608
+              O 10 -- Fe 2                   0.14         0.04          2.16608
+              O 12 -- O 14                  -0.15         0.00          2.39786
+              O 11 -- O 13                  -0.15        -0.00          2.39786
+              O 10 -- O 16                  -0.15         0.00          2.39786
+              O 9  -- O 15                  -0.15        -0.00          2.39786
+              O 2  -- O 5                   -0.13         0.00          2.50991
+              O 4  -- O 7                   -0.13         0.00          2.50991
+              O 1  -- O 6                   -0.13        -0.00          2.50991
+              O 3  -- O 8                   -0.13        -0.00          2.50991
+              O 6  -- O 15                  -0.11         0.00          2.57016
+              O 6  -- O 9                   -0.11         0.00          2.57016
+              O 8  -- O 11                  -0.11         0.00          2.57016
+              O 7  -- O 14                  -0.11        -0.00          2.57016
+              O 8  -- O 13                  -0.11         0.00          2.57016
+              O 7  -- O 12                  -0.11        -0.00          2.57016
+              O 5  -- O 16                  -0.11        -0.00          2.57016
+              O 5  -- O 10                  -0.11        -0.00          2.57016
+              O 4  -- O 14                  -0.13         0.00          2.57431
+              O 4  -- O 12                  -0.13         0.00          2.57431
+              O 3  -- O 11                  -0.13        -0.00          2.57431
+              O 2  -- O 16                  -0.13         0.00          2.57431
+              O 2  -- O 10                  -0.13         0.00          2.57431
+              O 1  -- O 15                  -0.13        -0.00          2.57431
+              O 1  -- O 9                   -0.13        -0.00          2.57431
+              O 3  -- O 13                  -0.13        -0.00          2.57431
+              O 4  -- O 15                  -0.04         0.00          2.71993
+              O 3  -- O 16                  -0.04        -0.00          2.71993
+              O 3  -- O 10                  -0.04        -0.00          2.71993
+              O 4  -- O 9                   -0.04         0.00          2.71993
+              O 2  -- O 13                  -0.04         0.00          2.71993
+              O 2  -- O 11                  -0.04         0.00          2.71993
+              O 1  -- O 14                  -0.04        -0.00          2.71993
+              O 1  -- O 12                  -0.04        -0.00          2.71993
+               P 3 -- Fe 3                  -0.37        -0.01          2.82166
+               P 1 -- Fe 1                  -0.37        -0.01          2.82166
+               P 4 -- Fe 4                  -0.37         0.01          2.82166
+               P 2 -- Fe 2                  -0.37         0.01          2.82166
+              O 8  -- O 15                  -0.03         0.00          2.83745
+              O 7  -- O 10                  -0.03        -0.00          2.83745
+              O 8  -- O 9                   -0.03         0.00          2.83745
+              O 7  -- O 16                  -0.03        -0.00          2.83745
+              O 6  -- O 13                  -0.03         0.00          2.83745
+              O 6  -- O 11                  -0.03         0.00          2.83745
+              O 5  -- O 14                  -0.03        -0.00          2.83745
+              O 5  -- O 12                  -0.03        -0.00          2.83745
+              O 14 -- O 15                  -0.04         0.00          2.96297
+              O 13 -- O 16                  -0.04        -0.00          2.96297
+              O 10 -- O 11                  -0.04         0.00          2.96297
+              O 9  -- O 12                  -0.04        -0.00          2.96297
+================================================================================
+
+
+Writing analysis data to ml_dos.castep_bin
+
+Writing model to ml_dos.check
+ 
+ A BibTeX formatted list of references used in this run has been written to 
+ ml_dos.bib
+ 
+Initialisation time =      9.58 s
+Calculation time    =   2723.57 s
+Finalisation time   =      2.87 s
+Total time          =   2736.02 s
+Peak Memory Use     = 3256036 kB
+ 
+Overall parallel efficiency rating: Very good (83%)
+ 
+Data was distributed by:-
+k-point (15-way); efficiency rating: Very good (83%)

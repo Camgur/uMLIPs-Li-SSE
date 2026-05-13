@@ -1,0 +1,120 @@
+malloc(): unsorted double linked list corrupted
+
+Program received signal SIGABRT: Process abort signal.
+malloc(): unsorted double linked list corrupted
+
+Backtrace for this error:
+
+Program received signal SIGABRT: Process abort signal.
+
+Backtrace for this error:
+#0  0x1f13e66 in ???
+#1  0x1f13531 in ???
+#2  0x14897766378f in ???
+#3  0x1489776b17ac in ???
+#4  0x1489776636f1 in ???
+#5  0x14897764d4b1 in ???
+#6  0x14897764e400 in ???
+#7  0x1489776bb154 in ???
+#8  0x1489776be47b in ???
+#9  0x1489776bf358 in ???
+#10  0x1489765e479e in ucs_malloc
+	at debug/memtrack.c:320
+#11  0x1489765d8f1c in ucs_mpool_chunk_malloc
+	at datastruct/mpool.c:328
+#12  0x1489765d8c59 in ucs_mpool_grow
+	at datastruct/mpool.c:266
+#13  0x1489765d8e64 in ucs_mpool_get_grow
+	at datastruct/mpool.c:312
+#0  0x1f13e66 in ???
+#1  0x1f13531 in ???
+#2  0x1481b796b78f in ???
+#3  0x1481b79b97ac in ???
+#4  0x1481b796b6f1 in ???
+#5  0x1481b79554b1 in ???
+#6  0x1481b7956400 in ???
+#7  0x1481b79c3154 in ???
+#8  0x1481b79c647b in ???
+#9  0x1481b79c7358 in ???
+#14  0x148976559e8f in uct_rc_txqp_add_flush_comp
+	at /tmp/ebuser/avx512/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/ib/rc/base/rc_ep.h:418
+#15  0x148976559e8f in uct_rc_mlx5_ep_flush
+	at rc/accel/rc_mlx5_ep.c:638
+#10  0x1481b691179e in ucs_malloc
+	at debug/memtrack.c:320
+#11  0x1481b6905f1c in ucs_mpool_chunk_malloc
+	at datastruct/mpool.c:328
+#12  0x1481b6905c59 in ucs_mpool_grow
+	at datastruct/mpool.c:266
+#13  0x1481b6905e64 in ucs_mpool_get_grow
+	at datastruct/mpool.c:312
+#16  0x148976afa01d in uct_ep_flush
+	at /tmp/ebuser/avx512/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/api/uct.h:3244
+#17  0x148976afa01d in ucp_ep_flush_progress
+	at rma/flush.c:121
+#18  0x148976afa824 in ucp_ep_flush_internal
+	at rma/flush.c:413
+#19  0x148976ad04bc in ucp_ep_close_nbx
+#14  0x1481b3dafe8f in uct_rc_txqp_add_flush_comp
+	at core/ucp_ep.c:1726
+	at /tmp/ebuser/avx512/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/ib/rc/base/rc_ep.h:418
+#20  0x148976ad06a3 in ucp_ep_close_nb
+#15  0x1481b3dafe8f in uct_rc_mlx5_ep_flush
+	at core/ucp_ep.c:1695
+	at rc/accel/rc_mlx5_ep.c:638
+#21  0x1489765ae314 in ???
+#22  0x1489765ae46d in ???
+#23  0x148976bbc7a8 in ???
+#24  0x1489778903ac in ???
+#25  0x1489770cfc09 in ???
+#26  0x1489770c58ae in ???
+#27  0x14897788a2d8 in ???
+#28  0x148977891533 in ???
+#29  0x148977892a7c in ???
+#30  0x148977886842 in ???
+#31  0x148978564728 in ???
+#32  0x1489785ac7a1 in ???
+#16  0x1481b69a301d in uct_ep_flush
+	at /tmp/ebuser/avx512/UCX/1.16.0/GCCcore-13.3-gentoo/ucx-1.16.0/src/uct/api/uct.h:3244
+#17  0x1481b69a301d in ucp_ep_flush_progress
+	at rma/flush.c:121
+#18  0x1481b69a3824 in ucp_ep_flush_internal
+	at rma/flush.c:413
+#19  0x1481b69794bc in ucp_ep_close_nbx
+	at core/ucp_ep.c:1726
+#20  0x1481b69796a3 in ucp_ep_close_nb
+	at core/ucp_ep.c:1695
+#21  0x1481b6ea2314 in ???
+#22  0x1481b6ea246d in ???
+#23  0x1481b48ca7a8 in ???
+#24  0x1481b7c903ac in ???
+#25  0x1481b74cfc09 in ???
+#26  0x1481b74c58ae in ???
+#27  0x1481b7c8a2d8 in ???
+#28  0x1481b7c91533 in ???
+#29  0x1481b7c92a7c in ???
+#30  0x1481b7c86842 in ???
+#31  0x1481b85ac728 in ???
+#32  0x1481b85e47a1 in ???
+#33  0x1d32ce9 in __comms_MOD_comms_finalise
+	at ../../../Source/Utility/comms.mpi.F90:765
+#33  0x1d32ce9 in __comms_MOD_comms_finalise
+	at ../../../Source/Utility/comms.mpi.F90:765
+#34  0x430197 in __castep_MOD_castep_finalise
+	at ../../../Source/Functional/castep.f90:7042
+#35  0x40dee3 in MAIN__
+	at ../../../Source/main.f90:101
+#34  0x430197 in __castep_MOD_castep_finalise
+	at ../../../Source/Functional/castep.f90:7042
+#35  0x40dee3 in MAIN__
+	at ../../../Source/main.f90:101
+#36  0x40a688 in main
+	at ../../../Source/main.f90:32
+#36  0x40a688 in main
+	at ../../../Source/main.f90:32
+srun: error: c698: task 19: Aborted (core dumped)
+srun: Terminating StepId=5671925.0
+srun: error: c646: tasks 4-8,10: Terminated
+slurmstepd: error:  mpi/pmix_v4: _errhandler: c646 [1]: pmixp_client_v2.c:211: Error handler invoked: status = -61, source = [slurm.pmix.5671925.0:4]
+srun: Job step aborted: Waiting up to 62 seconds for job step to finish.
+srun: error: c646: task 9: Aborted (core dumped)

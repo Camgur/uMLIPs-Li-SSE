@@ -1,128 +1,159 @@
-"""dos/compare_dos.py — Compare DOS curves between uMLIP-relaxed and DFT-reference structures.
-
-Reads VASP DOSCAR files from ``results/dos/<material>/`` and computes a
-cosine-similarity score against the DFT reference DOS.  Results are written to
-``results/dos/dos_similarity_summary.csv``.
-
-Usage
------
-    python scripts/dos/compare_dos.py --material LLZO
-"""
-
-from __future__ import annotations
-
-import argparse
-import csv
-import logging
-from pathlib import Path
-
+import os
+import glob
 import numpy as np
+import matplotlib.pyplot as plt
+from openpyxl import Workbook
+from scipy.ndimage import gaussian_filter1d
+from sumo.io.castep import read_dos
+from pymatgen.electronic_structure.core import Spin
 
-import sys
-sys.path.insert(0, str(Path(__file__).parents[1]))
-from utils.models import list_models
+# Config
+OUTPUT_DIR = "results/figures/"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(message)s")
+MATERIALS = [
+    'LFVO',
+]
 
-REPO_ROOT = Path(__file__).parents[2]
-DOS_RESULTS_DIR = REPO_ROOT / "results" / "dos"
+MODELS = [
+    'chgnet-r2-2025',
+    'm3gnet-r2-2025',
+    'mace-mpa',
+    'mace-r2',
+]
 
+COLORS = {
+    'chgnet-r2-2025': '#648fff',
+    'm3gnet-r2-2025': "#B858F4",
+    'mace-mpa': "#EA56CA",
+    'mace-r2': '#dc267f',
+    'dft': '#000000',
+}
 
-def parse_doscar(doscar_path: Path, n_dos_points: int = 2000) -> np.ndarray:
-    """Parse a VASP DOSCAR and return the total DOS array.
+GAUSSIAN_SIGMA = 0.05
+Y_LIMITS = (-5, 10)
 
-    Parameters
-    ----------
-    doscar_path:
-        Path to the VASP DOSCAR file.
-    n_dos_points:
-        Number of DOS energy grid points (must match NEDOS in INCAR).
+# Helpers
+def find_bands_file(directory):
+    """Find .bands file in directory."""
+    files = glob.glob(os.path.join(directory, "*.bands"))
+    return files[0] if files else None
 
-    Returns
-    -------
-    dos: np.ndarray
-        Array of shape ``(n_dos_points, 2)`` with columns [energy, total_dos].
+def load_and_total(bands_file, gaussian=0.05, emin=-20, emax=20):
+    """Load CASTEP DOS with SUMO read_dos.
+    
+    Returns: energies, total_dos, efermi, dos_obj
     """
-    lines = doscar_path.read_text().splitlines()
-    # Header: 6 lines; first DOS block starts at line 6
-    header_lines = 6
-    dos_lines = lines[header_lines: header_lines + n_dos_points]
-    dos = np.array([[float(x) for x in ln.split()[:2]] for ln in dos_lines])
-    return dos
+    dos_obj, _ = read_dos(bands_file, gaussian=gaussian, emin=emin, emax=emax, total_only=False)
+    energies = np.array(dos_obj.energies)
+    
+    # Sum spins if dict
+    if isinstance(dos_obj.densities, dict):
+        total = sum(np.array(arr) for arr in dos_obj.densities.values())
+    else:
+        total = np.array(dos_obj.densities)
+        if total.ndim > 1:
+            total = total.sum(axis=0)
+    
+    return energies, np.array(total), float(dos_obj.efermi), dos_obj
 
-
-def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
-    """Return the cosine similarity between vectors *a* and *b*."""
+def cosine_similarity(a, b):
+    """Cosine similarity between vectors a and b."""
     norm_a = np.linalg.norm(a)
     norm_b = np.linalg.norm(b)
     if norm_a == 0 or norm_b == 0:
         return 0.0
     return float(np.dot(a, b) / (norm_a * norm_b))
 
+# Load DOS data and compare
+similarity_data = []
+wb = Workbook()
+ws = wb.active
+ws.append(["Material", "Model", "Cosine Similarity"])
 
-def compare_material(material: str, models: list[str]) -> list[dict]:
-    """Return DOS cosine-similarity rows for *material*."""
-    ref_doscar = DOS_RESULTS_DIR / material / "DFT" / "DOSCAR"
-    if not ref_doscar.exists():
-        logger.warning("DFT reference DOSCAR not found: %s — skipping %s.", ref_doscar, material)
-        return []
-
+for material in MATERIALS:
+    # Load DFT reference
+    dft_dir = f"results/dos/dft/{material}/"
+    dft_file = find_bands_file(dft_dir)
+    
+    if not dft_file:
+        print(f"WARNING: No DFT .bands file for {material}")
+        continue
+    
     try:
-        ref_dos = parse_doscar(ref_doscar)
+        e_dft, dos_dft, efermi_dft, dos_dft_obj = load_and_total(dft_file, gaussian=GAUSSIAN_SIGMA)
+        dos_dft_smooth = np.array(dos_dft)  # Already smoothed by read_dos
     except Exception as exc:
-        logger.error("Failed to parse reference DOSCAR for %s: %s", material, exc)
-        return []
-
-    ref_vec = ref_dos[:, 1]  # total DOS values
-    rows = []
-
-    for model in models:
-        model_doscar = DOS_RESULTS_DIR / material / model / "DOSCAR"
-        if not model_doscar.exists():
-            logger.warning("DOSCAR missing for %s / %s — skipping.", material, model)
+        print(f"ERROR: Failed to load DFT for {material}: {exc}")
+        continue
+    
+    # Normalize DFT DOS
+    ref_vec = dos_dft_smooth / np.max(dos_dft_smooth) if np.max(dos_dft_smooth) > 0 else dos_dft_smooth
+    
+    # Create plot
+    fig, ax = plt.subplots(figsize=(8, 6))
+    
+    # Shift energies relative to Fermi
+    e_dft_shift = e_dft - efermi_dft
+    mask_dft = (e_dft_shift >= Y_LIMITS[0]) & (e_dft_shift <= Y_LIMITS[1])
+    
+    # Plot ML models first
+    plotted_models = []
+    for model in MODELS:
+        model_dir = f"results/dos/{material}/{model}/"
+        model_file = find_bands_file(model_dir)
+        
+        if not model_file:
             continue
+        
         try:
-            model_dos = parse_doscar(model_doscar)
+            e_ml, dos_ml, efermi_ml, dos_ml_obj = load_and_total(model_file, gaussian=GAUSSIAN_SIGMA)
+            dos_ml_smooth = np.array(dos_ml)
         except Exception as exc:
-            logger.error("Failed to parse DOSCAR for %s / %s: %s", material, model, exc)
+            print(f"ERROR: Failed to load {model} for {material}: {exc}")
             continue
+        
+        # Compute similarity
+        similarity = cosine_similarity(ref_vec, dos_ml_smooth / np.max(dos_ml_smooth) if np.max(dos_ml_smooth) > 0 else dos_ml_smooth)
+        similarity_data.append({'material': material, 'model': model, 'similarity': similarity})
+        
+        print(f"{material} {model:20} cosine_similarity={similarity:.4f}")
+        
+        # Plot
+        e_ml_shift = e_ml - efermi_ml
+        mask_ml = (e_ml_shift >= Y_LIMITS[0]) & (e_ml_shift <= Y_LIMITS[1])
+        dos_ml_norm = dos_ml_smooth[mask_ml] / np.max(dos_ml_smooth) if np.max(dos_ml_smooth) > 0 else dos_ml_smooth[mask_ml]
+        
+        ax.plot(e_ml_shift[mask_ml], dos_ml_norm, color=COLORS.get(model, '#777777'), 
+                label=f"{model} ({similarity:.3f})", lw=1.5)
+        
+        plotted_models.append(model)
+        ws.append([material, model, round(similarity, 6)])
+    
+    # Plot DFT last (on top)
+    dos_dft_norm = dos_dft_smooth[mask_dft] / np.max(dos_dft_smooth) if np.max(dos_dft_smooth) > 0 else dos_dft_smooth[mask_dft]
+    ax.plot(e_dft_shift[mask_dft], dos_dft_norm, color=COLORS['dft'], label="DFT", lw=2.5)
+    
+    ws.append([material, 'dft', ""])
+    
+    # Format plot
+    ax.set_xlabel("Energy (eV)", fontsize=14)
+    ax.set_ylabel("DOS (normalized)", fontsize=14)
+    ax.set_title(f"{material} DOS Comparison", fontsize=16)
+    ax.legend(fontsize=10)
+    ax.grid(True, alpha=0.3)
+    ax.axvline(0.0, color='gray', linestyle='--', lw=1.0, alpha=0.5)
+    ax.tick_params(labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_linewidth(1.5)
+    
+    fig.tight_layout()
+    png_path = os.path.join(OUTPUT_DIR, f"dos_{material}.png")
+    fig.savefig(png_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Saved: {png_path}")
 
-        similarity = cosine_similarity(ref_vec, model_dos[:, 1])
-        rows.append({"material": material, "model": model, "dos_cosine_similarity": round(similarity, 6)})
-        logger.info("%s / %-12s  cosine_similarity=%.4f", material, model, similarity)
-
-    return rows
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Compare DOS curves to DFT reference.")
-    parser.add_argument("--material", default=None, help="Material name. If omitted, all are processed.")
-    args = parser.parse_args()
-
-    models = list_models()
-
-    if args.material:
-        materials = [args.material]
-    else:
-        materials = [p.name for p in DOS_RESULTS_DIR.iterdir() if p.is_dir()]
-
-    all_rows: list[dict] = []
-    for mat in materials:
-        all_rows.extend(compare_material(mat, models))
-
-    if not all_rows:
-        logger.warning("No DOS comparison results.")
-        return
-
-    out_path = DOS_RESULTS_DIR / "dos_similarity_summary.csv"
-    fieldnames = ["material", "model", "dos_cosine_similarity"]
-    with open(out_path, "w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(all_rows)
-    logger.info("Summary written to %s", out_path)
-
-
-if __name__ == "__main__":
-    main()
+# Save Excel summary
+xlsx_path = os.path.join(OUTPUT_DIR, "dos_comparison.xlsx")
+wb.save(xlsx_path)
+print(f"Saved: {xlsx_path}")

@@ -73,10 +73,10 @@ The following uMLIPs are evaluated in this study. All models are used without ad
 
 This example benchmark focuses on the following lithium-based materials:
 
-| Material                                             | Structure Type   | Li Conductivity Regime |
-| ---------------------------------------------------- | ---------------- | ---------------------- |
-| Li<sub>10</sub>SnP<sub>2</sub>S<sub>12</sub> (LSnPS) | SSE (Argyrodite) | High                   |
-| LiFeV<sub>2</sub>O<sub>7</sub> (LFVO)                | Cathode          | Low–Moderate           |
+| Material                                      | Alias | Structure Type   | Li Conductivity Regime |
+| --------------------------------------------- | ----- | ---------------- | ---------------------- |
+| Li<sub>10</sub>SnP<sub>2</sub>S<sub>12</sub>  | LSnPS | Electrolyte      | High                   |
+| LiFeV<sub>2</sub>O<sub>7</sub>                | LFVO  | Cathode          | Low–Moderate           |
 
 ---
 
@@ -146,10 +146,8 @@ uMLIPs Pipeline/
 │   ├── relaxation/              # Structure relaxation with each uMLIP
 │   │   └── relax.py
 │   ├── dos/                     # DOS pre-screening
-│   │   ├── run_dos.py
 │   │   └── compare_dos.py
 │   ├── neb/                     # NEB pre-screening
-│   │   ├── build_neb_images.py
 │   │   ├── run_neb.py
 │   │   └── analyse_neb.py
 │   ├── md/                      # MD simulations and MSD analysis
@@ -172,7 +170,7 @@ uMLIPs Pipeline/
 │   ├── 03_arrhenius_analysis.ipynb
 │   └── 04_ssnmr_comparison.ipynb
 │
-└── environment.yml              # Environment specification
+└── Requirements.txt             # Environment specification
 ```
 
 ---
@@ -185,7 +183,7 @@ uMLIPs Pipeline/
 - [ASE](https://wiki.fysik.dtu.dk/ase/) ≥ 3.23
 - [PyMatGen](https://pymatgen.org/) ≥ 2024.1
 - [NumPy](https://numpy.org/), [SciPy](https://scipy.org/), [Matplotlib](https://matplotlib.org/)
-- Individual uMLIP packages (see `environment.yml`)
+- Individual uMLIP packages (see `requirements.txt`)
 
 ### Setup
 
@@ -194,9 +192,10 @@ uMLIPs Pipeline/
 git clone https://github.com/Camgur/uMLIPs-Li-SSE.git
 cd uMLIPs-Li-SSE
 
-# Create and activate the conda environment
-conda env create -f environment.yml
-conda activate uMLIPs-Li-SSE
+# Create and activate the venv
+python -m venv "venv"
+source path-to-venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ---
@@ -206,7 +205,7 @@ conda activate uMLIPs-Li-SSE
 ### Stage 1 — Pre-Screening
 
 ```bash
-# 1a. Relax structures with all uMLIPs
+# 1a. Relax structures with a uMLIP
 python scripts/relaxation/relax.py structures/LSnPS/LSnPS.cif mace-0b3
 
 # 1b. Run DOS pre-screening

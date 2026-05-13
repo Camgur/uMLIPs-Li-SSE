@@ -1,0 +1,813 @@
+ +-------------------------------------------------+
+ |                                                 |
+ |      CCC   AA    SSS  TTTTT  EEEEE  PPPP        |
+ |     C     A  A  S       T    E      P   P       |
+ |     C     AAAA   SS     T    EEE    PPPP        |
+ |     C     A  A     S    T    E      P           |
+ |      CCC  A  A  SSS     T    EEEEE  P           |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ | Welcome to Academic Release CASTEP version 25.12|
+ | Ab Initio Total Energy Program                  |
+ |                                                 |
+ | Authors:                                        |
+ | M. Segall, M. Probert, C. Pickard, P. Hasnip,   |
+ | S. Clark, K. Refson, J. R. Yates,               |
+ | A. Bartok-Partay, M. Payne                      |
+ |                                                 |
+ | Contributors:                                   |
+ | P. Lindan, P. Haynes, J. White, V. Milman,      |
+ | N. Govind, M. Gibson, P. Tulip, V. Cocula,      |
+ | B. Montanari, D. Quigley, M. Glover,            |
+ | L. Bernasconi, A. Perlov, M. Plummer,           |
+ | E. McNellis, J. Meyer, J. Gale, D. Jochym       |
+ | J. Aarons, B. Walker, R. Gillen, D. Jones       |
+ | T. Green, I. J. Bush, C. J. Armstrong,          |
+ | E. J. Higgins, E. L. Brown, M. S. McFly,        |
+ | J. Wilkins, B-C. Shih, P. J. P. Byrne,          |
+ | R. J. Maurer, J. C. Womack, J. Dziedzic,        |
+ | L. LeBlanc, T. K. Stenczel, J. Kermode,         |
+ | S. Sturniolo, B. Shi, B. Durham, M. Evans,      |
+ | M. J. Smith, A. Tamerus, Z. Hawkhead,           |
+ | V. Ravindran, T. Hollins, S. A. Joyce,          |
+ | R. T. Strong, A. M. Reilly, S. J. Donaldson,    |
+ | J. C. A. Prentice                               |
+ |                                                 |
+ | Copyright (c) 2000 - 2024                       |
+ |                                                 |
+ |     Distributed under license from Cambridge    |
+ |     Enterprise for academic use only.           |
+ |                                                 |
+ | Please cite                                     |
+ |                                                 |
+ |     "First principles methods using CASTEP"     |
+ |                                                 |
+ |         Zeitschrift fuer Kristallographie       |
+ |           220(5-6) pp. 567-570 (2005)           |
+ |                                                 |
+ | S. J. Clark, M. D. Segall, C. J. Pickard,       |
+ | P. J. Hasnip, M. J. Probert, K. Refson,         |
+ | M. C. Payne                                     |
+ |                                                 |
+ |       in all publications arising from          |
+ |              your use of CASTEP                 |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ |              http://www.castep.org              |
+ |                                                 |
+ +-------------------------------------------------+
+
+
+
+ Compiled for linux_x86_64_gfortran10 on Wed, 30 Jul 2025 10:20:48 -0700
+ from code version git version unavailable
+ Compiler: GNU Fortran 13.3.0; Optimisation: fast
+ Comms   : Open MPI v5.0.3
+ MATHLIBS: flexiblas (AOCL) (LAPACK version 3.12.0)
+ FFT Lib : fftw3 version fftw-3.3.10-sse2-avx-avx2-avx2_128
+ Fundamental constants values: CODATA 2018
+
+ Run started: Mon, 03 Nov 2025 09:34:10 -0800
+
+ Atomic calculation performed for Li: 1s2 2s1
+
+ Converged in 47 iterations to an ae energy of -202.784 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation  3-11-2025   |                
+   ------------------------------------------------------------                
+   | Element: Li Ionic charge:  3.00 Level of theory: PBE     |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            1s              2.000           -1.906        |                
+   |            2s              1.000           -0.106        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -1.906   1.001     qc      0         |                
+   |          2      0   -0.106   1.001     qc      0         |                
+   |          3      0    0.250   1.001     qc      0         |                
+   |         loc     1    0.000   1.001     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 0.699                       |                
+   | No partial core correction                               |                
+   ------------------------------------------------------------                
+   | "1|1.0|14|16|18|10U:20(qc=7)"                            |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for Al: 1s2 2s2 2p6 3s2 3p1
+
+ Converged in 54 iterations to an ae energy of -6603.783 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation  3-11-2025   |                
+   ------------------------------------------------------------                
+   | Element: Al Ionic charge:  3.00 Level of theory: PBE     |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            3s              2.000           -0.285        |                
+   |            3p              1.000           -0.100        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.285   2.192     qc      0         |                
+   |          2      0    0.250   2.192     qc      0         |                
+   |          3      1   -0.100   2.192     qc      0         |                
+   |          4      1    0.250   2.192     qc      0         |                
+   |          5      2    0.000   2.000     qc      0         |                
+   |          6      2    0.250   2.000     qc      0         |                
+   |         loc     3    0.000   2.192     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 1.398                       |                
+   | Partial core correction Rc = 1.398                       |                
+   ------------------------------------------------------------                
+   | "3|2.2|2.2|1.4|4|5|5|30:31:32U2U2"                       |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for Cl: 1s2 2s2 2p6 3s2 3p5
+
+ Converged in 58 iterations to an ae energy of -12556.233 eV
+
+   ============================================================                
+   | Pseudopotential Report - Date of generation  3-11-2025   |                
+   ------------------------------------------------------------                
+   | Element: Cl Ionic charge:  7.00 Level of theory: PBE     |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            3s              2.000           -0.760        |                
+   |            3p              5.000           -0.316        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.760   1.807     qc      0         |                
+   |          2      0    0.250   1.807     qc      0         |                
+   |          3      1   -0.316   1.807     qc      0         |                
+   |          4      1    0.250   1.807     qc      0         |                
+   |          5      2    0.000   1.807     qc      0         |                
+   |          6      2    0.250   1.807     qc      0         |                
+   |         loc     3    0.000   1.807     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 1.263                       |                
+   | Partial core correction Rc = 1.263                       |                
+   ------------------------------------------------------------                
+   | "3|1.8|5|6|7|30:31:32"                                   |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.4991 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 15 iterations to a total energy of -107.1307 eV
+
+ Pseudo atomic calculation performed for Cl 3s2 3p5
+
+ Converged in 20 iterations to a total energy of -420.3644 eV
+ Calculation parallelised over 20 processes.
+ Data is distributed by G-vector(5-way) and k-point(4-way)
+
+ ************************************ Title ************************************
+ 
+
+ ***************************** General Parameters ******************************
+  
+ output verbosity                               : normal  (1)
+ write checkpoint data to                       : ml_dos.check
+ type of calculation                            : Electronic Spectroscopy
+ stress calculation                             : off
+ density difference calculation                 : off
+ electron localisation func (ELF) calculation   : off
+ Hirshfeld analysis                             : off
+ polarisation (Berry phase) analysis            : off
+ molecular orbital projected DOS                : off
+ deltaSCF calculation                           : off
+ unlimited duration calculation
+ timing information                             : on
+ memory usage estimate                          : on
+ write extra output files                       : on
+ write final potential to formatted file        : off
+ write final density to formatted file          : off
+ write BibTeX reference list                    : on
+ write OTFG pseudopotential files               : on
+ write electrostatic potential file             : on
+ write bands file                               : on
+ checkpoint writing                             : both castep_bin and check files
+  
+ output         length unit                     : A
+ output           mass unit                     : amu
+ output           time unit                     : ps
+ output         charge unit                     : e
+ output           spin unit                     : hbar/2
+ output         energy unit                     : eV
+ output          force unit                     : eV/A
+ output       velocity unit                     : A/ps
+ output       pressure unit                     : GPa
+ output     inv_length unit                     : 1/A
+ output      frequency unit                     : cm-1
+ output force constant unit                     : eV/A**2
+ output         volume unit                     : A**3
+ output   IR intensity unit                     : (D/A)**2/amu
+ output         dipole unit                     : D
+ output         efield unit                     : eV/A/e
+ output        entropy unit                     : J/mol/K
+ output    efield chi2 unit                     : pm/V
+  
+ wavefunctions paging                           : none
+ random number generator seed                   :   93410694
+ data distribution                              : optimal for this architecture
+ optimization strategy                          : balance speed and memory
+
+ *********************** Exchange-Correlation Parameters ***********************
+  
+ using functional                               : Perdew Burke Ernzerhof
+ relativistic treatment                         : Koelling-Harmon
+ DFT+D: Semi-empirical dispersion correction    : off
+
+ ************************* Pseudopotential Parameters **************************
+  
+ pseudopotential representation                 : reciprocal space
+ <beta|phi> representation                      : reciprocal space
+ spin-orbit coupling                            : off
+
+ **************************** Basis Set Parameters *****************************
+  
+ plane wave basis set cut-off                   :   700.0000   eV
+ size of standard grid                          :     2.0000
+ size of   fine   gmax                          :    27.1093   1/A
+ finite basis set correction                    : none
+
+ **************************** Electronic Parameters ****************************
+  
+ number of  electrons                           :  136.0    
+ net charge of system                           :  0.000    
+ treating system as non-spin-polarized
+ number of bands                                :         82
+
+ ********************* Electronic Minimization Parameters **********************
+  
+ Method: Treating system as metallic with conventional treatment of electrons,
+         and number of  SD  steps               :          1
+         and number of  CG  steps               :          4
+  
+ total energy / atom convergence tol.           : 0.1000E-05   eV
+ max force / atom convergence tol.              : ignored
+ convergence tolerance window                   :          3   cycles
+ max. number of SCF cycles                      :        100
+ number of fixed-spin iterations                :         10
+ smearing scheme                                : Gaussian
+ smearing width                                 : 0.2000       eV
+ Fermi energy convergence tolerance             : 0.2721E-13   eV
+ periodic dipole correction                     : NONE
+
+ *********************** Population Analysis Parameters ************************
+  
+ Population analysis with cutoff                :  3.000       A
+ Population analysis output                     : summary and pdos components
+ Partial DOS weights calculated
+
+ ********************* Electronic Spectroscopy Parameters **********************
+  
+ electronic spectroscopy with theory level      : DFT       
+ spectroscopy calculation                       : density of states
+ max. number of iterations                      :         60
+ max. steps per iteration                       :          5
+ number of bands / k-point                      :        128
+ band convergence tolerance                     : 0.1000E-05   eV
+ write orbitals file                            : off
+
+ *******************************************************************************
+  
+
+                           -------------------------------
+                                      Unit Cell
+                           -------------------------------
+        Real Lattice(A)                      Reciprocal Lattice(1/A)
+     7.0113320     0.0000000     0.0000000        0.896147167   0.000000831   0.047018224
+    -0.0000060     6.4740390     0.0000000        0.000000000   0.970520151   0.000000979
+    -0.6760050    -0.0000130    12.8843650        0.000000000   0.000000000   0.487659680
+
+                       Lattice parameters(A)       Cell Angles
+                    a =      7.011332          alpha =   90.000055
+                    b =      6.474039          beta  =   93.003388
+                    c =     12.902087          gamma =   90.000053
+
+                       Current cell volume =           584.842417       A**3
+                                   density =             1.201919   AMU/A**3
+                                           =             1.995834     g/cm^3
+
+                           -------------------------------
+                                     Cell Contents
+                           -------------------------------
+                         Total number of ions in cell =   24
+                      Total number of species in cell =    3
+                        Max number of any one species =   16
+
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            x  Element    Atom        Fractional coordinates of atoms  x
+            x            Number           u          v          w      x
+            x----------------------------------------------------------x
+            x  Li           1         0.131969   0.524266   0.854000   x 
+            x  Li           2         0.868038   0.024263   0.646000   x 
+            x  Li           3         0.868031   0.475732   0.145999   x 
+            x  Li           4         0.131963   0.975739   0.354000   x 
+            x  Al           1         0.694645   0.167234   0.401173   x 
+            x  Al           2         0.305368   0.667232   0.098831   x 
+            x  Al           3         0.305358   0.832768   0.598828   x 
+            x  Al           4         0.694631   0.332768   0.901168   x 
+            x  Cl           1         0.697650   0.304359   0.552663   x 
+            x  Cl           2         0.302344   0.804346   0.947335   x 
+            x  Cl           3         0.302351   0.695638   0.447337   x 
+            x  Cl           4         0.697656   0.195657   0.052666   x 
+            x  Cl           5         0.813481   0.862955   0.425415   x 
+            x  Cl           6         0.186507   0.362963   0.074585   x 
+            x  Cl           7         0.186517   0.137045   0.574586   x 
+            x  Cl           8         0.813490   0.637036   0.925415   x 
+            x  Cl           9         0.919895   0.305092   0.314318   x 
+            x  Cl          10         0.080100   0.805083   0.185678   x 
+            x  Cl          11         0.080106   0.694908   0.685682   x 
+            x  Cl          12         0.919900   0.194917   0.814322   x 
+            x  Cl          13         0.422904   0.169780   0.320680   x 
+            x  Cl          14         0.577104   0.669771   0.179322   x 
+            x  Cl          15         0.577094   0.830220   0.679320   x 
+            x  Cl          16         0.422897   0.330230   0.820678   x 
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+                         No user defined ionic velocities
+
+                           -------------------------------
+                                   Details of Species
+                           -------------------------------
+
+                               Mass of species in AMU
+                                    Li    6.9410000
+                                    Al   26.9815400
+                                    Cl   35.4527000
+
+                          Electric Quadrupole Moment (Barn)
+                                    Li   -0.0401000 Isotope   7
+                                    Al    0.1466000 Isotope  27
+                                    Cl   -0.0816500 Isotope  35
+
+                          Files used for pseudopotentials:
+                                    Li 1|1.0|14|16|18|10U:20(qc=7)
+                                    Al 3|2.2|2.2|1.4|4|5|5|30:31:32U2U2
+                                    Cl 3|1.8|5|6|7|30:31:32
+
+                           -------------------------------
+                              k-Points For BZ Sampling
+                           -------------------------------
+                       MP grid size for SCF calculation is  8  8  4
+                            with an offset of   0.000  0.000  0.000
+                       Number of kpoints used =           128
+
+                           -------------------------------
+                               Symmetry and Constraints
+                           -------------------------------
+
+                      Maximum deviation from symmetry =  0.00000         ANG
+
+                      Number of symmetry operations   =           1
+                      Number of ionic constraints     =           3
+                      Point group of crystal =     1: C1, 1, 1
+                      Space group of crystal =    14: P2_1/c, -P 2ybc
+
+             Set iprint > 1 for details on symmetry rotations/translations
+
+                         Centre of mass is constrained
+             Set iprint > 2 for details of linear ionic constraints
+
+                         Number of cell constraints= 0
+                         Cell constraints are:  1 2 3 4 5 6
+
+                         External pressure/stress (GPa)
+                          0.00000   0.00000   0.00000
+                                    0.00000   0.00000
+                                              0.00000
+ 
++---------------- MEMORY AND SCRATCH DISK ESTIMATES PER PROCESS --------------+
+|                                                     Memory          Disk    |
+| Baseline code, static data and system overhead      628.0 MB         0.0 MB |
+| BLAS internal memory storage                          0.0 MB         0.0 MB |
+| Model and support data                              755.3 MB         0.0 MB |
+| Electronic energy minimisation requirements        1025.3 MB         0.0 MB |
+| Force calculation requirements                       20.0 MB         0.0 MB |
+|                                               ----------------------------- |
+| Approx. total storage required per process         2408.6 MB         0.0 MB |
+|                                                                             |
+| Requirements will fluctuate during execution and may exceed these estimates |
++-----------------------------------------------------------------------------+
+Calculating approximate eigenstates for fixed initial Hamiltonian
+Cut-off for approx. calculation is  119.774 eV
+Improving approx. states at cut-off of  350.000 eV
+Resetting cut-off to  700.000 eV
+Improving states further at cut-off of  700.000 eV
+Calculating total energy with cut-off of  700.000 eV.
+------------------------------------------------------------------------ <-- SCF
+SCF loop      Energy           Fermi           Energy gain       Timer   <-- SCF
+                               energy          per atom          (sec)   <-- SCF
+------------------------------------------------------------------------ <-- SCF
+Initial  -8.04653535E+003  3.21830091E+000                       215.09  <-- SCF
+      1  -8.04758163E+003  3.21830091E+000   4.35948499E-002     371.59  <-- SCF
+      2  -8.04759111E+003  3.21830091E+000   3.95194592E-004     529.38  <-- SCF
+      3  -8.04759128E+003  3.21830091E+000   6.74568395E-006     657.82  <-- SCF
+      4  -8.04759131E+003  3.21830091E+000   1.57128690E-006     783.88  <-- SCF
+      5  -8.04759133E+003  3.21830091E+000   6.18163473E-007     915.42  <-- SCF
+      6  -8.04759133E+003  3.21830091E+000   1.69258462E-007    1044.37  <-- SCF
+------------------------------------------------------------------------ <-- SCF
+ 
+Final energy, E             =  -8047.591332714     eV
+Final free energy (E-TS)    =  -8047.591332714     eV
+(energies not corrected for finite basis set)
+ 
+NB est. 0K energy (E-0.5TS)      =  -8047.591332714     eV
+ 
+
+Writing analysis data to ml_dos.castep_bin
+
+Writing model to ml_dos.check
+ 
++---------------- MEMORY AND SCRATCH DISK ESTIMATES PER PROCESS --------------+
+|                                                     Memory          Disk    |
+|                                               ----------------------------- |
+| Approx. total storage required per process         1993.9 MB         0.0 MB |
+|                                                                             |
+| Requirements will fluctuate during execution and may exceed these estimates |
++-----------------------------------------------------------------------------+
+ 
+  =====================================================================
+  +                                                                   +
+  +                 Calculation of Spectral Properties                +
+  +                                                                   +
+  + Calculation re-parallelised over 20 processes.                    +
+  + There are 128 k-points distributed across 20 k-point groups.      +
+  + Data distributed by G-vector(1-way), k-point(20-way), band(1-way) +
+  + Data distributed by k-point(20-way)                               +
+  +                                                                   +
+  =====================================================================
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.4991 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 15 iterations to a total energy of -107.1307 eV
+
+ Pseudo atomic calculation performed for Cl 3s2 3p5
+
+ Converged in 20 iterations to a total energy of -420.3644 eV
+  Starting k-point:        1 of        7 Time:      0.00 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.4991 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 15 iterations to a total energy of -107.1307 eV
+
+ Pseudo atomic calculation performed for Cl 3s2 3p5
+
+ Converged in 20 iterations to a total energy of -420.3644 eV
+  Starting k-point:        2 of        7 Time:     77.44 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.4991 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 15 iterations to a total energy of -107.1307 eV
+
+ Pseudo atomic calculation performed for Cl 3s2 3p5
+
+ Converged in 20 iterations to a total energy of -420.3644 eV
+  Starting k-point:        3 of        7 Time:    154.44 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.4991 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 15 iterations to a total energy of -107.1307 eV
+
+ Pseudo atomic calculation performed for Cl 3s2 3p5
+
+ Converged in 20 iterations to a total energy of -420.3644 eV
+  Starting k-point:        4 of        7 Time:    229.76 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.4991 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 15 iterations to a total energy of -107.1307 eV
+
+ Pseudo atomic calculation performed for Cl 3s2 3p5
+
+ Converged in 20 iterations to a total energy of -420.3644 eV
+  Starting k-point:        5 of        7 Time:    303.30 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.4991 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 15 iterations to a total energy of -107.1307 eV
+
+ Pseudo atomic calculation performed for Cl 3s2 3p5
+
+ Converged in 20 iterations to a total energy of -420.3644 eV
+  Starting k-point:        6 of        7 Time:    378.64 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.4991 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 15 iterations to a total energy of -107.1307 eV
+
+ Pseudo atomic calculation performed for Cl 3s2 3p5
+
+ Converged in 20 iterations to a total energy of -420.3644 eV
+  Starting k-point:        7 of        7 Time:    454.62 sec  |<-- SPEC
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.4991 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 15 iterations to a total energy of -107.1307 eV
+
+ Pseudo atomic calculation performed for Cl 3s2 3p5
+
+ Converged in 20 iterations to a total energy of -420.3644 eV
+  Check-pointing spectral run                                 |<-- SPEC
+  Total time to compute matrix elements            532.35 sec |<-- SPEC
+  
+  + Calculation re-parallelised over 20 processes.                    +
+  + Data distributed by G-vector(5-way), k-point(4-way)               +
+
+ ************************** Forces **************************
+ *                                                          *
+ *               Cartesian components (eV/A)                *
+ * -------------------------------------------------------- *
+ *                         x            y            z      *
+ *                                                          *
+ * Li              1     -0.04542      0.03005      0.18378 *
+ * Li              2      0.04560      0.03102     -0.18422 *
+ * Li              3      0.04631     -0.03029     -0.18442 *
+ * Li              4     -0.04484     -0.03090      0.18382 *
+ * Al              1     -0.05161      0.11591      0.07432 *
+ * Al              2      0.04414      0.11683     -0.08490 *
+ * Al              3      0.05321     -0.11668     -0.06828 *
+ * Al              4     -0.04369     -0.11961      0.08668 *
+ * Cl              1     -0.26214      0.47255      0.03142 *
+ * Cl              2      0.26000      0.47486     -0.02093 *
+ * Cl              3      0.25783     -0.47423     -0.03938 *
+ * Cl              4     -0.27234     -0.46869      0.01509 *
+ * Cl              5     -0.11004     -0.62175      0.00148 *
+ * Cl              6      0.12177     -0.61633      0.00564 *
+ * Cl              7      0.11969      0.62234      0.01103 *
+ * Cl              8     -0.12622      0.63333     -0.00190 *
+ * Cl              9      0.06899      0.25709      0.07050 *
+ * Cl             10     -0.05177      0.25249     -0.07852 *
+ * Cl             11     -0.07124     -0.24949     -0.07889 *
+ * Cl             12      0.06175     -0.25509      0.08073 *
+ * Cl             13      0.11056      0.34949     -0.38004 *
+ * Cl             14     -0.09802      0.34830      0.38295 *
+ * Cl             15     -0.12073     -0.36288      0.37727 *
+ * Cl             16      0.10819     -0.35832     -0.38324 *
+ *                                                          *
+ ************************************************************
+
+ Pseudo atomic calculation performed for Li 1s2 2s1
+
+ Converged in 18 iterations to a total energy of -200.4991 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 15 iterations to a total energy of -107.1307 eV
+
+ Pseudo atomic calculation performed for Cl 3s2 3p5
+
+ Converged in 20 iterations to a total energy of -420.3644 eV
+Charge spilling parameter for spin component 1 = 0.54%
+
+            Orbital Populations       
+     Ion    Atom   Orbital             Charge
+  -------------------------------------------
+     Li     1      S                    2.000
+     Li     1      S                    0.102
+     Li     1      Px                   0.065
+     Li     1      Py                   0.095
+     Li     1      Pz                   0.070
+     Li     2      S                    2.000
+     Li     2      S                    0.102
+     Li     2      Px                   0.065
+     Li     2      Py                   0.095
+     Li     2      Pz                   0.070
+     Li     3      S                    2.000
+     Li     3      S                    0.102
+     Li     3      Px                   0.065
+     Li     3      Py                   0.095
+     Li     3      Pz                   0.070
+     Li     4      S                    2.000
+     Li     4      S                    0.102
+     Li     4      Px                   0.065
+     Li     4      Py                   0.095
+     Li     4      Pz                   0.070
+     Al     1      S                    0.712
+     Al     1      Px                   0.362
+     Al     1      Py                   0.323
+     Al     1      Pz                   0.358
+     Al     2      S                    0.712
+     Al     2      Px                   0.362
+     Al     2      Py                   0.323
+     Al     2      Pz                   0.358
+     Al     3      S                    0.712
+     Al     3      Px                   0.362
+     Al     3      Py                   0.323
+     Al     3      Pz                   0.358
+     Al     4      S                    0.712
+     Al     4      Px                   0.362
+     Al     4      Py                   0.323
+     Al     4      Pz                   0.358
+     Cl     1      S                    1.944
+     Cl     1      Px                   1.921
+     Cl     1      Py                   1.897
+     Cl     1      Pz                   1.711
+     Cl     2      S                    1.944
+     Cl     2      Px                   1.922
+     Cl     2      Py                   1.897
+     Cl     2      Pz                   1.711
+     Cl     3      S                    1.944
+     Cl     3      Px                   1.921
+     Cl     3      Py                   1.897
+     Cl     3      Pz                   1.711
+     Cl     4      S                    1.944
+     Cl     4      Px                   1.922
+     Cl     4      Py                   1.897
+     Cl     4      Pz                   1.711
+     Cl     5      S                    1.946
+     Cl     5      Px                   1.854
+     Cl     5      Py                   1.768
+     Cl     5      Pz                   1.903
+     Cl     6      S                    1.946
+     Cl     6      Px                   1.854
+     Cl     6      Py                   1.769
+     Cl     6      Pz                   1.903
+     Cl     7      S                    1.946
+     Cl     7      Px                   1.854
+     Cl     7      Py                   1.768
+     Cl     7      Pz                   1.903
+     Cl     8      S                    1.946
+     Cl     8      Px                   1.854
+     Cl     8      Py                   1.769
+     Cl     8      Pz                   1.903
+     Cl     9      S                    1.939
+     Cl     9      Px                   1.790
+     Cl     9      Py                   1.894
+     Cl     9      Pz                   1.862
+     Cl    10      S                    1.939
+     Cl    10      Px                   1.790
+     Cl    10      Py                   1.894
+     Cl    10      Pz                   1.862
+     Cl    11      S                    1.939
+     Cl    11      Px                   1.790
+     Cl    11      Py                   1.894
+     Cl    11      Pz                   1.862
+     Cl    12      S                    1.939
+     Cl    12      Px                   1.790
+     Cl    12      Py                   1.894
+     Cl    12      Pz                   1.862
+     Cl    13      S                    1.936
+     Cl    13      Px                   1.737
+     Cl    13      Py                   1.928
+     Cl    13      Pz                   1.883
+     Cl    14      S                    1.936
+     Cl    14      Px                   1.737
+     Cl    14      Py                   1.928
+     Cl    14      Pz                   1.884
+     Cl    15      S                    1.936
+     Cl    15      Px                   1.737
+     Cl    15      Py                   1.928
+     Cl    15      Pz                   1.883
+     Cl    16      S                    1.936
+     Cl    16      Px                   1.737
+     Cl    16      Py                   1.928
+     Cl    16      Pz                   1.883
+  -------------------------------------------
+                           Total:     135.999
+  -------------------------------------------
+
+     Atomic Populations (Mulliken)
+     -----------------------------
+Species          Ion     s       p       d       f      Total   Charge (e)
+==========================================================================
+  Li              1     2.102   0.230   0.000   0.000   2.331     0.669
+  Li              2     2.102   0.230   0.000   0.000   2.331     0.669
+  Li              3     2.102   0.230   0.000   0.000   2.331     0.669
+  Li              4     2.102   0.230   0.000   0.000   2.331     0.669
+  Al              1     0.712   1.043   0.000   0.000   1.755     1.245
+  Al              2     0.712   1.042   0.000   0.000   1.755     1.245
+  Al              3     0.712   1.042   0.000   0.000   1.755     1.245
+  Al              4     0.712   1.042   0.000   0.000   1.754     1.246
+  Cl              1     1.944   5.529   0.000   0.000   7.473    -0.473
+  Cl              2     1.944   5.529   0.000   0.000   7.473    -0.473
+  Cl              3     1.944   5.529   0.000   0.000   7.473    -0.473
+  Cl              4     1.944   5.530   0.000   0.000   7.474    -0.474
+  Cl              5     1.946   5.525   0.000   0.000   7.471    -0.471
+  Cl              6     1.946   5.525   0.000   0.000   7.471    -0.471
+  Cl              7     1.946   5.525   0.000   0.000   7.471    -0.471
+  Cl              8     1.946   5.525   0.000   0.000   7.471    -0.471
+  Cl              9     1.939   5.546   0.000   0.000   7.485    -0.485
+  Cl             10     1.939   5.546   0.000   0.000   7.485    -0.485
+  Cl             11     1.939   5.546   0.000   0.000   7.485    -0.485
+  Cl             12     1.939   5.546   0.000   0.000   7.485    -0.485
+  Cl             13     1.936   5.548   0.000   0.000   7.484    -0.484
+  Cl             14     1.936   5.549   0.000   0.000   7.484    -0.484
+  Cl             15     1.936   5.549   0.000   0.000   7.484    -0.484
+  Cl             16     1.936   5.549   0.000   0.000   7.484    -0.484
+==========================================================================
+
+                 Bond                   Population      Length (A)
+======================================================================
+              Al 4 -- Cl 16                  0.55        2.12161
+              Al 2 -- Cl 14                  0.55        2.12163
+              Al 3 -- Cl 15                  0.55        2.12164
+              Al 1 -- Cl 13                  0.55        2.12168
+              Al 1 -- Cl 1                   0.55        2.14580
+              Al 3 -- Cl 3                   0.55        2.14582
+              Al 2 -- Cl 2                   0.55        2.14583
+              Al 4 -- Cl 4                   0.55        2.14585
+              Al 1 -- Cl 5                   0.52        2.15530
+              Al 3 -- Cl 7                   0.52        2.15530
+              Al 4 -- Cl 8                   0.52        2.15530
+              Al 2 -- Cl 6                   0.52        2.15531
+              Al 1 -- Cl 9                   0.47        2.17531
+              Al 3 -- Cl 11                  0.47        2.17532
+              Al 4 -- Cl 12                  0.47        2.17533
+              Al 2 -- Cl 10                  0.47        2.17533
+              Li 1 -- Cl 11                  0.12        2.44663
+              Li 3 -- Cl 9                   0.12        2.44664
+              Li 2 -- Cl 12                  0.12        2.44671
+              Li 4 -- Cl 10                  0.12        2.44672
+              Li 3 -- Cl 4                   0.15        2.45236
+              Li 1 -- Cl 2                   0.15        2.45239
+              Li 2 -- Cl 1                   0.15        2.45253
+              Li 4 -- Cl 3                   0.15        2.45255
+              Li 1 -- Cl 16                  0.15        2.45266
+              Li 3 -- Cl 14                  0.15        2.45266
+              Li 4 -- Cl 13                  0.15        2.45274
+              Li 2 -- Cl 15                  0.15        2.45277
+              Li 3 -- Cl 6                   0.13        2.56585
+              Li 1 -- Cl 8                   0.13        2.56588
+              Li 2 -- Cl 7                   0.13        2.56589
+              Li 4 -- Cl 5                   0.13        2.56592
+              Li 1 -- Cl 12                  0.09        2.63429
+              Li 3 -- Cl 10                  0.09        2.63430
+              Li 4 -- Cl 9                   0.09        2.63432
+              Li 2 -- Cl 11                  0.09        2.63433
+======================================================================
+
+
+Writing analysis data to ml_dos.castep_bin
+
+Writing model to ml_dos.check
+ 
+ A BibTeX formatted list of references used in this run has been written to 
+ ml_dos.bib
+ 
+Initialisation time =      8.05 s
+Calculation time    =   1631.26 s
+Finalisation time   =      8.16 s
+Total time          =   1647.47 s
+Peak Memory Use     = 3144260 kB
+ 
+Overall parallel efficiency rating: Good (71%)
+ 
+Data was distributed by:-
+G-vector (5-way); efficiency rating: Good (74%)
+k-point (4-way); efficiency rating: Excellent (93%)

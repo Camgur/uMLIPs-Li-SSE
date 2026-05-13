@@ -1,179 +1,179 @@
-"""md/arrhenius_fit.py — Fit the Arrhenius equation to Li diffusivity data.
-
-For each (material, model) pair the script:
-  1. Reads the MSD data for each temperature.
-  2. Fits D(T) = MSD / (6*t) via linear regression on the MSD-vs-time curve.
-  3. Fits ln(D) vs 1/T to extract Ea and D0.
-  4. Estimates room-temperature ionic conductivity via the Nernst-Einstein equation.
-  5. Saves results to ``results/arrhenius/<material>/<model>/arrhenius.json``.
-
-Usage
------
-    python scripts/md/arrhenius_fit.py --material LLZO --model MACE-MP-0
-    python scripts/md/arrhenius_fit.py --material LLZO  # all passing models
-"""
-
-from __future__ import annotations
-
-import argparse
-import json
-import logging
-from pathlib import Path
-
 import numpy as np
-from scipy import stats
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+from sklearn.linear_model import LinearRegression
+from sklearn.impute import SimpleImputer
+from sklearn.metrics import r2_score
+from pandas import DataFrame
+import glob, os
 
-import sys
-sys.path.insert(0, str(Path(__file__).parents[1]))
-from utils.io import ensure_dir
+# Constants
+k_B = 1.380649e-23  # J/K
+e = 1.60218e-19     # J/eV
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(message)s")
+def calc_diff(msd, t):
+    reg = LinearRegression()
+    reg.fit(t.reshape(-1,1), msd)
+    y_pred = reg.predict(t.reshape(-1,1))
+    r2 = r2_score(msd, y_pred)
+    print(f"Diffusion coefficient: {reg.coef_[0]/6:.3e} Å²/ps (r²={r2:.3f})")
+    return np.float64(reg.coef_[0]/6), y_pred, r2
 
-REPO_ROOT = Path(__file__).parents[2]
-MD_RESULTS_DIR = REPO_ROOT / "results" / "md"
-ARRHENIUS_RESULTS_DIR = REPO_ROOT / "results" / "arrhenius"
+def calc_act(diffusion_dict):
+    temps = sorted(diffusion_dict.keys())
+    inv_T = 1 / np.array(temps)
+    D_vals = [diffusion_dict[T] for T in temps]
+    imp = SimpleImputer(missing_values=np.nan, strategy='mean')
+    lnD = np.log(imp.fit_transform(np.array(D_vals).reshape(-1, 1)).astype('float'))
 
-KB_EV = 8.617333262e-5   # Boltzmann constant [eV/K]
-E_CHARGE = 1.602176634e-19  # Elementary charge [C]
-NA = 6.02214076e23          # Avogadro constant
+    reg = LinearRegression()
+    reg.fit(inv_T.reshape(-1, 1), lnD)
+    y_pred = reg.predict(inv_T.reshape(-1, 1))
 
+    residuals = lnD.flatten() - y_pred.flatten()
+    n = len(temps)
+    s_err = np.sqrt(np.sum(residuals**2) / (n - 2)) / np.sqrt(np.sum((inv_T - np.mean(inv_T))**2))
 
-def fit_diffusivity(lag_times_ps: np.ndarray, msd_A2: np.ndarray) -> float:
-    """Return self-diffusion coefficient D [m²/s] from MSD vs lag-time data.
+    slope = reg.coef_[0][0]
+    Ea_J = -slope * k_B
+    Ea_eV = Ea_J / e
+    dEa_J = s_err * k_B
+    dEa_eV = dEa_J / e
 
-    Linear regression of MSD = 6 D t  →  slope = 6D.
-
-    Parameters
-    ----------
-    lag_times_ps:
-        Lag times in picoseconds.
-    msd_A2:
-        MSD values in Å².
-
-    Returns
-    -------
-    D_m2s: float
-        Diffusion coefficient in m²/s.
-    """
-    # Convert units: ps → s, Å² → m²
-    lag_times_s = lag_times_ps * 1e-12
-    msd_m2 = msd_A2 * 1e-20
-
-    slope, _, _, _, _ = stats.linregress(lag_times_s, msd_m2)
-    D = slope / 6.0
-    return float(D)
-
-
-def fit_arrhenius(
-    temperatures_K: np.ndarray, diffusivities_m2s: np.ndarray
-) -> dict[str, float]:
-    """Fit the Arrhenius equation and return Ea, D0, and R².
-
-    Parameters
-    ----------
-    temperatures_K:
-        Array of temperatures.
-    diffusivities_m2s:
-        Array of diffusion coefficients at each temperature.
-
-    Returns
-    -------
-    dict with keys: Ea_eV, D0_m2s, R2
-    """
-    inv_T = 1.0 / temperatures_K
-    ln_D = np.log(diffusivities_m2s)
-
-    slope, intercept, r_value, _, _ = stats.linregress(inv_T, ln_D)
-    Ea = -slope * KB_EV  # eV
-    D0 = float(np.exp(intercept))  # m²/s
-
-    return {"Ea_eV": float(Ea), "D0_m2s": D0, "R2": float(r_value**2)}
+    return float(Ea_eV), float(dEa_eV), y_pred, temps
 
 
-def nernst_einstein_conductivity(
-    D_m2s: float,
-    n_Li_per_m3: float,
-    T_K: float = 298.15,
-) -> float:
-    """Estimate ionic conductivity [S/m] at *T_K* via Nernst-Einstein.
+# Load MSD data
+msd_data = {}
+data = {}
 
-    σ = n z² e² D / (k_B T)
+for file in glob.glob("results/md/*/*/[0-9]*K/msd.npz"):
+    parts = file.replace("\\", "/").split("/")
+    material = parts[-4]
+    model = parts[-3]
+    temp_str = parts[-2]
+    temp = int(temp_str.replace("K", ""))
+    
+    arr = np.load(file)
+    t, msd = arr["lag_times_ps"], arr["msd_A2"]
 
-    Parameters
-    ----------
-    D_m2s:
-        Li self-diffusion coefficient [m²/s].
-    n_Li_per_m3:
-        Li carrier density [m⁻³].
-    T_K:
-        Temperature [K] (default: room temperature).
-    """
-    z = 1  # Li charge number
-    kBT = 1.380649e-23 * T_K  # J
-    sigma = n_Li_per_m3 * (z * E_CHARGE) ** 2 * D_m2s / kBT
-    return float(sigma)
+    diffusion, diff_line, r2_val = calc_diff(msd, t)
+    diff_m = diffusion * 1e-8  # m²/s
+
+    print(f"{material} {model} {temp} K --> {diff_m:.3e} m²/s (r²={r2_val:.3f}); ({len(msd)} pts)")
+
+    # Store MSD plot data
+    if material not in msd_data:
+        msd_data[material] = {}
+    if model not in msd_data[material]:
+        msd_data[material][model] = {}
+    msd_data[material][model][temp] = {
+        't': t, 
+        'msd': msd, 
+        'diff_line': diff_line, 
+        'r2': r2_val,
+        'diffusion': diff_m
+    }
+
+    # Store results
+    if material not in data:
+        data[material] = {}
+    if model not in data[material]:
+        data[material][model] = {}
+    data[material][model][temp] = diff_m
 
 
-def process_model(material: str, model_name: str) -> dict | None:
-    """Extract Arrhenius parameters for one (material, model) pair."""
-    base_dir = MD_RESULTS_DIR / material / model_name
-    temp_dirs = sorted(base_dir.glob("*K"))
+# Create individual MSD plots
+for material, models_dict in msd_data.items():
+    for model, temps_dict in models_dict.items():
+        for temp, plot_data in temps_dict.items():
+            t = plot_data['t']
+            msd = plot_data['msd']
+            diff_line = plot_data['diff_line']
+            r2 = plot_data['r2']
+            diff_m = plot_data['diffusion']
+            
+            # Individual MSD plot
+            f, ax = plt.subplots()
+            ax.plot(t, msd, label=f'MSD, D: {diff_m:.3e} m²/s')
+            ax.plot(t, diff_line, "--", color="purple", label=f"Fit, (r²={r2:.2f})")
+            ax.set_xlabel("Time (ps)")
+            ax.set_ylabel("MSD (Å²)")
+            ax.legend()
+            f.savefig(f"results/figures/msd/{material}_{model}_{temp}.png", dpi=300)
+            plt.close()
 
-    temperatures = []
-    diffusivities = []
 
-    for temp_dir in temp_dirs:
-        msd_path = temp_dir / "msd.npz"
-        if not msd_path.exists():
+# Ea plotting
+activation = {}
+for material, models_dict in data.items():
+    predictions = {}
+    f2, ax2 = plt.subplots()
+    f1, ax1 = plt.subplots()
+
+    for model, values in models_dict.items():
+        # Filter by r2 cutoff
+        filtered_temps = []
+        filtered_values = {}
+        for temp, diff_value in values.items():
+            if material in msd_data and model in msd_data[material] and temp in msd_data[material][model]:
+                r2 = msd_data[material][model][temp]['r2']
+                if r2 >= 0.8 and diff_value > 0:
+                    filtered_temps.append(temp)
+                    filtered_values[temp] = diff_value
+                else:
+                    print(f"Discarding {material} {model} {temp} (r²={r2:.2f}, D={diff_value:.3e})")
+        
+        # Only keep datasets with >=2 valid diffusion values
+        if len(filtered_values) < 2:
+            print(f"Skipping {material} {model} (not enough valid points)")
             continue
-        T = float(temp_dir.name.replace("K", ""))
-        data = np.load(str(msd_path))
-        try:
-            D = fit_diffusivity(data["lag_times_ps"], data["msd_A2"])
-        except Exception as exc:
-            logger.warning("D fitting failed at %g K: %s", T, exc)
-            continue
-        temperatures.append(T)
-        diffusivities.append(D)
-        logger.info("  T=%g K  D=%.3e m²/s", T, D)
+        
+        values = filtered_values
 
-    if len(temperatures) < 2:
-        logger.warning("Insufficient data points for Arrhenius fit (%d).", len(temperatures))
-        return None
+        Ea, Ea_err, y_pred, T_list = calc_act(values)
+        predictions[model] = (Ea, Ea_err)
+        inv_T = 1000 / np.array(T_list)
+        D_list = [values[T] for T in T_list]
+        label = f"{model}: {Ea:.3f}({Ea_err*1000:.0f}) eV"
+        ax2.scatter(inv_T, np.log(D_list), label=label, s=60)
+        ax2.plot(inv_T, y_pred)
 
-    result = fit_arrhenius(np.array(temperatures), np.array(diffusivities))
-    result["temperatures_K"] = temperatures
-    result["diffusivities_m2s"] = diffusivities
-    logger.info(
-        "%s / %s  Ea=%.3f eV  D0=%.3e m²/s  R²=%.4f",
-        material, model_name, result["Ea_eV"], result["D0_m2s"], result["R2"],
-    )
-    return result
+        ax1.scatter(T_list, D_list, label=model, s=60)
 
+    ax2.set_xlabel("1000/T [K⁻¹]", fontsize=18)
+    ax2.set_ylabel("ln(D)", fontsize=18)
+    ax2.tick_params(labelsize=14)
+    for spine in ax2.spines.values():
+        spine.set_linewidth(1.5)
+    ax2.legend()
+    f2.tight_layout()
+    f2.savefig(f"results/figures/activation_{material}.png", dpi=300)
+    f2.savefig(f"results/figures/activation_{material}.svg")
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Fit Arrhenius equation to Li diffusivity.")
-    parser.add_argument("--material", required=True)
-    parser.add_argument("--model", default=None, help="Model name. If omitted, all are processed.")
-    args = parser.parse_args()
+    ax1.set_xlabel("Temperature [K]", fontsize=18)
+    ax1.set_ylabel("Diffusion [m²/s]", fontsize=18)
+    ax1.tick_params(labelsize=14)
+    for spine in ax1.spines.values():
+        spine.set_linewidth(1.5)
+    ax1.legend()
+    f1.tight_layout()
+    f1.savefig(f"results/figures/diffusion_{material}.png", dpi=300)
+    f1.savefig(f"results/figures/diffusion_{material}.svg")
 
-    if args.model:
-        models = [args.model]
-    else:
-        base = MD_RESULTS_DIR / args.material
-        models = [p.name for p in base.iterdir() if p.is_dir()] if base.exists() else []
+    activation[material] = predictions
 
-    for model in models:
-        result = process_model(args.material, model)
-        if result is None:
-            continue
-        out_dir = ensure_dir(ARRHENIUS_RESULTS_DIR / args.material / model)
-        out_path = out_dir / "arrhenius.json"
-        with open(out_path, "w") as fh:
-            json.dump(result, fh, indent=2)
-        logger.info("Saved to %s", out_path)
+# Save activation energy
+df = DataFrame.from_dict({(i,j): activation[i][j] for i in activation for j in activation[i]}, 
+                         columns=["Ea", "dEa"], orient="index")
+df.to_excel("results/activation.xlsx", sheet_name="MD_Activation")
 
+# Save diffusion
+diffusion_dict = {}
+for material in data:
+    for model in data[material]:
+        if data[material][model]:  # only add non-empty
+            diffusion_dict[(material, model)] = data[material][model]
 
-if __name__ == "__main__":
-    main()
+df_diff = DataFrame.from_dict(diffusion_dict, orient="index").sort_index(axis=1)
+df_diff.to_excel("results/diffusion.xlsx", sheet_name="MD_Diffusion")

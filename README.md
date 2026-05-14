@@ -22,6 +22,7 @@ DOI: [https://doi.org/10.26434/chemrxiv.15002480/v1](https://doi.org/10.26434/ch
      - 3.2.2 [Comparison with Experimental ssNMR Data](#322-comparison-with-experimental-ssnmr-data)
 4. [Repository Structure](#4-repository-structure)
 5. [Installation and Dependencies](#5-installation-and-dependencies)
+6. [Usage](#6-usage)
 
 ---
 

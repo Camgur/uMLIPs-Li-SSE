@@ -1,20 +1,13 @@
-"""utils/models.py — uMLIP loader utilities.
+"""utils/models.py: uMLIP loader utilities.
 
-Each entry in ``CALCULATOR_BLOCKS`` is a self-contained Python code snippet
-that, when executed, defines a local variable named ``calculator`` holding a
-ready-to-use ASE Calculator.  Call ``get_calculator(model_name)`` to execute
-the relevant block and return that calculator.  The same dict is the single
-source of truth for ``list_models()``.
-
-Note: The MACE models must be pointed to the correct .model files, which are 
-not included in this repo. Please download the relevant .model files from the 
-MACE repository and update the paths.
+Each entry in CALCULATOR_BLOCKS is a self-contained Python code snippet
+that, when executed, defines a local variable named 'calculator' holding a
+ready-to-use ASE Calculator. Call get_calculator(model_name) to execute
+the relevant block and return that calculator.
 """
 
-from __future__ import annotations
 
-
-CALCULATOR_BLOCKS: dict[str, str] = {
+CALCULATOR_BLOCKS = {
     'chgnet-2023': '''
 from matgl import load_model
 from matgl.ext.ase import PESCalculator
@@ -62,37 +55,37 @@ mdl = load_model("M3GNet-MatPES-r2SCAN-v2025.1-PES")
 calculator = PESCalculator(potential=mdl)
 ''',
     'mace-0b3': '''
-from mace.calculators import MACECalculator
-calculator = MACECalculator(
-    model_paths='mace-mp-0b3-medium.model',
+from mace.calculators import mace_mp
+calculator = mace_mp(
+    model="medium-0b3",
     dispersion=False, device='cuda', default_dtype='float64'
 )
 ''',
     'mace-l2': '''
-from mace.calculators import MACECalculator
-calculator = MACECalculator(
-    model_paths='2024-01-07-mace-128-L2_epoch-199.model',
+from mace.calculators import mace_mp
+calculator = mace_mp(
+    model="large",
     dispersion=False, device='cuda', default_dtype='float64'
 )
 ''',
     'mace-mpa': '''
-from mace.calculators import MACECalculator
-calculator = MACECalculator(
-    model_paths='mace-mpa-0-medium.model',
+from mace.calculators import mace_mp
+calculator = mace_mp(
+    model="medium-mpa-0",
     dispersion=False, device='cuda', default_dtype='float64'
 )
 ''',
     'mace-omat': '''
-from mace.calculators import MACECalculator
-calculator = MACECalculator(
-    model_paths='mace-omat-0-medium.model',
+from mace.calculators import mace_mp
+calculator = mace_mp(
+    model="medium-omat-0",
     dispersion=False, device='cuda', default_dtype='float64'
 )
 ''',
     'mace-r2': '''
-from mace.calculators import MACECalculator
-calculator = MACECalculator(
-    model_paths='mace-matpes-r2scan-omat-ft.model',
+from mace.calculators import mace_mp
+calculator = mace_mp(
+    model="mace-matpes-r2scan-0",
     dispersion=False, device='cuda', default_dtype='float64'
 )
 ''',
@@ -129,26 +122,20 @@ calculator = ORBCalculator(orbff, device='cuda')
 }
 
 
-def get_calculator(model_name: str):
-    """Return an ASE Calculator instance for *model_name*.
-
-    Executes the code block stored in ``CALCULATOR_BLOCKS[model_name]`` and
-    returns the ``calculator`` object it defines.
-
-    Parameters
-    ----------
-    model_name:
-        Key in ``CALCULATOR_BLOCKS`` (e.g. ``'mace-0b3'``, ``'chgnet-2024'``).
-
-    Returns
-    -------
-    ase.calculators.calculator.Calculator
-        Configured calculator ready for use.
-
-    Raises
-    ------
-    KeyError
-        If *model_name* is not present in ``CALCULATOR_BLOCKS``.
+def get_calculator(model_name):
+    """Return an ASE Calculator instance for model_name.
+    
+    Executes the code block stored in CALCULATOR_BLOCKS[model_name] and
+    returns the 'calculator' object it defines.
+    
+    Parameters:
+        model_name: Key in CALCULATOR_BLOCKS (e.g. 'mace-0b3', 'chgnet-2024')
+    
+    Returns:
+        ASE Calculator object, configured and ready for use
+    
+    Raises:
+        KeyError if model_name is not in CALCULATOR_BLOCKS
     """
     if model_name not in CALCULATOR_BLOCKS:
         available = ", ".join(CALCULATOR_BLOCKS)
@@ -157,11 +144,11 @@ def get_calculator(model_name: str):
             f"Available models: {available}"
         )
 
-    namespace: dict = {}
+    namespace = {}
     exec(CALCULATOR_BLOCKS[model_name], namespace)  # noqa: S102
     return namespace["calculator"]
 
 
-def list_models() -> list[str]:
-    """Return the names of all models defined in ``CALCULATOR_BLOCKS``."""
+def list_models():
+    """Return the names of all models defined in CALCULATOR_BLOCKS."""
     return list(CALCULATOR_BLOCKS.keys())

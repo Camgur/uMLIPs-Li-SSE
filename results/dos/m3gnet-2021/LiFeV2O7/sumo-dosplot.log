@@ -1,7 +1,0 @@
-C:\Users\camgu\Goward\Code\mace-env\Scripts\sumo-dosplot --width 6 --height 4 --xmin -9 --xmax 8 --code castep --format png -g 0.1 --zero-line
-Found PDOS binary file ml_dos.pdos_bin; including PDOS in the plot.
-Reading CASTEP .bands file header...
-nbands: [389, 389], efermi / Ry: [0.077048, 0.077048], spin channels: 2
-Reading band eigenvalues...
-Electronic structure appears to have a bandgap
-Setting energy zero to VBM

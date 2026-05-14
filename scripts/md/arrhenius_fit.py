@@ -1,11 +1,16 @@
+import glob
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 from sklearn.linear_model import LinearRegression
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import r2_score
 from pandas import DataFrame
-import glob, os
+
+import sys
+sys.path.insert(0, str(Path(__file__).parents[1]))
+from utils.config import MD_RESULTS_DIR
 
 # Constants
 k_B = 1.380649e-23  # J/K
@@ -47,12 +52,14 @@ def calc_act(diffusion_dict):
 msd_data = {}
 data = {}
 
-for file in glob.glob("results/md/*/*/[0-9]*K/msd.npz"):
+for file in glob.glob(str(MD_RESULTS_DIR / "*" / "*" / "*.npz")):
     parts = file.replace("\\", "/").split("/")
-    material = parts[-4]
-    model = parts[-3]
-    temp_str = parts[-2]
-    temp = int(temp_str.replace("K", ""))
+    material = parts[-3]
+    model = parts[-2]
+    filename = parts[-1]
+    
+    # Extract temperature from filename (last underscore-separated component, minus .npz extension)
+    temp = int(filename.replace(".npz", "").split("_")[-1])
     
     arr = np.load(file)
     t, msd = arr["lag_times_ps"], arr["msd_A2"]

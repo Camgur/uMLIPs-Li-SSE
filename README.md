@@ -160,17 +160,11 @@ uMLIPs Pipeline/
 │       ├── io.py                # I/O helpers for structure loading/saving
 │       └── models.py            # uMLIP calculator loader via registry
 │
-├── results/
+└── results/
 │   ├── dos/                     # DOS comparison plots and Excel exports
 │   ├── neb/                     # NEB barrier results and analysis
 │   └── md/                      # MD trajectories and MSD data
-│       └── <material>/<model>/   # Temperature subdirectories with MD trajectories
-│
-├── notebooks/                   # Analysis and plotting notebooks
-│   ├── 01_dos_screening.ipynb
-│   ├── 02_neb_screening.ipynb
-│   ├── 03_arrhenius_analysis.ipynb
-│   └── 04_ssnmr_comparison.ipynb
+│       └── <material>/<model>/  
 │
 └── Requirements.txt             # Environment specification
 ```
@@ -252,7 +246,3 @@ python scripts/md/compute_msd.py --material LSnPS
 # Fit Arrhenius equation (automatically discovers all MSD .npz files)
 python scripts/md/arrhenius_fit.py --material LSnPS
 ```
-
-### Analysis Notebooks
-
-Open the notebooks in `notebooks/` for interactive analysis and figure generation.

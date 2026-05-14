@@ -1,37 +1,17 @@
-import os
-import glob
+import os, glob, argparse
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
 from openpyxl import Workbook
-from scipy.ndimage import gaussian_filter1d
 from sumo.io.castep import read_dos
-from pymatgen.electronic_structure.core import Spin
 
-# Config
-OUTPUT_DIR = "results/figures/"
-os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-MATERIALS = [
-    'LFVO',
-]
-
-MODELS = [
-    'chgnet-r2-2025',
-    'm3gnet-r2-2025',
-    'mace-mpa',
-    'mace-r2',
-]
-
-COLORS = {
-    'chgnet-r2-2025': '#648fff',
-    'm3gnet-r2-2025': "#B858F4",
-    'mace-mpa': "#EA56CA",
-    'mace-r2': '#dc267f',
-    'dft': '#000000',
-}
-
-GAUSSIAN_SIGMA = 0.05
-Y_LIMITS = (-5, 10)
+import sys
+sys.path.insert(0, str(Path(__file__).parents[2]))
+from utils.config import (
+    GAUSSIAN_SIGMA,
+    DEFAULT_STRUCTURE, MODELS, COLORS
+)
 
 # Helpers
 def find_bands_file(directory):
@@ -39,121 +19,138 @@ def find_bands_file(directory):
     files = glob.glob(os.path.join(directory, "*.bands"))
     return files[0] if files else None
 
-def load_and_total(bands_file, gaussian=0.05, emin=-20, emax=20):
-    """Load CASTEP DOS with SUMO read_dos.
-    
-    Returns: energies, total_dos, efermi, dos_obj
-    """
+def load_and_total(bands_file, gaussian, emin, emax):
+    """Load CASTEP DOS with SUMO and return dos_obj for native VBM/CBM access."""
     dos_obj, _ = read_dos(bands_file, gaussian=gaussian, emin=emin, emax=emax, total_only=False)
     energies = np.array(dos_obj.energies)
-    
-    # Sum spins if dict
+    # sum spins if dict
     if isinstance(dos_obj.densities, dict):
         total = sum(np.array(arr) for arr in dos_obj.densities.values())
     else:
         total = np.array(dos_obj.densities)
         if total.ndim > 1:
             total = total.sum(axis=0)
-    
     return energies, np.array(total), float(dos_obj.efermi), dos_obj
 
-def cosine_similarity(a, b):
-    """Cosine similarity between vectors a and b."""
-    norm_a = np.linalg.norm(a)
-    norm_b = np.linalg.norm(b)
-    if norm_a == 0 or norm_b == 0:
-        return 0.0
-    return float(np.dot(a, b) / (norm_a * norm_b))
-
-# Load DOS data and compare
-similarity_data = []
-wb = Workbook()
-ws = wb.active
-ws.append(["Material", "Model", "Cosine Similarity"])
-
-for material in MATERIALS:
-    # Load DFT reference
-    dft_dir = f"results/dos/dft/{material}/"
-    dft_file = find_bands_file(dft_dir)
+def compare_and_plot(structure, models, output_dir="results/dos"):
+    """Plot DOS for ML models and DFT, export figure and Excel."""
+    os.makedirs(output_dir, exist_ok=True)
     
-    if not dft_file:
-        print(f"WARNING: No DFT .bands file for {material}")
-        continue
+    fig, ax = plt.subplots(figsize=(10, 6))
     
-    try:
-        e_dft, dos_dft, efermi_dft, dos_dft_obj = load_and_total(dft_file, gaussian=GAUSSIAN_SIGMA)
-        dos_dft_smooth = np.array(dos_dft)  # Already smoothed by read_dos
-    except Exception as exc:
-        print(f"ERROR: Failed to load DFT for {material}: {exc}")
-        continue
+    wb = Workbook()
+    ws = wb.active
+    ws.title = structure
+    ws['A1'] = 'Model'
+    ws['B1'] = 'VBM (eV)'
+    ws['C1'] = 'CBM (eV)'
+    ws['D1'] = 'Bandgap (eV)'
     
-    # Normalize DFT DOS
-    ref_vec = dos_dft_smooth / np.max(dos_dft_smooth) if np.max(dos_dft_smooth) > 0 else dos_dft_smooth
-    
-    # Create plot
-    fig, ax = plt.subplots(figsize=(8, 6))
-    
-    # Shift energies relative to Fermi
-    e_dft_shift = e_dft - efermi_dft
-    mask_dft = (e_dft_shift >= Y_LIMITS[0]) & (e_dft_shift <= Y_LIMITS[1])
+    row = 2
     
     # Plot ML models first
-    plotted_models = []
-    for model in MODELS:
-        model_dir = f"results/dos/{material}/{model}/"
-        model_file = find_bands_file(model_dir)
+    for model in models:
+        model_dir = f"MACE/elastic/{structure}/{model}"
+        if not os.path.isdir(model_dir):
+            print(f"[WARNING] No directory for {structure} / {model}")
+            continue
         
-        if not model_file:
+        bands_file = find_bands_file(model_dir)
+        if not bands_file:
+            print(f"[WARNING] No bands file for {structure} / {model}")
             continue
         
         try:
-            e_ml, dos_ml, efermi_ml, dos_ml_obj = load_and_total(model_file, gaussian=GAUSSIAN_SIGMA)
-            dos_ml_smooth = np.array(dos_ml)
+            energies, total_dos, efermi, dos_obj = load_and_total(bands_file, GAUSSIAN_SIGMA, -15, 15)
+            e_rel = energies - efermi
+            
+            # Use SUMO's native VBM/CBM detection
+            vbm = float(dos_obj.vbm) if dos_obj.vbm is not None else 0.0
+            cbm = float(dos_obj.cbm) if dos_obj.cbm is not None else np.nan
+            bandgap = cbm - vbm if not np.isnan(cbm) else np.nan
+            
+            # Plot
+            ax.plot(e_rel, total_dos, 
+                   color=COLORS.get(model, '#000000'),
+                   label=f"{model}: {bandgap:.2f} eV" if not np.isnan(bandgap) else model,
+                   linewidth=2)
+            
+            # Write to Excel
+            ws[f'A{row}'] = model
+            ws[f'B{row}'] = round(vbm, 4)
+            ws[f'C{row}'] = round(cbm, 4) if not np.isnan(cbm) else None
+            ws[f'D{row}'] = round(bandgap, 4) if not np.isnan(bandgap) else None
+            row += 1
+            
+            print(f"Plotted {structure} / {model}: VBM={vbm:.3f}, CBM={cbm:.3f}, Eg={bandgap:.3f} eV")
+            
         except Exception as exc:
-            print(f"ERROR: Failed to load {model} for {material}: {exc}")
-            continue
-        
-        # Compute similarity
-        similarity = cosine_similarity(ref_vec, dos_ml_smooth / np.max(dos_ml_smooth) if np.max(dos_ml_smooth) > 0 else dos_ml_smooth)
-        similarity_data.append({'material': material, 'model': model, 'similarity': similarity})
-        
-        print(f"{material} {model:20} cosine_similarity={similarity:.4f}")
-        
-        # Plot
-        e_ml_shift = e_ml - efermi_ml
-        mask_ml = (e_ml_shift >= Y_LIMITS[0]) & (e_ml_shift <= Y_LIMITS[1])
-        dos_ml_norm = dos_ml_smooth[mask_ml] / np.max(dos_ml_smooth) if np.max(dos_ml_smooth) > 0 else dos_ml_smooth[mask_ml]
-        
-        ax.plot(e_ml_shift[mask_ml], dos_ml_norm, color=COLORS.get(model, '#777777'), 
-                label=f"{model} ({similarity:.3f})", lw=1.5)
-        
-        plotted_models.append(model)
-        ws.append([material, model, round(similarity, 6)])
+            print(f"[ERROR] Could not process {structure} / {model}: {exc}")
     
-    # Plot DFT last (on top)
-    dos_dft_norm = dos_dft_smooth[mask_dft] / np.max(dos_dft_smooth) if np.max(dos_dft_smooth) > 0 else dos_dft_smooth[mask_dft]
-    ax.plot(e_dft_shift[mask_dft], dos_dft_norm, color=COLORS['dft'], label="DFT", lw=2.5)
-    
-    ws.append([material, 'dft', ""])
+    # Plot DFT last
+    dft_dir = f"castep/{structure}"
+    if os.path.isdir(dft_dir):
+        bands_file = find_bands_file(dft_dir)
+        if bands_file:
+            try:
+                energies, total_dos, efermi, dos_obj = load_and_total(bands_file, GAUSSIAN_SIGMA, -15, 15)
+                e_rel = energies - efermi
+                
+                # Use SUMO's native VBM/CBM detection
+                vbm = float(dos_obj.vbm) if dos_obj.vbm is not None else 0.0
+                cbm = float(dos_obj.cbm) if dos_obj.cbm is not None else np.nan
+                bandgap = cbm - vbm if not np.isnan(cbm) else np.nan
+                
+                # Plot DFT on top
+                ax.plot(e_rel, total_dos, 
+                       color=COLORS['dft'],
+                       label=f"DFT: {bandgap:.2f} eV" if not np.isnan(bandgap) else "DFT",
+                       linewidth=2.5,
+                       linestyle='solid')
+                
+                # Write to Excel
+                ws[f'A{row}'] = 'DFT'
+                ws[f'B{row}'] = round(vbm, 4)
+                ws[f'C{row}'] = round(cbm, 4) if not np.isnan(cbm) else None
+                ws[f'D{row}'] = round(bandgap, 4) if not np.isnan(bandgap) else None
+                
+                print(f"Plotted {structure} / DFT: VBM={vbm:.3f}, CBM={cbm:.3f}, Eg={bandgap:.3f} eV")
+                
+            except Exception as exc:
+                print(f"[ERROR] Could not process {structure} / DFT: {exc}")
     
     # Format plot
     ax.set_xlabel("Energy (eV)", fontsize=14)
-    ax.set_ylabel("DOS (normalized)", fontsize=14)
-    ax.set_title(f"{material} DOS Comparison", fontsize=16)
-    ax.legend(fontsize=10)
+    ax.set_ylabel("DOS (states/eV)", fontsize=14)
+    ax.set_title(f"Density of States: {structure}", fontsize=16)
+    ax.set_xlim(-15, 15)
+    ax.set_ylim(bottom=0)
+    ax.legend(fontsize=11, loc='best')
     ax.grid(True, alpha=0.3)
-    ax.axvline(0.0, color='gray', linestyle='--', lw=1.0, alpha=0.5)
-    ax.tick_params(labelsize=12)
-    for spine in ax.spines.values():
-        spine.set_linewidth(1.5)
-    
     fig.tight_layout()
-    png_path = os.path.join(OUTPUT_DIR, f"dos_{material}.png")
-    fig.savefig(png_path, dpi=300, bbox_inches='tight')
+    
+    # Save figure
+    fig_path = os.path.join(output_dir, f"dos_{structure}.png")
+    fig.savefig(fig_path, dpi=300)
+    print(f"Saved figure to {fig_path}")
     plt.close()
-    print(f"Saved: {png_path}")
+    
+    # Save Excel
+    excel_path = os.path.join(output_dir, f"bandgaps_{structure}.xlsx")
+    wb.save(excel_path)
+    print(f"Saved Excel to {excel_path}")
 
-# Save Excel summary
-xlsx_path = os.path.join(OUTPUT_DIR, "dos_comparison.xlsx")
-wb.save(xlsx_path)
-print(f"Saved: {xlsx_path}")
+
+def main():
+    parser = argparse.ArgumentParser(description="Plot DOS comparison for a structure")
+    parser.add_argument("--structure", default=DEFAULT_STRUCTURE, 
+                       help=f"Structure name (default: {DEFAULT_STRUCTURE})")
+    parser.add_argument("--output-dir", default="results/dos",
+                       help="Output directory for figures and data")
+    args = parser.parse_args()
+    
+    compare_and_plot(args.structure, MODELS, args.output_dir)
+
+
+if __name__ == "__main__":
+    main()

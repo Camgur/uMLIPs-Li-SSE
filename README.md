@@ -123,7 +123,7 @@ $$
 D = D_0 \exp \left(-\frac{E_a}{k_B T}\right)
 $$
 
-to extract E<sub>a</sub>. The Nernst-Einstein equation may be then used to obtain the room temperature conductivity, but comparison to ssNMR E<sub>a</sub> was the object of this study, so this equation was unused.
+to extract E<sub>a</sub>.
 
 #### 3.2.2 Comparison with Experimental ssNMR Data
 
@@ -144,25 +144,26 @@ uMLIPs Pipeline/
 │
 ├── scripts/
 │   ├── relaxation/              # Structure relaxation with each uMLIP
-│   │   └── relax.py
+│   │   └── run_relax.py
 │   ├── dos/                     # DOS pre-screening
 │   │   └── compare_dos.py
 │   ├── neb/                     # NEB pre-screening
 │   │   ├── run_neb.py
-│   │   └── analyse_neb.py
+│   │   └── plot_neb.py          # NEB barrier analysis and visualization
 │   ├── md/                      # MD simulations and MSD analysis
 │   │   ├── run_md.py
 │   │   ├── compute_msd.py
 │   │   └── arrhenius_fit.py
 │   └── utils/                   # Shared utilities
-│       ├── io.py
-│       └── models.py            # uMLIP loader/wrapper
+│       ├── config.py            # Centralized configuration (paths, parameters, models, colors, line styles)
+│       ├── io.py                # I/O helpers for structure loading/saving
+│       └── models.py            # uMLIP calculator loader via registry
 │
 ├── results/
-│   ├── dos/                     # DOS comparison metrics
-│   ├── neb/                     # NEB barrier results
-│   ├── md/                      # MD trajectories and MSD data
-│   └── arrhenius/               # Fitted Ea values and conductivity estimates
+│   ├── dos/                     # DOS comparison plots and Excel exports
+│   ├── neb/                     # NEB barrier results and analysis
+│   └── md/                      # MD trajectories and MSD data
+│       └── <material>/<model>/   # Temperature subdirectories with MD trajectories
 │
 ├── notebooks/                   # Analysis and plotting notebooks
 │   ├── 01_dos_screening.ipynb
@@ -182,8 +183,17 @@ uMLIPs Pipeline/
 - Python ≥ 3.10
 - [ASE](https://wiki.fysik.dtu.dk/ase/) ≥ 3.23
 - [PyMatGen](https://pymatgen.org/) ≥ 2024.1
+- [SUMO](https://github.com/smtg-ucl/sumo) ≥ 2.3 (for DOS analysis with VBM/CBM detection)
 - [NumPy](https://numpy.org/), [SciPy](https://scipy.org/), [Matplotlib](https://matplotlib.org/)
+- [Openpyxl](https://openpyxl.readthedocs.io/) (for Excel export in DOS comparison)
 - Individual uMLIP packages (see `requirements.txt`)
+
+### Supported uMLIP Packages
+
+- **CHGNet**: Via `matgl` or `chgnet-torch`
+- **M3GNet**: Via `matgl`
+- **MACE**: Via `mace`
+- **ORB**: Via `orb-models`
 
 ### Setup
 
@@ -198,6 +208,17 @@ source path-to-venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Configuration
+
+All scripts use centralized configuration from `scripts/utils/config.py`. Key configuration variables include:
+
+- **Paths**: `REPO_ROOT`, `RESULTS_DIR`, `NEB_RESULTS_DIR`, `MD_RESULTS_DIR`, `CONFIGS_DIR`, `DOS_OUTPUT_DIR`
+- **Parameters**: `ELEMENT` (mobile ion species), `TIMESTEP_PS` (MD timestep), `DEFAULT_TEMP` (default temperature)
+- **Models**: List of all supported uMLIP model aliases
+- **Visualization**: Color and line style mappings for consistent figure generation
+
+Configuration can be overridden via CLI arguments in individual scripts (e.g., `--material`, `--model`, `--temperature`).
+
 ---
 
 ## 6. Usage
@@ -208,11 +229,14 @@ pip install -r requirements.txt
 # 1a. Relax structures with a uMLIP
 python scripts/relaxation/relax.py structures/LSnPS/LSnPS.cif mace-0b3
 
-# 1b. Run DOS pre-screening
+# 1b. Run DOS pre-screening (compares DOS across all models)
 python scripts/dos/compare_dos.py --material LSnPS
 
 # 1c. Run NEB pre-screening
 python scripts/neb/run_neb.py structures/LSnPS/LSnPS.cif idx1 idx2 mace-0b3
+
+# 1d. Analyze NEB barriers
+python scripts/neb/plot_neb.py --material LSnPS --models mace-0b3 mace-mpa chgnet-2024
 ```
 
 ### Stage 2 — MD Simulations (top candidates only)
@@ -221,9 +245,11 @@ python scripts/neb/run_neb.py structures/LSnPS/LSnPS.cif idx1 idx2 mace-0b3
 # Run MD at a given temperature
 python scripts/md/run_md.py structures/LSnPS/LSnPS.cif 800 mace-0b3
 
-# Compute MSD and fit Arrhenius equation
-python scripts/md/compute_msd.py --material LSnPS --model mace-0b3
-python scripts/md/arrhenius_fit.py --material LSnPS --model mace-0b3
+# Compute MSD from trajectories (automatically discovers all md_*.traj files)
+python scripts/md/compute_msd.py --material LSnPS
+
+# Fit Arrhenius equation (automatically discovers all MSD .npz files)
+python scripts/md/arrhenius_fit.py --material LSnPS
 ```
 
 ### Analysis Notebooks

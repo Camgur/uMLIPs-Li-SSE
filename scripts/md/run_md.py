@@ -2,6 +2,7 @@ import warnings
 warnings.simplefilter("ignore", category=FutureWarning)
 
 import sys, os
+import argparse
 from pathlib import Path
 
 from ase.io import read
@@ -14,12 +15,16 @@ from ase.units import fs
 sys.path.insert(0, str(Path(__file__).parents[1]))
 from utils.io import ensure_dir
 from utils.models import get_calculator
+from utils.config import REPO_ROOT
 
-# Input
-if len(sys.argv) != 4:
-    sys.exit("Usage: python run_md.py structure.cif temp model_name")
+# Parse arguments
+parser = argparse.ArgumentParser(description="Run MD simulation")
+parser.add_argument("structure", help="Path to input structure (CIF format)")
+parser.add_argument("temperature", type=float, help="Temperature (K)")
+parser.add_argument("model", help="ML model name")
+args = parser.parse_args()
 
-cif_path, temp, model_name = sys.argv[1], float(sys.argv[2]), sys.argv[3]
+cif_path, temp, model_name = args.structure, args.temperature, args.model
 filename = os.path.splitext(os.path.basename(cif_path))[0]
 
 # System setup
@@ -29,8 +34,8 @@ atoms.calc = get_calculator(model_name)
 
 MaxwellBoltzmannDistribution(atoms, temperature_K=temp)
 
-REPO_ROOT = Path(__file__).parents[2]
-out_dir = ensure_dir(REPO_ROOT / "results" / "md" / filename / model_name / f"{int(temp)}K")
+out_dir = ensure_dir(REPO_ROOT / "results" / "md" / filename / model_name)
+temp_int = int(temp)
 
 # Equilibration (NVT Berendsen thermostat)
 init = NVTBerendsen(
@@ -38,7 +43,7 @@ init = NVTBerendsen(
     temperature_K=temp,
     timestep=1*fs,
     taut=100*fs,
-    logfile=str(out_dir / f"relaxation_{str(temp)}.log"),
+    logfile=str(out_dir / f"relaxation_{filename}_{model_name}_{temp_int}.log"),
     loginterval=1000,
 )
 init.run(50000)  # 50 ps
@@ -49,8 +54,8 @@ md = NoseHooverChainNVT(
     temperature_K=temp,
     timestep=1*fs,
     tdamp=100*fs,
-    trajectory=str(out_dir / "md.traj"),
-    logfile=str(out_dir / f"production_{str(temp)}.log"),
+    trajectory=str(out_dir / f"md_{filename}_{model_name}_{temp_int}.traj"),
+    logfile=str(out_dir / f"production_{filename}_{model_name}_{temp_int}.log"),
     loginterval=50,
 )
 md.run(100000000)  # 100 ns
